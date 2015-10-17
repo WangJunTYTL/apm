@@ -1,7 +1,11 @@
-#############################################################################################
-# Desciption of file layout: http://www.kernel.org/pub/software/scm/git/docs/gitignore.html #
-#############################################################################################
 
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
 
 # eclipse ignore
 .settings/
@@ -24,6 +28,10 @@
 # system ignore
 .DS_Store
 Thumbs.d
+
+
+
+
 
 
 
