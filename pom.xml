@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>perf4j</module>
+        <module>timing</module>
         <module>Dashboard</module>
     </modules>
 
