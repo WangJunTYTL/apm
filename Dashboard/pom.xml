@@ -13,6 +13,7 @@
     <groupId>com.vita</groupId>
     <artifactId>Dashboard</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
 
     <dependencies>
