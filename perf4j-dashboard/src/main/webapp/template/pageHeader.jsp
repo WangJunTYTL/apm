@@ -26,7 +26,8 @@
     <script src="/js/bootstrap-3.5.js"></script>
 
     <%-- baidu echart--%>
-    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+    <%--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>--%>
+    <script src="/js/echart/echarts-all.js"></script>
 
 
 </head>
