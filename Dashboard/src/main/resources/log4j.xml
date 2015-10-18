@@ -16,8 +16,8 @@
     </appender>
 
     <root>
-        <priority value="${root.log.level}"/>
-        <appender-ref ref="${root.log.appender}"/>
+        <priority value="debug"/>
+        <appender-ref ref="console-appender"/>
     </root>
 
 </log4j:configuration>

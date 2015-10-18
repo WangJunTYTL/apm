@@ -27,20 +27,10 @@ public class AdminController {
     @RequestMapping({"index", "welcome", "/"})
     public String welcome(HttpServletRequest request) {
         try {
-            // focused task data
-            String focusedTaskData = TaskConsoleAPI.cat(TaskConsoleAPI.Method.focusedTaskBeanSet);
-            // first flexible task data
-            String firstFlexibleTaskData = TaskConsoleAPI.cat(TaskConsoleAPI.Method.firstFlexibleTaskBeanSet);
-            // second flexible task data
-            String secondFlexibleTaskBeanSet = TaskConsoleAPI.cat(TaskConsoleAPI.Method.secondFlexibleTaskBeanSet);
-            // task container running info
+            // runningInfo = data
             String runningInfo = TaskConsoleAPI.cat(TaskConsoleAPI.Method.runningInfo);
-            logger.info("focusedTaskData {}", focusedTaskData);
-            logger.info("firstFlexibleTaskData {}", firstFlexibleTaskData);
-            request.setAttribute("focusedTaskData", JSON.parseObject(JSON.parseObject(focusedTaskData, String.class), List.class));
-            request.setAttribute("firstFlexibleTaskData", JSON.parseObject(JSON.parseObject(firstFlexibleTaskData, String.class), List.class));
-            request.setAttribute("secondFlexibleTaskBeanSet", JSON.parseObject(JSON.parseObject(secondFlexibleTaskBeanSet, String.class), List.class));
-            request.setAttribute("runningInfo", JSON.parseObject(runningInfo, String.class));
+            logger.info("runningInfo {}", runningInfo);
+            request.setAttribute("runningInfo",runningInfo);
         } catch (Exception e) {
             logger.error("request api error ", ExceptionUtils.getStackTrace(e));
         }

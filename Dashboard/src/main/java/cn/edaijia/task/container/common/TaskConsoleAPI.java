@@ -19,7 +19,7 @@ public class TaskConsoleAPI {
 
     public static String cat(String method) {
         try {
-            return HttpClient.post("http://" + apiAdd.get() + "?method=" + method);
+            return HttpClient.post("http://" + apiAdd.get());
         } catch (Exception e) {
             logger.error("request found error {}", ExceptionUtils.getStackTrace(e));
             return "error";

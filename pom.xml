@@ -13,6 +13,7 @@
     <modules>
         <module>timing</module>
         <module>Dashboard</module>
+        <module>timing-demo</module>
     </modules>
 
 </project>

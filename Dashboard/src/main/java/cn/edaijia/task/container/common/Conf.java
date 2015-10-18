@@ -21,9 +21,9 @@ public class Conf {
     public Map<String, String> clusterMap = new HashMap<String, String>();
 
     private Conf() {
-        Config config = ConfigFactory.load("taskCluster");
+        Config config = ConfigFactory.load("ServerCluster");
         // cluster list
-        ConfigList list = config.getList("taskCluster.clusterList");
+        ConfigList list = config.getList("ServerCluster.clusterList");
         for (ConfigValue configValue : list) {
             Config config1 = configValue.atPath("cluster").getConfig("cluster");
             clusterMap.put(config1.getString("name"), config1.getString("ip") + ":" + config1.getString("port") + config1.getString("url"));

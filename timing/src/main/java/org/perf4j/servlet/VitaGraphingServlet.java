@@ -1,17 +1,16 @@
 package org.perf4j.servlet;
 
+import com.alibaba.fastjson.JSON;
 import org.perf4j.chart.StatisticsChartGenerator;
 import org.perf4j.helpers.MiscUtils;
+import org.perf4j.log4j.GraphingStatisticsAppender;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author WangJun <wangjuntytl@163.com>
@@ -19,7 +18,7 @@ import java.util.Map;
  * @since 1.6
  */
 
-public abstract class VitaGraphingServlet extends HttpServlet{
+public class VitaGraphingServlet extends HttpServlet {
 
     private static final long serialVersionUID = 7877125631806499443L;
 
@@ -45,13 +44,21 @@ public abstract class VitaGraphingServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Map<String, StatisticsChartGenerator> chartsByName = getChartGeneratorsToDisplay(request);
-
-        response.setContentType("text/html;charset=utf-8");
-
+        response.setContentType("application/json;charset=utf-8");
         writeHeader(request, response);
+        List<String> graphData = new ArrayList<String>();
+        response.getWriter().println("[");
+        int x = 0;
         for (Map.Entry<String, StatisticsChartGenerator> nameAndChart : chartsByName.entrySet()) {
-            writeChart(nameAndChart.getKey(), nameAndChart.getValue(), request, response);
+            x++;
+            if (x == 1) {
+                // pass
+            } else {
+                response.getWriter().println(",");
+            }
+            response.getWriter().println(nameAndChart.getValue().getChartUrl());
         }
+        response.getWriter().println("]");
         writeFooter(request, response);
     }
 
@@ -79,14 +86,11 @@ public abstract class VitaGraphingServlet extends HttpServlet{
                               StatisticsChartGenerator chartGenerator,
                               HttpServletRequest request,
                               HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println("<br><br>");
-
         String chartUrl = (chartGenerator == null) ? null : chartGenerator.getChartUrl();
         if (chartUrl != null) {
-            response.getWriter().println("<b>" + name + "</b><br>");
-            response.getWriter().println("<div class=\"chart\">" + chartUrl + "</div>");
+            response.getWriter().println(chartUrl);
         } else {
-            response.getWriter().println("<b>Unknown graph name: " + name + "</b><br>");
+            response.getWriter().println(name);
         }
     }
 
@@ -95,90 +99,6 @@ public abstract class VitaGraphingServlet extends HttpServlet{
      */
     protected void writeFooter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().println("<script type='text/javascript'>");
-        response.getWriter().println("$(function () {\n" +
-                "\n" +
-                "    var charts = $(\".chart\");\n" +
-                "    for (var n = 0; n < charts.length; n++) {\n" +
-                "        var c = charts[n];\n" +
-                "        var config = $(c).html();\n" +
-                "        $(c).html(\"\");\n" +
-                "        var node = $(\"<div>\").attr(\"id\", \"chart\" + n).attr(\"style\", \"height:500px;\");\n" +
-                "        $(c).append(node);\n" +
-                "        //alert(config)\n" +
-                "        if (config == null || config == \"\")\n" +
-                "            continue;\n" +
-                "        var parseData = JSON.parse(config);\n" +
-                "        var myChart = echarts.init(document.getElementById(\"chart\" + n));\n" +
-                "        var series = []\n" +
-                "        for (var tag in parseData.tagsToYData) {\n" +
-                "            var tagData = {\n" +
-                "                name: tag,\n" +
-                "                type: 'line',\n" +
-                "                data: parseData.tagsToYData[tag],\n" +
-                "                markPoint: {\n" +
-                "                    data: [\n" +
-                "                        {type: 'max', name: '最大值'},\n" +
-                "                        //{type : 'min', name: '最小值'}\n" +
-                "                    ]\n" +
-                "                },\n" +
-                "                markLine: {\n" +
-                "                    data: [\n" +
-                "                        {type: 'average', name: '平均值'}\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            }\n" +
-                "            series.push(tagData)\n" +
-                "        }\n" +
-                "        var option = {\n" +
-                "            title: {\n" +
-                "                //text: parseData.graphType,\n" +
-                "                //subtext: '纯属虚构'\n" +
-                "            },\n" +
-                "            tooltip: {\n" +
-                "                trigger: 'axis'\n" +
-                "            },\n" +
-                "            legend: {\n" +
-                "                data: parseData.tags,\n" +
-                "            },\n" +
-                "            toolbox: {\n" +
-                "                show: true,\n" +
-                "                feature: {\n" +
-                "                    mark: {show: false},\n" +
-                "                    dataView: {show: true, readOnly: false},\n" +
-                "                    magicType: {show: true, type: ['line', 'bar']},\n" +
-                "                    restore: {show: true},\n" +
-                "                    saveAsImage: {show: true}\n" +
-                "                }\n" +
-                "            },\n" +
-                "            calculable: true,\n" +
-                "            xAxis: [\n" +
-                "                {\n" +
-                "                    type: 'category',\n" +
-                "                    boundaryGap: false,\n" +
-                "                    data: parseData.labels\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            yAxis: [\n" +
-                "                {\n" +
-                "                    type: 'value',\n" +
-                "                    axisLabel: {\n" +
-                "                        formatter: '{value} '\n" +
-                "                    }\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            series: series\n" +
-                "        };\n" +
-                "\n" +
-                "\n" +
-                "        // 为echarts对象加载数据\n" +
-                "        myChart.setOption(option);\n" +
-                "    }\n" +
-                "\n" +
-                "});\n");
-        response.getWriter().println("</script>");
-        response.getWriter().println("</body>");
-        response.getWriter().println("</html>");
         response.getWriter().flush();
     }
 
@@ -214,18 +134,28 @@ public abstract class VitaGraphingServlet extends HttpServlet{
     }
 
     /**
-     * Subclasses should implement this method to return a chart generator by its name. Subclasses may use any method
-     * necessary to find the underlying repository of charts.
+     * This method looks for all known GraphingStatisticsAppenders and returns their names.
      *
-     * @param name the name of the graph to return
-     * @return the chart generator capable of creating the requested chart.
+     * @return The list of known GraphingStatisticsAppender names.
      */
-    protected abstract StatisticsChartGenerator getGraphByName(String name);
+    protected List<String> getAllKnownGraphNames() {
+        List<String> retVal = new ArrayList<String>();
+        for (GraphingStatisticsAppender appender : GraphingStatisticsAppender.getAllGraphingStatisticsAppenders()) {
+            retVal.add(appender.getName());
+        }
+        return retVal;
+    }
 
     /**
-     * Subclasses should implement this method to return a list of all possible known graph names.
+     * Finds the specified graph by using the
+     * {@link GraphingStatisticsAppender#getAppenderByName(String)} method to find the appender with
+     * the specified name.
      *
-     * @return The list of possible graph names for which <tt>getGraphByName</tt> will return a valid chart generator.
+     * @param name the name of the GraphingStatisticsAppender whose chart generator should be returned.
+     * @return The specified chart generator, or null if no appender with the specified name was found.
      */
-    protected abstract List<String> getAllKnownGraphNames();
+    protected StatisticsChartGenerator getGraphByName(String name) {
+        GraphingStatisticsAppender appender = GraphingStatisticsAppender.getAppenderByName(name);
+        return (appender == null) ? null : appender.getChartGenerator();
+    }
 }
