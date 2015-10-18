@@ -11,4 +11,4 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
 新的图表渲染样式如下
 
 
-![Alt text](doc/dashboard.sh)
+![Alt text](doc/dashboard.png)
