@@ -1,4 +1,4 @@
-package com.peaceful.demo.spring.webmvc;
+package com.vita.perf4j.demo.spring.webmvc;
 
 import com.peaceful.common.util.Util;
 import org.springframework.stereotype.Controller;

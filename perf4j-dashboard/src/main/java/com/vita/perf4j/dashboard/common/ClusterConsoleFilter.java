@@ -1,4 +1,4 @@
-package cn.edaijia.task.container.common;
+package com.vita.perf4j.dashboard.common;
 
 import com.alibaba.fastjson.JSON;
 

@@ -1,7 +1,6 @@
-package cn.edaijia.task.container.admin.controller;
+package com.vita.perf4j.dashboard.controller;
 
-import cn.edaijia.task.container.common.TaskConsoleAPI;
-import com.alibaba.fastjson.JSON;
+import com.vita.perf4j.dashboard.common.TaskConsoleAPI;
 import com.peaceful.common.util.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Display data provided by the task console api

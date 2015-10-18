@@ -1,4 +1,4 @@
-package cn.edaijia.task.container.common;
+package com.vita.perf4j.dashboard.common;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
