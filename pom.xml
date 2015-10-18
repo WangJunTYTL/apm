@@ -11,9 +11,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>timing</module>
-        <module>Dashboard</module>
-        <module>timing-demo</module>
+        <module>vita-perf4j</module>
+        <module>perf4j-dashboard</module>
+        <module>perf4j-demo</module>
     </modules>
 
 </project>

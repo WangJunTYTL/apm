@@ -11,15 +11,16 @@
     </parent>
 
     <groupId>com.vita</groupId>
-    <artifactId>Dashboard</artifactId>
+    <artifactId>vita-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <properties>
-        <jetty.stop.port>10000</jetty.stop.port>
-        <jetty.run.port>8889</jetty.run.port>
-    </properties>
 
+    <properties>
+        <version.spring.webmvc>4.1.1.RELEASE</version.spring.webmvc>
+        <version.jstl>1.2</version.jstl>
+        <version.freemarker>2.3.20</version.freemarker>
+    </properties>
 
     <dependencies>
 
@@ -27,29 +28,37 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <version>${version.spring.webmvc}</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
+            <version>3.2.5.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
+            <version>3.2.5.RELEASE</version>
         </dependency>
+
 
         <!--RESOLVER FREEMARKER-->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
+            <version>${version.freemarker}</version>
         </dependency>
 
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
+            <version>${version.jstl}</version>
         </dependency>
 
+        <!--COMMON UTIL-->
         <dependency>
             <groupId>com.peaceful</groupId>
             <artifactId>peaceful-common-utils</artifactId>
@@ -57,24 +66,18 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
+            <groupId>com.vita</groupId>
+            <artifactId>vita-perf4j</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.typesafe</groupId>
-            <artifactId>config</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-
     </dependencies>
-
 
 </project>
