@@ -30,7 +30,7 @@ public interface StatisticsChartGenerator {
      * the <tt>appendData</tt> method, implementing classes that respect this limit will only graph the last 20
      * statistics that were passed to <tt>appendData</tt>.
      */
-    public static final int DEFAULT_MAX_DATA_POINTS = 20;
+    public static final int DEFAULT_MAX_DATA_POINTS = 16;
 
     /**
      * Implementing classes should return a URL to the chart that depicts the data sent in to the <tt>appendData</tt>

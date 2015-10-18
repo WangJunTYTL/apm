@@ -65,7 +65,8 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
         List<String> tags = new ArrayList<String>();
 
         //labels so the chart doesn't get too crowded
-        int stepSize = this.data.size() / 10 + 1;
+//        int stepSize = this.data.size() / this.maxDataPoints + 1;
+        int stepSize =  1;
 
 
         for (Iterator<GroupedTimingStatistics> iter = data.iterator(); iter.hasNext(); ) {
