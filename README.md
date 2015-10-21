@@ -1,16 +1,23 @@
 # perf4j
 Performance Monitoring and Statistics for Java Code
 
-重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表
+
+## perf4j-zh与perf4j比较
+
+1. 重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，更适合国内行情
+1. 另外增加集群监控，监控图表渲染与监控项目独立
+
+新的图表渲染样式如下
+
+![Alt text](doc/dashboard.png)
+
+## 为什么开发perf4j-zh
 
 google网站并不是每个人都可以访问，但自己又不想放弃perf4j这款轻量方便的组件，它可以和常用的日志系统如log4j，logback集成，所以为了继续使用它，图表渲染的功能
 修改为baidu的Echart，更适合我们国内企业和开发人员的使用
 
 另外，它的官网也不在对外开放，使用方式我会按照我目前知道的写个简单的介绍
 
-新的图表渲染样式如下
-
-![Alt text](doc/dashboard.png)
 
 ## 快速上手
 
@@ -41,11 +48,11 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
     cd perf4j-demo
     mvn jetty:run
     
-启动成功后，需要不断访问演示项目，使其产生请求
+启动成功后，需要不断访问演示项目，使其产生请求量
     
-    sh test.sh
+    sh ./test.sh
 
-然后在观察访问perf4j-dashboard，就会发现监控图表已经生成    
+然后在观察访问perf4j-dashboard，查看监控图表    
     
     
     
