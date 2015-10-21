@@ -1,6 +1,6 @@
 package org.perf4j.servlet;
 
-import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.perf4j.chart.StatisticsChartGenerator;
 import org.perf4j.helpers.MiscUtils;
 import org.perf4j.log4j.GraphingStatisticsAppender;
@@ -46,17 +46,18 @@ public class VitaGraphingServlet extends HttpServlet {
         Map<String, StatisticsChartGenerator> chartsByName = getChartGeneratorsToDisplay(request);
         response.setContentType("application/json;charset=utf-8");
         writeHeader(request, response);
-        List<String> graphData = new ArrayList<String>();
         response.getWriter().println("[");
         int x = 0;
         for (Map.Entry<String, StatisticsChartGenerator> nameAndChart : chartsByName.entrySet()) {
+            String chartUrl = nameAndChart.getValue().getChartUrl();
+            if (StringUtils.isBlank(chartUrl)) continue;
             x++;
             if (x == 1) {
                 // pass
             } else {
                 response.getWriter().println(",");
             }
-            response.getWriter().println(nameAndChart.getValue().getChartUrl());
+            response.getWriter().println(chartUrl);
         }
         response.getWriter().println("]");
         writeFooter(request, response);

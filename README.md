@@ -10,5 +10,44 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
 
 新的图表渲染样式如下
 
-
 ![Alt text](doc/dashboard.png)
+
+## 快速上手
+
+**1.本地构建**
+
+首先你需要在本地将vita-perf4项目install到你本地，请执行下面脚本构建
+
+    sh ./build.sh
+    
+**2.运行perf4j监控**
+    
+    cd perf4j-dashboard
+    mvn jetty:run
+    
+启动完毕后访问：[127.0.0.1:8889](http://127.0.0.1:8889) ，你也可以更改端口号，通过修改 perf4j-dashboard/pom.xml下面的配置
+    
+    <properties>
+        <jetty.stop.port>10000</jetty.stop.port>
+        <jetty.run.port>8889</jetty.run.port>
+    </properties>
+    
+
+**3.运行perf4j-demo演示项目**
+
+此时，你没有监控到任何数据，因为还没有被监控的项目启动，perf4j-demo是一个用于演示的demo项目，它引入了vita-perf4j，通过同样方式启动
+在这个演示项目中，它会使用perf4j监控接口访问TPS、响应时间和请求数
+ 
+    cd perf4j-demo
+    mvn jetty:run
+    
+启动成功后，需要不断访问演示项目，使其产生请求
+    
+    sh test.sh
+
+然后在观察访问perf4j-dashboard，就会发现监控图表已经生成    
+    
+    
+    
+   
+   

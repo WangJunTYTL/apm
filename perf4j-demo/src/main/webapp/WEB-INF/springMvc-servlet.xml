@@ -16,7 +16,7 @@
     <!-- 开启注解方案 -->
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="com.peaceful.demo.spring.webmvc"/>
+    <context:component-scan base-package="com.vita.perf4j.demo.spring.webmvc"/>
 
 
     <!-- 静态资源访问，方案1 -->

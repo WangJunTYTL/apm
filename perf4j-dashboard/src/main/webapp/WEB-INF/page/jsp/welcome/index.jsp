@@ -23,6 +23,7 @@
 <data value="" style="display: none" id="runningInfo">${runningInfo}</data>
 <data value="" style="display: none" id="clusterMap">${clusterMap}</data>
 <data value="" style="display: none" id="currentCluster">${currentCluster}</data>
+<data value="" style="display: none" id="refresh">${refresh}</data>
 <%--<div class="col-xs-12"><data value="" style="" id="runningInfo">${runningInfo}</data></div>--%>
 <script src="/js/index-graph.js"></script>
 <script>
@@ -48,10 +49,9 @@
         function refresh() {
             window.location.reload();
         }
-
-        setInterval(refresh, ${refresh} * 1000
-        )
-        ;
+        var refreshTime = $("#refresh").html();
+        if (refreshTime == null) refreshTime = 30;
+        setInterval(refresh, refreshTime * 1000);
 
     });
 
