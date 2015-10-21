@@ -1,6 +1,6 @@
 # perf4j
-Performance Monitoring and Statistics for Java Code
 
+Performance Monitoring and Statistics for Java Code
 
 ## perf4j-zh与perf4j比较
 
@@ -52,7 +52,15 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
     
     sh ./test.sh
 
-然后在观察访问perf4j-dashboard，查看监控图表    
+然后在观察访问perf4j-dashboard，查看监控图表 
+   
+   
+## perf4j-dashboard
+   
+如果你只前有使用过官网perf4就组件，那太好了，该perf4j-zh埋点的方式还时依据原perf4j使用方式，只是在配制监控图表发生了变化。
+   
+
+      
     
     
     

@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Random;
 
-/**
- * author:dengxiaming@edaijia-staff.cn crate_time:2014年5月3日 -下午12:48:04
- * description:
- */
 public class PerformanceInterceptor extends HandlerInterceptorAdapter {
 
     protected org.slf4j.Logger logger = LoggerFactory

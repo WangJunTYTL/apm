@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>edaijia</title>
+    <title>404</title>
     <link href="/css/bootstrap3.css" rel="stylesheet">
 </head>
 <body>
