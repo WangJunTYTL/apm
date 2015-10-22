@@ -60,7 +60,16 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
 如果你只前有使用过官网perf4就组件，那太好了，该perf4j-zh埋点的方式还时依据原perf4j使用方式，只是在配制监控图表发生了变化。
    
 
-      
+
+## perf4j  解读
+
+1. 数据收集与统计分析
+    1. [数据收集](./doc/StopWatch.md)
+    1. [数据统计:TimingStatistics](./doc/TimingStatistics.md)
+    1. [数据统计结果保存容器:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
+1. 日志系统对接
+    1. [stop & lap 方法调度日志输出](./doc/LoggingStopWatch.md)
+    1. [log4j logback slf 等对接方式]  
     
     
     

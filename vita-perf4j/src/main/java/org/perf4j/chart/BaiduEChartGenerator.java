@@ -24,7 +24,6 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
     private int maxDataPoints = DEFAULT_MAX_DATA_POINTS;
     private StatsValueRetriever valueRetriever;
     private Set<String> enabledTags = null;
-    DecimalFormat df = new DecimalFormat("#.0");
 
 
     public BaiduEChartGenerator(StatsValueRetriever statsValueRetriever) {
@@ -66,7 +65,7 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
 
         //labels so the chart doesn't get too crowded
 //        int stepSize = this.data.size() / this.maxDataPoints + 1;
-        int stepSize =  1;
+        int stepSize = 1;
 
 
         for (Iterator<GroupedTimingStatistics> iter = data.iterator(); iter.hasNext(); ) {
@@ -129,7 +128,7 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
             List<Number>[] XYData = tagsToXDataAndYData.get(tag);
             List<Number> XData = XYData[0];
             List<Number> YData = XYData[1];
-            int n=0;
+            int n = 0;
             for (int i = 0; i < labels2.size() && i < XData.size(); i++) {
                 long xi = XData.get(i).longValue();
                 if (labels2.get(i) < xi) {

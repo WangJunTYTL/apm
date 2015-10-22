@@ -1,8 +1,4 @@
-# perf4j
-
-perf4j 是一个简单的性能记录，监测和分析库
-
-## StopWatch
+# StopWatch
 
 一个StopWatch代表一个计时器，简单的使用方式
 

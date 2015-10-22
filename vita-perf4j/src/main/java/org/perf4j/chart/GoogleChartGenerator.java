@@ -198,6 +198,7 @@ public class GoogleChartGenerator implements StatisticsChartGenerator {
         return Collections.unmodifiableList(this.data);
     }
 
+
     public synchronized void appendData(GroupedTimingStatistics statistics) {
         if (this.data.size() >= this.maxDataPoints) {
             this.data.removeFirst();
