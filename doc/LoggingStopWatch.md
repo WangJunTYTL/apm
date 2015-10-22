@@ -1,6 +1,7 @@
 # LoggingStopWatch
 
-    // --- Template Methods ---
+该对象主要目的是把把StopWatch对象输出结果toString记录到日志系统中，主要方法
+
     /**
      * This log method can be overridden by subclasses in order to persist the StopWatch, for example by using a
      * log4j Logger. The default implementation here just writes the StopWatch to the standard error stream.
@@ -29,3 +30,7 @@
     	long timeThreshold = getTimeThreshold(); // to allow for subclasses to override this value
     	if (timeThreshold == 0 || isNormalAndSlowSuffixesEnabled() || elapsedTime >= timeThreshold) {
             log(stopWatchAsString, exception);
+        }
+    }
+    
+    

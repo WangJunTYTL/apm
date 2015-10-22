@@ -65,12 +65,16 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
 
 1. 数据收集与统计分析
     1. [数据收集](./doc/StopWatch.md)
-    1. [数据统计:TimingStatistics](./doc/TimingStatistics.md)
-    1. [数据统计结果保存容器:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
+    1. [数据统计](./doc/TimingStatistics.md)
+    1. [对数据数据统计进行分组，格式化输出方式:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
 1. 日志系统对接
-    1. [stop & lap 方法调度日志输出](./doc/LoggingStopWatch.md)
-    1. [log4j logback slf 等对接方式]  
-    
+    1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)
+    1. [log4j、logback、slf等日志组件对接方式](./doc/Log4jStopWatch.md)
+1. 图表渲染
+    1. [性能图表渲染](./doc/graph.md)
+    1. [原google图表渲染](./doc/GoogleChart.md)
+    1. [新baidu Echart图表渲染](./doc/Echart.md)
+    1. [集群监控](./doc/dashboard.md)
     
     
    

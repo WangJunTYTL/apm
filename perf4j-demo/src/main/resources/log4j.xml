@@ -81,6 +81,7 @@
 
     <appender name="CoalescingStatistics" class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
         <param name="TimeSlice" value="30000"/>
+        <param name="createRollupStatistics" value="true"></param>
         <appender-ref ref="stdout"/>
         <appender-ref ref="ExecutionTPS"></appender-ref>
         <appender-ref ref="ExecutionTimes"></appender-ref>
@@ -103,7 +104,6 @@
         <appender-ref ref="CoalescingStatistics"/>
     </logger>
     <!-- per4j-appender-end -->
-
 
     <root>
         <level value="debug"/>
