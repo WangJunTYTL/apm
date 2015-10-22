@@ -57,9 +57,61 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
    
 ## perf4j-dashboard
    
-如果你只前有使用过官网perf4就组件，那太好了，该perf4j-zh埋点的方式还时依据原perf4j使用方式，只是在配制监控图表发生了变化。
-   
+dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，它由原perf4j图表监控只能在依赖项目中查看，改为dashboard去拉取集群中每个节点的监控数据统一在dashboard中渲染
 
+### 使用方式
+
+1. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
+
+     <servlet>
+         <servlet-name>perf4j</servlet-name>
+         <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>perf4j</servlet-name>
+         <url-pattern>/admin</url-pattern>
+     </servlet-mapping>
+     
+2. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
+
+
+    ServerCluster: {
+    
+      clusterList = [
+        {
+          name = perf4j-demo
+          ip = 127.0.0.1
+          port = 8888
+          url = "/admin"
+        }
+    
+        {
+          name = perf4j-demo02
+          ip = 127.0.0.1
+          port = 8888
+          url = "/admin"
+        }
+    
+        {
+          name = perf4j-demo03
+          ip = 127.0.0.1
+          port = 8888
+          url = "/admin"
+        }
+      ]
+    
+    }
+     
+这样，dashboard项目通过配置的集群中的节点的ip、port和servlet的访问地址去拉取性能数据，然后渲染上文中介绍的图表样式     
+
+
+## vita-perf4j
+
+vita-perf4j其实就是官网的源码，只是修改了它的图表渲染，加入显示性能数据的servlet，在使用这个项目时就和使用perf4j没有区别，不做太多介绍了
+
+## perf4j-demo
+
+这是一个依赖vita-perf4j的Demo项目,在`PerformanceInterceptor`和`TestController`了有使用的列子
 
 ## perf4j  解读
 

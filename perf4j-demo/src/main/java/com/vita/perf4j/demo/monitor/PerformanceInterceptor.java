@@ -1,4 +1,4 @@
-package org.perf4j.monitor;
+package com.vita.perf4j.demo.monitor;
 
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
@@ -8,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Random;
 
 public class PerformanceInterceptor extends HandlerInterceptorAdapter {
 
