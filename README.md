@@ -63,6 +63,7 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
 
 1. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
 
+     ```
      <servlet>
          <servlet-name>perf4j</servlet-name>
          <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
@@ -71,6 +72,7 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
          <servlet-name>perf4j</servlet-name>
          <url-pattern>/admin</url-pattern>
      </servlet-mapping>
+     ```
      
 2. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
 
