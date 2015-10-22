@@ -1,15 +1,16 @@
 # perf4j
 
 Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于企业Java应用程序。
+
 perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控图表，使perf4j能够被更多企业Java项目使用。
 
 
-## perf4j-zh Vs perf4j 
+## perf4j-zh、 perf4j 
 
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
 1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每个服务的性能图表。
 
-下面这张图表展示了在一个实际业务中，dashboard对集群服务的监控
+下面这张图表是其在一个实际业务项目中，perf4j-dashboard对集群服务的监控样式
 
 ![Alt text](doc/dashboard.png)
 
@@ -23,7 +24,7 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控图表�
     sh ./build.sh
     
 该脚本主要目的是安装vita-perf4j到你本地的maven私服中，vita-perf4j和perf4j的使用方式完全和perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
-换成vita-perf4j，而不必修改任何配置和其它出现的地方。    
+换成vita-perf4j，而不必修改任何配置和其它对perf4j的地方。    
     
 **2.启动集群监控项目perf4j-dashboard**
     
@@ -118,5 +119,8 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
     1. [集群监控](./doc/dashboard.md)
     
     
+## 交流
+
+QQ：365133362
    
    
