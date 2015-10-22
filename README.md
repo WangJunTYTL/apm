@@ -1,33 +1,31 @@
 # perf4j
 
-Performance Monitoring and Statistics for Java Code
+Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于企业Java应用程序。
+perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控图表，使perf4j能够被更多企业Java项目使用。
 
-## perf4j-zh与perf4j比较
 
-1. 重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，更适合国内行情
-1. 另外增加集群监控，监控图表渲染与监控项目独立
+## perf4j-zh Vs perf4j 
 
-新的图表渲染样式如下
+1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
+1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每个服务的性能图表。
+
+下面这张图表展示了在一个实际业务中，dashboard对集群服务的监控
 
 ![Alt text](doc/dashboard.png)
-
-## 为什么开发perf4j-zh
-
-google网站并不是每个人都可以访问，但自己又不想放弃perf4j这款轻量方便的组件，它可以和常用的日志系统如log4j，logback集成，所以为了继续使用它，图表渲染的功能
-修改为baidu的Echart，更适合我们国内企业和开发人员的使用
-
-另外，它的官网也不在对外开放，使用方式我会按照我目前知道的写个简单的介绍
 
 
 ## 快速上手
 
-**1.本地构建**
+**1.在本地构建安装**
 
-首先你需要在本地将vita-perf4项目install到你本地，请执行下面脚本构建
+首先你需要在本地将vita-perf4项目install到你本地，你只需要执行下面脚本
 
     sh ./build.sh
     
-**2.运行perf4j监控**
+该脚本主要目的是安装vita-perf4j到你本地的maven私服中，vita-perf4j和perf4j的使用方式完全和perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
+换成vita-perf4j，而不必修改任何配置和其它出现的地方。    
+    
+**2.启动集群监控项目perf4j-dashboard**
     
     cd perf4j-dashboard
     mvn jetty:run
@@ -42,22 +40,22 @@ google网站并不是每个人都可以访问，但自己又不想放弃perf4j�
 
 **3.运行perf4j-demo演示项目**
 
-此时，你没有监控到任何数据，因为还没有被监控的项目启动，perf4j-demo是一个用于演示的demo项目，它引入了vita-perf4j，通过同样方式启动
-在这个演示项目中，它会使用perf4j监控接口访问TPS、响应时间和请求数
+此时，在dashboard项目中不会有任何监控图表，因为还没有任何依赖perf4j的项目在运行，perf4j-demo就是一个用于演示的demo项目，它引入了vita-perf4j，通过同样方式启动
+在这个演示项目中，它会监控接口的请求TPS、响应时间和固定实际内的请求数
  
     cd perf4j-demo
     mvn jetty:run
     
-启动成功后，需要不断访问演示项目，使其产生请求量
+启动成功后，需要不断的访问演示项目，使其产生请求量
     
     sh ./test.sh
 
-然后在观察访问perf4j-dashboard，查看监控图表 
+然后在去刷新观察perf4j-dashboard项目，监控图表便会展现 
    
    
 ## perf4j-dashboard
    
-dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，它由原perf4j图表监控只能在依赖项目中查看，改为dashboard去拉取集群中每个节点的监控数据统一在dashboard中渲染
+dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，原perf4j图表监控只能在依赖项目中揭露，现在有了dashboard，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染
 
 ### 使用方式
 
@@ -103,14 +101,6 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
      
 这样，dashboard项目通过配置的集群中的节点的ip、port和servlet的访问地址去拉取性能数据，然后渲染上文中介绍的图表样式     
 
-
-## vita-perf4j
-
-vita-perf4j其实就是官网的源码，只是修改了它的图表渲染，加入显示性能数据的servlet，在使用这个项目时就和使用perf4j没有区别，不做太多介绍了
-
-## perf4j-demo
-
-这是一个依赖vita-perf4j的Demo项目,在`PerformanceInterceptor`和`TestController`了有使用的列子
 
 ## perf4j  解读
 
