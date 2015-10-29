@@ -107,7 +107,7 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
 
 1. 数据收集与统计分析
     1. [数据收集](./doc/StopWatch.md)
-    1. [数据统计](./doc/TimingStatistics.md)
+    1. [数据统计](./doc/TimingStatis    tics.md)
     1. [对数据数据统计进行分组，格式化输出方式:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
 1. 日志系统对接
     1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)

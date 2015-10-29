@@ -128,7 +128,7 @@ public abstract class HttpClient {
                 if (params == null) {
                     // pass
                 } else {
-                    UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params, Consts.UTF_8);
+                    UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params, HTTP.IDENTITY_CODING);
                     httpPost.setEntity(entity);
                 }
                 response = httpClient.execute(httpPost);
