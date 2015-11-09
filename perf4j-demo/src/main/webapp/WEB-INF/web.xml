@@ -29,7 +29,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>perf4j</servlet-name>
-        <url-pattern>/admin</url-pattern>
+        <url-pattern>/perf4j</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
