@@ -129,13 +129,30 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
             List<Number> XData = XYData[0];
             List<Number> YData = XYData[1];
             int n = 0;
-            for (int i = 0; i < labels2.size() && i < XData.size(); i++) {
-                long xi = XData.get(i).longValue();
-                if (labels2.get(i) <= xi && xi < labels2.get((i+1))) {
-                    tagYData.add(String.format("%.2f", YData.get(i).doubleValue()));
+            for (int i = 0; i < labels2.size(); i++) {
+                if (n >= XData.size()) {
+                    tagYData.add("0.00");
+                    continue;
+                }
+                Number number = XData.get(n);
+                long xi;
+                if (number == null) {
+                    tagYData.add("0.00");
+                    n++;
+                    continue;
+                } else {
+                    xi = number.longValue();
+                }
+                if ((i + 1) == labels2.size()) {
+                    tagYData.add(String.format("%.2f", YData.get(n).doubleValue()));
+                    break;
+                } else if (labels2.get(i) <= xi && xi < labels2.get(i + 1)) {
+                    tagYData.add(String.format("%.2f", YData.get(n).doubleValue()));
+                    n++;
                 } else {
                     tagYData.add("0.00");
                 }
+                if (n >= YData.size()) tagYData.add("0.00");
             }
         }
 

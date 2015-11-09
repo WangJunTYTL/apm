@@ -33,19 +33,6 @@
         <url>http://managed.on.a.private.build.server</url>
     </ciManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>deployment_release</id>
-            <name>edaijia nexus center</name>
-            <url>http://115.29.11.157:8081/nexus/content/groups/public</url>
-        </repository>
-        <snapshotRepository>
-            <id>deployment</id>
-            <name>edaijia nexus center</name>
-            <url>http://115.29.11.157:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <mailingLists>
         <mailingList>
             <name>Perf4j Users</name>
@@ -455,7 +442,7 @@
                     </links>
                     <charset>UTF-8</charset>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <phase>deploy</phase>
                         <goals>
@@ -465,7 +452,7 @@
                             <attach>true</attach>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 
             <!-- Generate a jar containing the source files when deploying -->
