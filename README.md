@@ -2,7 +2,7 @@
 
 Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于企业Java应用程序。
 
-perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控图表，使perf4j能够被更多企业Java项目使用。
+perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使perf4j能够被更多企业Java项目使用。
 
 
 ## perf4j-zh、 perf4j 
@@ -69,7 +69,7 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
      </servlet>
      <servlet-mapping>
          <servlet-name>perf4j</servlet-name>
-         <url-pattern>/admin</url-pattern>
+         <url-pattern>/perf4j</url-pattern>
      </servlet-mapping>
      ```
      
@@ -82,19 +82,19 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
           name = perf4j-demo
           ip = 127.0.0.1
           port = 8888
-          url = "/admin"
+          url = "/perf4j"
         }
         {
           name = perf4j-demo02
           ip = 127.0.0.1
           port = 8888
-          url = "/admin"
+          url = "/perf4j"
         }
         {
           name = perf4j-demo03
           ip = 127.0.0.1
           port = 8888
-          url = "/admin"
+          url = "/perf4j"
         }
       ]
     }
