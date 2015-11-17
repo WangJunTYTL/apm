@@ -106,6 +106,7 @@ dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，�
 ## perf4j  解读
 
 1. 数据收集与统计分析
+    1. [架构解析](./doc/perf4j架构解析.jpg)
     1. [数据收集](./doc/StopWatch.md)
     1. [数据统计](./doc/TimingStatis    tics.md)
     1. [对数据数据统计进行分组，格式化输出方式:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
