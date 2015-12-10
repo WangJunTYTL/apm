@@ -109,7 +109,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 
 1. 整体架构
     1. [监控系统设计要点](./doc/feature.md)
-    1. [架构解析](./doc/perf4j架构解析.jpg)
+    1. [架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 1. 数据收集与统计分析
     
     1. [数据收集](./doc/StopWatch.md)
@@ -118,11 +118,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 1. 日志系统对接
     1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)
     1. [log4j、logback、slf等日志组件对接方式](./doc/Log4jStopWatch.md)
-1. 图表渲染
-    1. [性能图表渲染](./doc/graph.md)
-    1. [原google图表渲染](./doc/GoogleChart.md)
-    1. [新baidu Echart图表渲染](./doc/Echart.md)
-    1. [集群监控](./doc/dashboard.md)
+
     
     
 ## 交流
