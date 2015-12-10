@@ -8,7 +8,8 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 ## perf4j-zh、 perf4j 
 
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
-1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每个服务的性能图表。
+1. 性能数据采集与数据渲染进行分离,方面对接到公司内部的监控系统
+1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每台服务的性能图表。
 
 下面这张图表是其在一个实际业务项目中，perf4j-dashboard对集群服务的监控样式
 
@@ -24,7 +25,7 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
     sh ./build.sh
     
 该脚本主要目的是安装vita-perf4j到你本地的maven私服中，vita-perf4j和perf4j的使用方式完全和perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
-换成vita-perf4j，而不必修改任何配置和其它对perf4j的地方。    
+换成vita-perf4j，而不必修改任何配置和其它使用到perf4j的地方。
     
 **2.启动集群监控项目perf4j-dashboard**
     
@@ -56,7 +57,8 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
    
 ## perf4j-dashboard
    
-dashboard是一个对所有依赖perf4j的项目进行集群监控的项目，原perf4j图表监控只能在依赖项目中揭露，现在有了dashboard，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染
+dashboard是一个对所有依赖perf4j的项目服务进行集中式监控的项目，原perf4j图表监控图表是直接在依赖项目中调用google的chartApi远程进行图表渲染然后返回图表地址，由于google被墙,如果直接引用perf4j时看不到图表的.
+vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数据图表，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染.
 
 ### 使用方式
 

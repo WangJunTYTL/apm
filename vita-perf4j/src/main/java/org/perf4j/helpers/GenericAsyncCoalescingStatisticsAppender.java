@@ -108,6 +108,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     private volatile int numDiscardedMessages = 0;
 
     // --- options ---
+
     /**
      * The name of this appender.
      *
@@ -200,7 +201,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     /**
      * The <b>ShutdownWaitMillis</b> option is used to control how long this class will block, waiting for the queue
      * to drain, when shutting-down the Appender.
-     *
+     * <p/>
      * After this timeout expires, no new messages will be drained from the log queue, the log queue will be
      * truncated and shutdown of the Appender will complete.
      *
@@ -239,6 +240,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     }
 
     // --- attributes ---
+
     /**
      * Returns the number of StopWatch messages that have been discarded due to the queue being full.
      *
@@ -249,6 +251,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     }
 
     // --- main lifecycle methods ---
+
     /**
      * The start method should only be called once, before the append method is called, to initialize options.
      *
@@ -265,9 +268,11 @@ public class GenericAsyncCoalescingStatisticsAppender {
         stopWatchParser = newStopWatchParser();
         numDiscardedMessages = 0;
         loggedMessages = new ArrayBlockingQueue<String>(getQueueSize());
-
+        // 从BlockQueue拉取消息
         drainingThread = new Thread(new Dispatcher(), "perf4j-async-stats-appender-sink-" + getName());
+        // 设置拉取消息的线程为daemon线程
         drainingThread.setDaemon(true);
+        // 启动
         drainingThread.start();
     }
 
@@ -275,12 +280,13 @@ public class GenericAsyncCoalescingStatisticsAppender {
      * The append method should be called each time a StopWatch log message is handled by the logging framework.
      *
      * @param message The log message, may not be null. If this message is not a valid StopWatch log message it will
-     *        be discarded.
+     *                be discarded.
      */
     public void append(String message) {
         //Do a quick check to cull out any messages not meant for us
         if (stopWatchParser.isPotentiallyValid(message)) {
             if (!loggedMessages.offer(message)) {
+                // 利用BlockQueue的offer方式记录log到queue中,如果消息记录失败,则做一下记录
                 ++numDiscardedMessages;
                 handler.error(message);
             }
@@ -296,6 +302,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     }
 
     // --- Helper Methods ---
+
     /**
      * Helper method stops the draining thread and waits for it to finish.
      */
@@ -331,6 +338,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
     }
 
     // --- Support Classes ---
+
     /**
      * This Dispatcher Runnable uses a StopWatchesFromQueueIterator to pull StopWatch logging message off the
      * loggedMessages queue, which are grouped to create GroupedTimingStatistics by the GroupingStatisticsIterator.
@@ -340,8 +348,8 @@ public class GenericAsyncCoalescingStatisticsAppender {
         public void run() {
             GroupingStatisticsIterator statsIterator =
                     new GroupingStatisticsIterator(new StopWatchesFromQueueIterator(),
-                                                   timeSlice,
-                                                   createRollupStatistics);
+                            timeSlice,
+                            createRollupStatistics);
 
             while (statsIterator.hasNext()) {
                 try {
@@ -411,18 +419,21 @@ public class GenericAsyncCoalescingStatisticsAppender {
 
             while (true) {
                 if (drainedMessages.isEmpty()) {
+                    // 第一次拉取多些消息
                     loggedMessages.drainTo(drainedMessages, 64);
 
                     //drainTo is more efficient but it doesn't block, so if we're still empty call take() to block
                     if (drainedMessages.isEmpty()) {
                         //then wait for a message to show up
                         try {
+                            // 第一次拉取后,还是空的,等待时间片的拉取消息,如果一直没有消息,则阻塞当前线程的执行
                             String message = loggedMessages.poll(timeSlice, TimeUnit.MILLISECONDS);
                             if (message == null) {
                                 // no new messages, but want to indicate to check the timeslice
                                 timeSliceOver = true;
                                 return null;
                             } else {
+                                // 把拿到的消息放到另外一个集合
                                 drainedMessages.add(message);
                             }
                         } catch (InterruptedException ie) {
@@ -433,6 +444,7 @@ public class GenericAsyncCoalescingStatisticsAppender {
                     }
                 }
 
+                // 解析上面拿到的message转为StopWatch对象
                 while (!drainedMessages.isEmpty()) {
                     String message = drainedMessages.removeFirst();
                     if (message.length() == 0) {

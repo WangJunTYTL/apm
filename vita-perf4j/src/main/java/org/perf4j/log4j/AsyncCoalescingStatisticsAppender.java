@@ -238,6 +238,7 @@ public class AsyncCoalescingStatisticsAppender extends AppenderSkeleton implemen
     public synchronized void activateOptions() {
         //Start the underlying generic appender with a handler object that pumps statistics to the downstream appenders
         baseImplementation.start(new GenericAsyncCoalescingStatisticsAppender.GroupedTimingStatisticsHandler() {
+
             public void handle(GroupedTimingStatistics statistics) {
                 LoggingEvent coalescedLoggingEvent =
                         new LoggingEvent(Logger.class.getName(),
