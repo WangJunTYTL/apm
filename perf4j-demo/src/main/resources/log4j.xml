@@ -73,11 +73,14 @@
     </appender>
 
     <appender name="ExecutionTPS"
-              class="org.perf4j.log4j.SqlLiteAppender">
+              class="org.perf4j.log4j.GraphingStatisticsAppender">
         <param name="GraphType" value="TPS"/>
-        <param name="path" value="/data/logs/perf.db"/>
         <param name="TagNamesToGraph" value="http_request,queue_pop,queue_push,/user/level/auth"/>
         <appender-ref ref="graphsFileAppender"/>
+    </appender>
+
+    <appender name="history"
+              class="org.perf4j.log4j.SqlLiteAppender">
     </appender>
 
     <appender name="CoalescingStatistics" class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
@@ -89,6 +92,7 @@
         <appender-ref ref="ExecutionCount"></appender-ref>
         <!--<appender-ref ref="ExecutionMax"></appender-ref>-->
         <appender-ref ref="ExecutionStdDev"></appender-ref>
+        <appender-ref ref="history"></appender-ref>
     </appender>
 
     <!-- -->
