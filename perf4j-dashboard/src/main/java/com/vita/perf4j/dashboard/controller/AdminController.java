@@ -1,7 +1,9 @@
 package com.vita.perf4j.dashboard.controller;
 
+import com.peaceful.common.util.DateUtils;
 import com.vita.perf4j.dashboard.common.TaskConsoleAPI;
 import com.peaceful.common.util.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,13 +26,42 @@ public class AdminController {
 
     @RequestMapping({"index", "welcome", "/"})
     public String welcome(HttpServletRequest request) {
+        String method = "";
+        String from = "";
+        String to = "";
+        String tag = "";
+
         try {
-            // runningInfo = data
-            String runningInfo = TaskConsoleAPI.cat(TaskConsoleAPI.Method.runningInfo);
+            method = request.getParameter("method");
+            if (StringUtils.isNotEmpty(method)) {
+                tag = request.getParameter("tag");
+                from = request.getParameter("from");
+                to = request.getParameter("to");
+                if (StringUtils.isEmpty(from)) from = "";
+                else {
+                    request.setAttribute("from",from);
+                    from = String.valueOf(DateUtils.getDateByPattern(from, "yyyy-MM-dd HH:mm").getTime());
+                }
+                if (StringUtils.isEmpty(to)) to = "";
+                else {
+                    request.setAttribute("to",to);
+                    to = String.valueOf(DateUtils.getDateByPattern(to, "yyyy-MM-dd HH:mm").getTime());
+                }
+                if (StringUtils.isEmpty(tag)) tag = "";
+                else {
+                    request.setAttribute("tag",tag);
+                }
+            } else {
+                method = "";
+            }
+            String runningInfo = TaskConsoleAPI.cat(method + "&from=" + from + "&to=" + to + "&tag=" + tag);
             logger.info("runningInfo {}", runningInfo);
-            request.setAttribute("runningInfo",runningInfo);
+            request.setAttribute("runningInfo", runningInfo);
         } catch (Exception e) {
             logger.error("request api error ", ExceptionUtils.getStackTrace(e));
+        }
+        if ("history".equals(method)) {
+            return "welcome/history";
         }
         return "welcome/index";
     }

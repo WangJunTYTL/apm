@@ -1,6 +1,7 @@
 package com.vita.perf4j.dashboard.common;
 
 import com.peaceful.common.util.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,36 +20,14 @@ public class TaskConsoleAPI {
 
     public static String cat(String method) {
         try {
-            return HttpClient.get("http://" + apiAdd.get());
+            if (StringUtils.isEmpty(method)) method = "";
+            return HttpClient.get("http://" + apiAdd.get() + "?method=" + method);
         } catch (Exception e) {
             logger.error("request found error {}", ExceptionUtils.getStackTrace(e));
             return "error";
         }
     }
 
-    public static class Method {
-
-        /**
-         * get all focusedTask info
-         */
-        public final static String focusedTaskBeanSet = "focusedTaskBeanSet";
-
-        /**
-         * get all first flexible task info
-         */
-        public final static String firstFlexibleTaskBeanSet = "firstFlexibleTaskBeanSet";
-
-        /**
-         * get all second flexible task info
-         */
-        public final static String secondFlexibleTaskBeanSet = "secondFlexibleTaskBeanSet";
-
-
-        /**
-         * get task container running info
-         */
-        public final static String runningInfo = "getRunningInfo";
-    }
 
     /**
      * change console api add on running time

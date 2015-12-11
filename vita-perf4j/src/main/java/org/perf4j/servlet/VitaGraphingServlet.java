@@ -1,15 +1,20 @@
 package org.perf4j.servlet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.perf4j.chart.StatisticsChartGenerator;
 import org.perf4j.helpers.MiscUtils;
 import org.perf4j.log4j.GraphingStatisticsAppender;
+import org.perf4j.log4j.SqlLiteAppender;
+import org.perf4j.log4j.db.sqllite.SqlLiteHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 /**
@@ -43,6 +48,14 @@ public class VitaGraphingServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String method = request.getParameter("method");
+        if (!StringUtils.isEmpty(method)) {
+            String from = request.getParameter("from");
+            String to = request.getParameter("to");
+            String tag = request.getParameter("tag");
+            response.getWriter().println(getHistoryData(from, to, tag));
+            return;
+        }
         Map<String, StatisticsChartGenerator> chartsByName = getChartGeneratorsToDisplay(request);
         response.setContentType("application/json;charset=utf-8");
         writeHeader(request, response);
@@ -63,6 +76,35 @@ public class VitaGraphingServlet extends HttpServlet {
         writeFooter(request, response);
     }
 
+    private String getHistoryData(String from, String to, String tag) {
+        SqlLiteHelper sqlLiteHelper = SqlLiteHelper.getInstance();
+        if (sqlLiteHelper == null) {
+            return null;
+        } else {
+            try {
+                java.sql.Date _from = null;
+                java.sql.Date _to = null;
+                if (StringUtils.isEmpty(from)) from = null;
+                else _from = new Date(Long.valueOf(from));
+                if (StringUtils.isEmpty(to)) to = null;
+                else _to = new Date(Long.valueOf(to));
+                if (StringUtils.isEmpty(tag)) {
+                    List<String> tags = sqlLiteHelper.getAllTags();
+                    if (tags.size() > 0) tag = tags.get(0);
+                    else {
+                        return null;
+                    }
+                }
+                return sqlLiteHelper.getData(_from, _to, tag);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+    }
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
@@ -73,26 +115,6 @@ public class VitaGraphingServlet extends HttpServlet {
      */
     protected void writeHeader(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
-
-    /**
-     * Helper method writes the chart to the page using an img tag. Subclasses may wish to override.
-     *
-     * @param name           the name of the chart to write
-     * @param chartGenerator the chart generator responsible for creating the chart URL
-     * @param request        the incoming servlet request
-     * @param response       the servlet respone
-     */
-    protected void writeChart(String name,
-                              StatisticsChartGenerator chartGenerator,
-                              HttpServletRequest request,
-                              HttpServletResponse response) throws ServletException, IOException {
-        String chartUrl = (chartGenerator == null) ? null : chartGenerator.getChartUrl();
-        if (chartUrl != null) {
-            response.getWriter().println(chartUrl);
-        } else {
-            response.getWriter().println(name);
-        }
     }
 
     /**

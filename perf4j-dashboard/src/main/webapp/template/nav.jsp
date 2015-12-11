@@ -22,10 +22,10 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="#" id="nav_dashboard">Dashboard</a></li>
+                <li><a href="#" id="nav_history">History</a></li>
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="https://github.com/WangJunTYTL/perf4j-zh" target="_blank">Help</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">

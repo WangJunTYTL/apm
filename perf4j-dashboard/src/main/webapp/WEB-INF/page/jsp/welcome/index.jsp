@@ -40,7 +40,8 @@
         }
 
         var currentCluster = $("#currentCluster").html();
-
+        $("#nav_history").attr("href","?currentCluster="+currentCluster+"&method=history");
+        $("#nav_dashboard").attr("href","?currentCluster="+currentCluster);
         $("#currentCluster" + currentCluster).attr("class", "active");
     });
 

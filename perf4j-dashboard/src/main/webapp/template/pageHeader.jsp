@@ -18,12 +18,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap-3.5.css" rel="stylesheet">
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
 
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/bootstrap-3.5.js"></script>
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
 
     <%-- baidu echart--%>
     <%--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>--%>
