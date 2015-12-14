@@ -61,7 +61,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 
 ### 使用方式
 
-1. 依赖项目加入vita-perf4j依赖
+1. 依赖项目加入vita-perf4j依赖,如果你的项目已经依赖原官网perf4j项目,可以直接替换为下面的依赖项目
 
     ````
     <dependency>
@@ -70,7 +70,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
         <version>1.0-SNAPSHOT</version>
     </dependency>
     ````
-如果之前依赖原官网perf4j,请移除它们.vita-perf4j新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
+此外,vita-perf4j新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
 
 2. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
 
@@ -121,7 +121,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 
     1. [监控系统设计要点](./doc/feature.md)
     1. [架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
-    1. [perf4j使用介绍]()
+    1. [perf4j配合log4j的简单使用]()
 
 1. 数据收集与统计分析
     
@@ -134,7 +134,6 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
     1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)
     1. [log4j、logback、slf等日志组件对接方式](./doc/Log4jStopWatch.md)
 
-    
     
 ## 交流
 
