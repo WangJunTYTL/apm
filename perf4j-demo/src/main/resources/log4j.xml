@@ -79,8 +79,10 @@
         <appender-ref ref="graphsFileAppender"/>
     </appender>
 
+    <!--历史数据存放目录-->
     <appender name="history"
               class="org.perf4j.log4j.SqlLiteAppender">
+        <param name="path" value="/data/logs/demo/perf4j.db"></param>
     </appender>
 
     <appender name="CoalescingStatistics" class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">

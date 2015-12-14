@@ -38,7 +38,6 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
         <jetty.stop.port>10000</jetty.stop.port>
         <jetty.run.port>8889</jetty.run.port>
     </properties>
-    
 
 **3.运行perf4j-demo演示项目**
 
@@ -62,7 +61,18 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 
 ### 使用方式
 
-1. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
+1. 依赖项目加入vita-perf4j依赖
+
+    ````
+    <dependency>
+        <groupId>com.vita</groupId>
+        <artifactId>vita-perf4j</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    ````
+如果之前依赖原官网perf4j,请移除它们.vita-perf4j新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
+
+2. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
 
      ```
      <servlet>
@@ -75,7 +85,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
      </servlet-mapping>
      ```
      
-2. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
+3. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
    
     ```
     ServerCluster: {
@@ -111,6 +121,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
 
     1. [监控系统设计要点](./doc/feature.md)
     1. [架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
+    1. [perf4j使用介绍]()
 
 1. 数据收集与统计分析
     
