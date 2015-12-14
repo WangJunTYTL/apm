@@ -3,6 +3,7 @@ package org.perf4j.log4j.db.sqllite;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;
@@ -129,6 +130,7 @@ public class SqlLiteHelper {
 
         for (Map.Entry<String, TimingStatistics> tagWithTimingStatistics : groupedTimingStatistics.getStatisticsByTag().entrySet()) {
             String tag = tagWithTimingStatistics.getKey();
+            if (StringUtils.isEmpty(tag)) continue;
             TimingStatistics timingStatistics = tagWithTimingStatistics.getValue();
             preparedStatement.setString(1, tag);
             preparedStatement.setInt(2, timingStatistics.getCount());
@@ -137,6 +139,7 @@ public class SqlLiteHelper {
             preparedStatement.addBatch();
         }
         preparedStatement.executeBatch();
+        preparedStatement.close();
     }
 
     public String getData(Date from, Date to, String tag) throws SQLException {
@@ -160,6 +163,9 @@ public class SqlLiteHelper {
             countDatas.add(resultSet.getInt(2));
             meanDatas.add(resultSet.getString(3));
         }
+
+        resultSet.close();
+        preparedStatement.close();
 
         tags.add(tag);
 
@@ -196,8 +202,12 @@ public class SqlLiteHelper {
         while (resultSet.next()){
             tags.add(resultSet.getString(1));
         }
+        resultSet.close();
+        preparedStatement.close();
         return tags;
     }
+
+
 
 
 }

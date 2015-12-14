@@ -6,9 +6,9 @@ $(function () {
 
         var tags = parseData['tags'];
         var currentTag = $("#currentTag").html();
-        for (var n =0;n < tags.length;n++){
+        for (var n = 0; n < tags.length; n++) {
             var node = $("<option>").html(tags[n]);
-            if (currentTag != null && tags[n] == currentTag) node.attr("selected","true");
+            if (currentTag != null && tags[n] == currentTag) node.attr("selected", "true");
             $("#tag").append(node);
         }
 
@@ -25,10 +25,15 @@ $(function () {
             var myChart = echarts.init(document.getElementById("chart" + n));
             var series = []
             for (var tag in graph.tags) {
+                var symbol = 'heart';
+                if (graph.tagsToYData.length > 168) {
+                    symbol = "none";
+                }
                 var tagData = {
-                    name: tag,
+                    name: graph.tags[tag],
                     type: 'line',
                     data: graph.tagsToYData,
+                    symbol: symbol,
                     markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -56,7 +61,7 @@ $(function () {
                     orient: 'horizontal', // 'vertical'
                     x: 'center', // 'center' | 'left' | {number},
                     y: 'top', // 'center' | 'bottom' | {number}
-                    padding: [20 ,5 ,5 ,5],    // [5, 10, 15, 20]
+                    padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
                 },
                 toolbox: {
                     show: true,
@@ -100,7 +105,7 @@ $(function () {
             myChart.setOption(option);
         }
 
-    }catch(e){
+    } catch (e) {
 
     }
 
