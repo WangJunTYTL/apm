@@ -10,10 +10,17 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
 1. 性能数据采集与数据渲染进行分离,方面对接到公司内部的监控系统
 1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每台服务的性能图表。
+1. 支持实时监控和历史监控图表渲染,快速帮助开发者分析系统的瓶颈、问题,节省人力
 
-下面这张图表是其在一个实际业务项目中，perf4j-dashboard对集群服务的监控样式
+下面这两张图表是其在一个实际业务项目中，perf4j-dashboard对集群服务的监控样式
+
+**实时监控**
 
 ![Alt text](doc/dashboard.png)
+
+**历史监控**
+
+![Alt text](doc/history.png)
 
 
 ## 快速上手
@@ -134,7 +141,7 @@ vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数�
     1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)
     1. [log4j、logback、slf等日志组件对接方式](./doc/Log4jStopWatch.md)
 
-    
+
 ## 交流
 
 QQ群：365133362 群名称：互联网从业者
