@@ -64,7 +64,10 @@
     <!--历史数据存放目录-->
     <appender name="HistoryData"
               class="org.perf4j.log4j.SqlLiteAppender">
+        <!--数据保留路径-->
         <param name="path" value="/data/logs/demo/perf4j.db"></param>
+        <!--数据保留天数,默认是30天-->
+        <param name="storage" value="25"></param>
     </appender>
 
     <appender name="CoalescingStatistics" class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">

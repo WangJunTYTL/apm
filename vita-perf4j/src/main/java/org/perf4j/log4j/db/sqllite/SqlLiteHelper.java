@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 导入性能数据到sqllite中
+ * 导入性能数据到sqlite中
  *
  * @author <a href="mailto:wangjuntytl@163.com">WangJun</a>
  * @version 1.0 15/12/10
@@ -27,16 +27,9 @@ public class SqlLiteHelper {
     private static final int INIT_FAIL = -1;
 
 
-    private static String path = "";
-
     private static Connection connection = null;
 
     private static int state = NOT_INIT;
-
-
-    public void setPath(String path) {
-        SqlLiteHelper.path = path;
-    }
 
     private SqlLiteHelper() {
 
@@ -47,13 +40,13 @@ public class SqlLiteHelper {
         if (state == INIT_SUC) {
             return Single.sqlLiteHelper;
         } else if (state == INIT_FAIL) {
-            throw new Exception("can't init sqllite !");
+            throw new Exception("can't init sqlite !");
         } else {
             try {
                 SqlLiteHelper sqlLiteHelper = Single.sqlLiteHelper;
                 sqlLiteHelper.initConn(path);
                 sqlLiteHelper.initTable();
-                System.out.print("init sqllite suc ,path is " + path);
+                System.out.println("init sqlite suc ,path is " + path);
                 state = INIT_SUC;
                 return sqlLiteHelper;
             } catch (Exception e) {
@@ -63,6 +56,13 @@ public class SqlLiteHelper {
         }
     }
 
+
+    /**
+     * 如果该对象已经实例化,则返回实例对象,否则返回null
+     * Note: 如果对象还未实例化,该方法不会主动去初始化
+     *
+     * @return
+     */
     public static SqlLiteHelper getInstance() {
         if (state == INIT_SUC) {
             return Single.sqlLiteHelper;
@@ -134,7 +134,7 @@ public class SqlLiteHelper {
             TimingStatistics timingStatistics = tagWithTimingStatistics.getValue();
             preparedStatement.setString(1, tag);
             preparedStatement.setInt(2, timingStatistics.getCount());
-            preparedStatement.setString(3, String.format("%.2f",timingStatistics.getMean()));
+            preparedStatement.setString(3, String.format("%.2f", timingStatistics.getMean()));
             preparedStatement.setDate(4, new Date(groupedTimingStatistics.getStopTime()));
             preparedStatement.addBatch();
         }
@@ -188,26 +188,32 @@ public class SqlLiteHelper {
         array.add(meanData);
 
         JSONObject totalData = new JSONObject();
-        totalData.put("graph",array);
-        totalData.put("tags",getAllTags());
+        totalData.put("graph", array);
+        totalData.put("tags", getAllTags());
 
         return JSON.toJSONString(totalData);
 
+    }
+
+    public void deleteData(Date date) throws SQLException {
+        String sql = "DELETE FROM perf4j WHERE  `create_time` < ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setDate(1,date);
+        preparedStatement.execute();
+        preparedStatement.close();
     }
 
     public List<String> getAllTags() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT (tag) from perf4j");
         List<String> tags = new ArrayList<String>();
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             tags.add(resultSet.getString(1));
         }
         resultSet.close();
         preparedStatement.close();
         return tags;
     }
-
-
 
 
 }

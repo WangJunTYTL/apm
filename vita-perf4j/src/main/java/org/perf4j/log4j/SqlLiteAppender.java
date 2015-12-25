@@ -1,5 +1,6 @@
 package org.perf4j.log4j;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.helpers.AppenderAttachableImpl;
@@ -9,7 +10,13 @@ import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.log4j.db.sqllite.SqlLiteHelper;
 
 import java.io.Flushable;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.Enumeration;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author <a href="mailto:wangjuntytl@163.com">WangJun</a>
@@ -19,6 +26,8 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
 
     private String pathName = "/data/logs/perf4j.db";
 
+    private int storageLife = 30;
+
     public String getPath() {
         return pathName;
     }
@@ -27,6 +36,13 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
         this.pathName = path;
     }
 
+    public void setStorage(int storage) {
+        this.storageLife = storage;
+    }
+
+    public int getStorage() {
+        return storageLife;
+    }
 
     /**
      * Any downstream appenders are contained in this AppenderAttachableImpl
@@ -110,5 +126,29 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
 
     public void flush() {
 
+    }
+
+    private static ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+    private class DeleteHistoryData implements Runnable {
+
+        public void run() {
+
+            Date date = DateUtils.addDays(new Date(), (-storageLife));
+            SqlLiteHelper sqlLiteHelper = SqlLiteHelper.getInstance();
+            if (sqlLiteHelper != null) {
+                try {
+                    sqlLiteHelper.deleteData(new java.sql.Date(date.getTime()));
+                } catch (SQLException e) {
+                    getErrorHandler().error("clear history data error "+ e);
+                }
+            }
+        }
+    }
+
+    @Override
+    public synchronized void activateOptions() {
+        System.out.println("clear-history-data-" + storageLife + " start");
+        scheduledExecutorService.scheduleAtFixedRate(new DeleteHistoryData(), 0, 1, TimeUnit.DAYS);
     }
 }

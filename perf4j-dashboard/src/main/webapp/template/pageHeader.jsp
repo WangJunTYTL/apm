@@ -25,7 +25,14 @@
 
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/bootstrap-3.5.js"></script>
+    <%--时间框--%>
     <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <%--自动提示框--%>
+    <script src="/js/typeahead.js"></script>
+
+    <%--所有页面都需要用到的js--%>
+    <script src="/js/common-dashboard.js"></script>
+
 
     <%-- baidu echart--%>
     <%--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>--%>

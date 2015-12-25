@@ -28,7 +28,7 @@
                 <li><a href="https://github.com/WangJunTYTL/perf4j-zh" target="_blank">Help</a></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" placeholder="Search..." id="search" autocomplete="off">
             </form>
         </div>
     </div>
