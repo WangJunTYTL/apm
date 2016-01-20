@@ -1,4 +1,4 @@
-package com.vita.perf4j.dashboard.common;
+package com.peaceful.perf4j.dashboard.common;
 
 import com.alibaba.fastjson.JSON;
 

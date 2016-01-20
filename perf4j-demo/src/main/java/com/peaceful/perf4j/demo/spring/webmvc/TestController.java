@@ -1,4 +1,4 @@
-package com.vita.perf4j.demo.spring.webmvc;
+package com.peaceful.perf4j.demo.spring.webmvc;
 
 import com.peaceful.common.util.Util;
 import org.perf4j.LoggingStopWatch;

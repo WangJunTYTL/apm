@@ -18,7 +18,7 @@
 	<mvc:resources location="/image/" mapping="/image/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/css/" mapping="/css/**" />
-	<context:component-scan base-package="com.vita.perf4j.dashboard.controller" />
+	<context:component-scan base-package="com.peaceful.perf4j.dashboard.controller" />
 
 
 	<!-- View Resolver for JSP -->
@@ -38,7 +38,7 @@
 
 	<bean id="HttpContextFilter" class="com.peaceful.common.util.HttpContextFilter"></bean>
 
-	<bean id="clusterConsoleFilter" class="com.vita.perf4j.dashboard.common.ClusterConsoleFilter"></bean>
+	<bean id="clusterConsoleFilter" class="com.peaceful.perf4j.dashboard.common.ClusterConsoleFilter"></bean>
 
 	<bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
 		<property name="encoding" value="UTF-8" />

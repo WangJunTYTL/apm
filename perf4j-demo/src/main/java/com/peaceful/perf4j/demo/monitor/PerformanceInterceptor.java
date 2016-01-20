@@ -1,4 +1,4 @@
-package com.vita.perf4j.demo.monitor;
+package com.peaceful.perf4j.demo.monitor;
 
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;

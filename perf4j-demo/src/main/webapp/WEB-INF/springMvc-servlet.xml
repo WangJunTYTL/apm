@@ -16,7 +16,7 @@
     <!-- 开启注解方案 -->
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="com.vita.perf4j.demo.spring.webmvc"/>
+    <context:component-scan base-package="com.peaceful.perf4j.demo.spring.webmvc"/>
 
 
     <!-- 静态资源访问，方案1 -->
@@ -26,7 +26,7 @@
 
 
     <mvc:interceptors>
-        <bean class="com.vita.perf4j.demo.monitor.PerformanceInterceptor" />
+        <bean class="com.peaceful.perf4j.demo.monitor.PerformanceInterceptor" />
     </mvc:interceptors>
 
     <!-- View Resolver for JSP-->

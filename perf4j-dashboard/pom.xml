@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.vita</groupId>
+    <groupId>com.peaceful</groupId>
     <artifactId>perf4j-dashboard</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>

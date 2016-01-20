@@ -1,4 +1,4 @@
-package com.vita.perf4j.dashboard.common;
+package com.peaceful.perf4j.dashboard.common;
 
 import com.peaceful.common.util.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;

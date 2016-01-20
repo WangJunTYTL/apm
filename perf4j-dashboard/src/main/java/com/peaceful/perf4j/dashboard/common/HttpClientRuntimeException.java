@@ -1,4 +1,4 @@
-package com.vita.perf4j.dashboard.common;
+package com.peaceful.perf4j.dashboard.common;
 
 /**
  * httpClient action exception

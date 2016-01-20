@@ -27,12 +27,12 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 
 **1.在本地构建安装**
 
-首先你需要在本地将vita-perf4项目install到你本地，你只需要执行下面脚本
+首先你需要在本地将`2.0-SNAPSHOT`版本的perf4项目install到你本地，你只需要执行下面脚本
 
     sh ./build.sh
     
-该脚本主要目的是安装vita-perf4j到你本地的maven私服中，vita-perf4j和perf4j的使用方式完全和perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
-换成vita-perf4j，而不必修改任何配置和其它使用到perf4j的地方。
+该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
+升级到`2.0-SNAPSHOT`，而不必修改任何配置和其它使用到perf4j的地方。
     
 **2.启动集群监控项目perf4j-dashboard**
     
@@ -48,7 +48,7 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 
 **3.运行perf4j-demo演示项目**
 
-此时，在dashboard项目中不会有任何监控图表，因为还没有任何依赖perf4j的项目在运行，perf4j-demo就是一个用于演示的demo项目，它引入了vita-perf4j，通过同样方式启动
+此时，在dashboard项目中不会有任何监控图表，因为还没有任何依赖perf4j的项目在运行，perf4j-demo就是一个用于演示的demo项目，它引入了perf4j依赖，通过同样方式启动
 在这个演示项目中，它会监控接口的请求TPS、响应时间和固定实际内的请求数
  
     cd perf4j-demo
@@ -63,21 +63,21 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
    
 ## perf4j-dashboard
    
-dashboard是一个对所有依赖perf4j的项目服务进行集中式监控的项目，原perf4j图表监控图表是直接在依赖项目中调用google的chartApi远程进行图表渲染然后返回图表地址，由于google被墙,如果直接引用perf4j时看不到图表的.
-vita-perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数据图表，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染.
+dashboard是一个对所有依赖perf4j的项目服务进行集中式监控的项目，原perf4j图表监控图表是直接在依赖项目中调用google的chartApi远程进行图表渲染然后返回图表地址，由于google被墙,如果直接引用官网perf4j是看不到图表的.
+在2.0-SNAPSHOT版本中的perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数据图表，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染.
 
 ### 使用方式
 
-1. 依赖项目加入vita-perf4j依赖,如果你的项目已经依赖原官网perf4j项目,可以直接替换为下面的依赖项目
+1. 加入perf4j依赖,如果你的项目已经依赖原官网perf4j项目,可以直接升级版本为`2.0-SNAPSHOT`
 
     ````
     <dependency>
-        <groupId>com.vita</groupId>
-        <artifactId>vita-perf4j</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.perf4j</groupId>
+        <artifactId>perf4j</artifactId>
+        <version>2.0-SNAPSHOT</version>
     </dependency>
     ````
-此外,vita-perf4j新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
+此外,`在2.0-SNAPSHOT`新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
 
 2. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
 

@@ -1,7 +1,7 @@
-package com.vita.perf4j.dashboard.controller;
+package com.peaceful.perf4j.dashboard.controller;
 
 import com.peaceful.common.util.DateUtils;
-import com.vita.perf4j.dashboard.common.TaskConsoleAPI;
+import com.peaceful.perf4j.dashboard.common.TaskConsoleAPI;
 import com.peaceful.common.util.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

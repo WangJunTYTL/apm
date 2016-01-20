@@ -1,4 +1,4 @@
-package com.vita.perf4j.dashboard.common;
+package com.peaceful.perf4j.dashboard.common;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +53,7 @@ public abstract class HttpClient {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(url);
-            RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(6000).setConnectTimeout(6000).build();//设置请求和传输超时时间
+            RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(22000).setConnectTimeout(22000).build();//设置请求和传输超时时间
             httpget.setConfig(requestConfig);
             String result = null;
             // The underlying HTTP connection is still held by the response object
