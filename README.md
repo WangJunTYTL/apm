@@ -18,10 +18,13 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 
 ![Alt text](doc/dashboard.png)
 
-**历史监控**
+**历史数据**
 
 ![Alt text](doc/history.png)
 
+**基本JVM监控**
+
+![Alt text](doc/jvm.png)
 
 ## 快速上手
 
