@@ -241,7 +241,7 @@ public class GraphDataTables {
     }
 
     public String getDataFromJvm(Date from, Date to) throws SQLException {
-        if (from == null) from = new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 6);
+        if (from == null) from = new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 1);
         if (to == null) to = new Date(System.currentTimeMillis());
         String sql = String.format("SELECT * from %s WHERE `create_time` BETWEEN ? AND ?", jvmTable);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);

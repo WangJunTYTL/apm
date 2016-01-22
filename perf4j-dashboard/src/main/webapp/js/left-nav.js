@@ -11,9 +11,9 @@ $(function () {
     }
 
     var currentCluster = $("#currentCluster").html();
-    $("#nav_history").attr("href","?currentCluster="+currentCluster+"&method=history");
+    $("#nav_history").attr("href","?method=history&currentCluster="+currentCluster);
     $("#nav_dashboard").attr("href","?currentCluster="+currentCluster);
-    $("#nav_jvm").attr("href","?currentCluster="+currentCluster+"&method=jvm");
+    $("#nav_jvm").attr("href","?method=jvm&currentCluster="+currentCluster);
     $("#currentCluster" + currentCluster).attr("class", "active");
 
     $(".datetimepicker").datetimepicker();
