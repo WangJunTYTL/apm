@@ -1,21 +1,18 @@
 package org.perf4j.db.sqlite;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.perf4j.GroupedTimingStatistics;
-import org.perf4j.TimingStatistics;
 import org.perf4j.jvm.JVMGraphData;
 import org.perf4j.jvm.JVMInfo;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 导入性能数据到sqlite中

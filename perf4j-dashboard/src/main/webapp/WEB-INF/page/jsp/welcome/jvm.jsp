@@ -35,12 +35,12 @@
     <h3 class="page-header">JVM</h3>
     <div>
         <div class="col-lg-6">
-            <h5>Heap</h5>
+            <%--<h5>Heap</h5>--%>
             <div id="UsedHeap" style="height: 300px"></div>
         </div>
         <div class="col-lg-6">
 
-            <h5>NonHeap</h5>
+            <%--<h5>NonHeap</h5>--%>
             <div id="UsedNonHeap" style="height: 300px"></div>
         </div>
     </div>
@@ -53,11 +53,11 @@
     <div>
         <h3 class="page-header">GC</h3>
         <div class="col-lg-6">
-            <h5>Count</h5>
+            <%--<h5>Count</h5>--%>
             <div id="GCCount" style="height: 300px"></div>
         </div>
         <div class="col-lg-6">
-            <h5>Time</h5>
+            <%--<h5>Time</h5>--%>
             <div id="GCTime" style="height: 300px"></div>
         </div>
     </div>

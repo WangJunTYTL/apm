@@ -48,8 +48,8 @@ public class GraphDataTables {
                 " create_time        DATETIME)";
         String existSql = "select count(*)  from sqlite_master where type='table' and name = 'perf4j'";
 
-        String tagIndex = "CREATE INDEX tag_index ON perf4j (tag)";
-        String timeIndex = "CREATE INDEX time_index ON perf4j (create_time)";
+        String tagIndex = "CREATE INDEX perf4j_tag_index ON perf4j (tag)";
+        String timeIndex = "CREATE INDEX perf4j_time_index ON perf4j (create_time)";
         if (isExist(existSql)) {
             System.out.println("table perf4j is exist");
         } else {
@@ -72,8 +72,8 @@ public class GraphDataTables {
                 " create_time        DATETIME)";
         String existSql = "select count(*)  from sqlite_master where type='table' and name = 'jvm'";
 
-        String tagIndex = "CREATE INDEX tag_index ON jvm (tag)";
-        String timeIndex = "CREATE INDEX time_index ON jvm (create_time)";
+        String tagIndex = "CREATE INDEX jvm_tag_index ON jvm (tag)";
+        String timeIndex = "CREATE INDEX jvm_time_index ON jvm (create_time)";
 
         if (isExist(existSql)) {
             System.out.println("table jvm is exist");
