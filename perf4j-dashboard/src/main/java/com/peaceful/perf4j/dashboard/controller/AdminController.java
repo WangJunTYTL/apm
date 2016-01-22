@@ -33,6 +33,7 @@ public class AdminController {
 
         try {
             method = request.getParameter("method");
+
             if (StringUtils.isNotEmpty(method)) {
                 tag = request.getParameter("tag");
                 from = request.getParameter("from");
@@ -51,7 +52,8 @@ public class AdminController {
                 else {
                     request.setAttribute("tag",tag);
                 }
-            } else {
+            }
+            else {
                 method = "";
             }
             String runningInfo = TaskConsoleAPI.cat(method + "&from=" + from + "&to=" + to + "&tag=" + tag);
@@ -62,6 +64,8 @@ public class AdminController {
         }
         if ("history".equals(method)) {
             return "welcome/history";
+        }else if ("jvm".equals(method)){
+            return "welcome/jvm";
         }
         return "welcome/index";
     }

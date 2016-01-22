@@ -1,12 +1,11 @@
 package org.perf4j.servlet;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.perf4j.chart.StatisticsChartGenerator;
+import org.perf4j.db.sqlite.GraphDataTables;
 import org.perf4j.helpers.MiscUtils;
 import org.perf4j.log4j.GraphingStatisticsAppender;
-import org.perf4j.log4j.SqlLiteAppender;
-import org.perf4j.log4j.db.sqllite.SqlLiteHelper;
+import org.perf4j.db.sqlite.SqlLiteHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +52,13 @@ public class VitaGraphingServlet extends HttpServlet {
             String from = request.getParameter("from");
             String to = request.getParameter("to");
             String tag = request.getParameter("tag");
-            response.getWriter().println(getHistoryData(from, to, tag));
+            int _dataType = 0;
+            if (method.equals("jvm")) {
+                _dataType = 1;
+            } else {
+                _dataType = 0;
+            }
+            response.getWriter().println(getMetaData(from, to, tag, _dataType));
             return;
         }
         Map<String, StatisticsChartGenerator> chartsByName = getChartGeneratorsToDisplay(request);
@@ -76,7 +81,7 @@ public class VitaGraphingServlet extends HttpServlet {
         writeFooter(request, response);
     }
 
-    private String getHistoryData(String from, String to, String tag) {
+    private String getMetaData(String from, String to, String tag, int type) {
         SqlLiteHelper sqlLiteHelper = SqlLiteHelper.getInstance();
         if (sqlLiteHelper == null) {
             return null;
@@ -88,14 +93,19 @@ public class VitaGraphingServlet extends HttpServlet {
                 else _from = new Date(Long.valueOf(from));
                 if (StringUtils.isEmpty(to)) to = null;
                 else _to = new Date(Long.valueOf(to));
-                if (StringUtils.isEmpty(tag)) {
-                    List<String> tags = sqlLiteHelper.getAllTags();
-                    if (tags.size() > 0) tag = tags.get(0);
-                    else {
-                        return null;
+                if (type == 0) {
+                    if (StringUtils.isEmpty(tag)) {
+                        List<String> tags = sqlLiteHelper.graphDataTables.getAllTags(GraphDataTables.perf4jTable);
+                        if (tags.size() > 0) tag = tags.get(0);
+                        else {
+                            return null;
+                        }
                     }
+                    return sqlLiteHelper.getData(_from, _to, tag, GraphDataTables.perf4jTable);
+                } else {
+                    return sqlLiteHelper.getData(_from, _to, tag, GraphDataTables.jvmTable);
+
                 }
-                return sqlLiteHelper.getData(_from, _to, tag);
             } catch (SQLException e) {
                 e.printStackTrace();
                 return null;

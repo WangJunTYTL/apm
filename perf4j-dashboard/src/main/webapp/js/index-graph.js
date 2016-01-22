@@ -46,7 +46,7 @@ $(function () {
                     orient: 'horizontal', // 'vertical'
                     x: 'center', // 'center' | 'left' | {number},
                     y: 'top', // 'center' | 'bottom' | {number}
-                    padding: [20 ,5 ,5 ,5],    // [5, 10, 15, 20]
+                    padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
                 },
                 toolbox: {
                     show: true,
@@ -90,7 +90,7 @@ $(function () {
             myChart.setOption(option);
         }
 
-    }catch(e){
+    } catch (e) {
 
     }
 

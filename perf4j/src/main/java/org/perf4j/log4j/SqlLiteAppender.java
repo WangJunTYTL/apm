@@ -7,13 +7,13 @@ import org.apache.log4j.helpers.AppenderAttachableImpl;
 import org.apache.log4j.spi.AppenderAttachable;
 import org.apache.log4j.spi.LoggingEvent;
 import org.perf4j.GroupedTimingStatistics;
-import org.perf4j.log4j.db.sqllite.SqlLiteHelper;
+import org.perf4j.jvm.JVMInfo;
+import org.perf4j.db.sqlite.SqlLiteHelper;
 
 import java.io.Flushable;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +43,7 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
     public int getStorage() {
         return storageLife;
     }
+
 
     /**
      * Any downstream appenders are contained in this AppenderAttachableImpl
@@ -97,7 +98,9 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
         if (logMessage instanceof GroupedTimingStatistics) {
             GroupedTimingStatistics statistics = (GroupedTimingStatistics) logMessage;
             try {
-                SqlLiteHelper.getInstance(pathName).save(statistics);
+                SqlLiteHelper.getInstance(pathName).savePerf4jData(statistics);
+                // 保存jvm信息的频率和导入性能数据的频率是一致的
+                SqlLiteHelper.getInstance(pathName).saveJVMData();
             } catch (Exception e) {
                 getErrorHandler().error(e + "");
             }
@@ -140,7 +143,7 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
                 try {
                     sqlLiteHelper.deleteData(new java.sql.Date(date.getTime()));
                 } catch (SQLException e) {
-                    getErrorHandler().error("clear history data error "+ e);
+                    getErrorHandler().error("clear history data error " + e);
                 }
             }
         }

@@ -26,37 +26,6 @@
 <data value="" style="display: none" id="refresh">${refresh}</data>
 <%--<div class="col-xs-12"><data value="" style="" id="runningInfo">${runningInfo}</data></div>--%>
 <script src="/js/index-graph.js"></script>
-<script>
-    // load left nav menu
-    $(function () {
-        var clusterMap = JSON.parse($("#clusterMap").html());
-        for (var key in clusterMap) {
-            var leftNav = $("#left-nav");
-            var li = $("<li>").attr("id", "currentCluster" + key);
-            var a = $("<a>").html(key).attr("href", "?currentCluster=" + key);
-            $(li).append(a);
-            $(leftNav).append($(li));
-            console.log("属性：" + key + ",值：" + clusterMap[key]);
-        }
-
-        var currentCluster = $("#currentCluster").html();
-        $("#nav_history").attr("href","?currentCluster="+currentCluster+"&method=history");
-        $("#nav_dashboard").attr("href","?currentCluster="+currentCluster);
-        $("#currentCluster" + currentCluster).attr("class", "active");
-    });
-
-    // timing refresh page
-    $(function () {
-        function refresh() {
-            window.location.reload();
-        }
-        var refreshTime = $("#refresh").html();
-        if (refreshTime == null) refreshTime = 30;
-        setInterval(refresh, refreshTime * 1000);
-
-    });
-
-</script>
 
 
 <jsp:include page="../../../../template/pageFooter.jsp"></jsp:include>

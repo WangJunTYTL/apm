@@ -24,6 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id="nav_dashboard">Now</a></li>
                 <li><a href="#" id="nav_history">History</a></li>
+                <li><a href="#" id="nav_jvm">JVM</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="https://github.com/WangJunTYTL/perf4j-zh" target="_blank">Help</a></li>
             </ul>
