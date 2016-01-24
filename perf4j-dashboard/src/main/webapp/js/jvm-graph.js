@@ -60,7 +60,3 @@ $(function () {
 
 })
 
-for(i=0;i<1000000;i++){
-    var user = {name:"test"+i,age:26}
-    db.users.insert(user)
-}
