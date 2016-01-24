@@ -2,7 +2,9 @@ $(function () {
     try {
         var charts = $("#runningInfo").html();
         var parseData = JSON.parse(charts);
-
+    } catch (e) {
+        $("#chart").html("无法加载数据！");
+    }
 
         var tags = parseData['tags'];
         var currentTag = $("#currentTag").html();
@@ -105,9 +107,7 @@ $(function () {
             myChart.setOption(option);
         }
 
-    } catch (e) {
 
-    }
 
 });
 
