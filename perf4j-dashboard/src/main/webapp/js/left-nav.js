@@ -7,7 +7,6 @@ $(function () {
         var a = $("<a>").html(key).attr("href", "?currentCluster=" + key);
         $(li).append(a);
         $(leftNav).append($(li));
-        console.log("属性：" + key + ",值：" + clusterMap[key]);
     }
 
     var currentCluster = $("#currentCluster").html();
