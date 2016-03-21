@@ -7,7 +7,6 @@ import org.apache.log4j.helpers.AppenderAttachableImpl;
 import org.apache.log4j.spi.AppenderAttachable;
 import org.apache.log4j.spi.LoggingEvent;
 import org.perf4j.GroupedTimingStatistics;
-import org.perf4j.jvm.JVMInfo;
 import org.perf4j.db.sqlite.SqlLiteHelper;
 
 import java.io.Flushable;
@@ -23,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0 15/12/10
  */
 public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttachable, Flushable {
+
 
     private String pathName = "/data/logs/perf4j.db";
 
@@ -133,10 +133,10 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
 
     private static ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
+
     private class DeleteHistoryData implements Runnable {
 
         public void run() {
-
             Date date = DateUtils.addDays(new Date(), (-storageLife));
             SqlLiteHelper sqlLiteHelper = SqlLiteHelper.getInstance();
             if (sqlLiteHelper != null) {
@@ -151,7 +151,6 @@ public class SqlLiteAppender extends AppenderSkeleton implements AppenderAttacha
 
     @Override
     public synchronized void activateOptions() {
-        System.out.println("clear-history-data-" + storageLife + " start");
         scheduledExecutorService.scheduleAtFixedRate(new DeleteHistoryData(), 0, 1, TimeUnit.DAYS);
     }
 }

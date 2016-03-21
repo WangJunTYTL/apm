@@ -10,7 +10,7 @@
 #
 # 如果你的开发平台是window，需要手动执行以下步骤
 #   1. git clone https://github.com/WangJunTYTL/peaceful-basic-platform.git
-#   2. 进入peaceful-basic-platform 目录 ，执行 mvn install  -Dmaven.test.skip=true
+#   2. 进入peaceful-basic-platform 目录 ，先执行 mvn install f peaceful-parent/pom.xml -Dmaven.test.skip=true 然后在执行 mvn install  -Dmaven.test.skip=true
 #   5. 进入perf4j-zh目录，执行 mvn install  -Dmaven.test.skip=true
 #==================================
 
@@ -28,7 +28,7 @@ cmd_is_exist(){
     if [ $? == 0 ];then
         echo "OK"
     else
-        echo "请先安装$1，并添加$1到PATH变量中" && exit 1
+        echo "请先安装$1，并添加$1到PATH变量中" && eit 1
     fi
 }
 
@@ -40,7 +40,7 @@ echo '----------------------------------------------'
 wait
 echo "准备下载依赖包并开始构建 ..."
 
-#下载依赖包，最好手动将依赖包install到你的本地仓库
+#下载依赖包，最好手动将依赖包install到你的本
 echo "下载依赖包peaceful-basic-platform"
 [ -d "peaceful-basic-platform" ] && rm -rf peaceful-basic-platform
 git clone https://github.com/WangJunTYTL/peaceful-basic-platform.git ||  exit 1
