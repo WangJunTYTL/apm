@@ -2,18 +2,18 @@
 
 Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于企业Java应用程序。
 
-perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使perf4j能够被更多企业Java项目使用。
+perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能够被更多企业Java项目使用。
 
 
 ## perf4j-zh、 perf4j 
 
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
-1. 性能数据采集与数据渲染进行分离,方面对接到公司内部的监控系统
+1. 性能数据采集与数据渲染进行分离,方面对接到本公司内部的监控系统
 1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每台服务的性能图表。
 1. 支持实时监控和历史监控图表渲染,快速帮助开发者分析系统的瓶颈、问题,节省人力
 1. 和其它监控对比最大的特点：简单、实用、开箱即用
 
-下面这两张图表是其在一个实际业务项目中，perf4j-dashboard对集群服务的监控样式
+下面这几张图表是其在一个实际业务项目中，集群服务的监控图表
 
 **实时监控**
 
@@ -29,14 +29,16 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 
 ## 快速上手
 
+如果你正在使用Windows平台，下面的步骤也许不适合，这需要你查看下面执行脚本的意思，一步一步进行构建
+
 **1.在本地构建安装**
 
 首先你需要在本地将`2.0-SNAPSHOT`版本的perf4项目install到你本地，你只需要执行下面脚本
 
     sh ./build.sh
     
-该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，它只是有少量的对perf4j源码的修改，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包
-升级到`2.0-SNAPSHOT`，而不必修改任何配置和其它使用到perf4j的地方。
+__注意：__线上mvn私服是不存在这个2.0-SNAPSHOT版本的perf4j包，该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，
+它只是有少量的对perf4j内部源码的修改，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`，而不必修改任何配置和其它使用到perf4j的地方。
     
 **2.启动集群监控项目perf4j-dashboard**
     
@@ -65,67 +67,19 @@ perf4j-zh 是修改部分perf4j源码并加入集中式机器集群监控，使p
 然后在去刷新观察perf4j-dashboard项目，监控图表便会展现 
    
    
-## perf4j-dashboard
-   
-dashboard是一个对所有依赖perf4j的项目服务进行集中式监控的项目，原perf4j图表监控图表是直接在依赖项目中调用google的chartApi远程进行图表渲染然后返回图表地址，由于google被墙,如果直接引用官网perf4j是看不到图表的.
-在2.0-SNAPSHOT版本中的perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数据图表，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染.
+## 具体使用介绍
 
-### 使用方式
-
-1. 加入perf4j依赖,如果你的项目已经依赖原官网perf4j项目,可以直接升级版本为`2.0-SNAPSHOT`
-
-    ````
-    <dependency>
-        <groupId>org.perf4j</groupId>
-        <artifactId>perf4j</artifactId>
-        <version>2.0-SNAPSHOT</version>
-    </dependency>
-    ````
-此外,`在2.0-SNAPSHOT`新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
-
-2. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
-
-     ```
-     <servlet>
-         <servlet-name>perf4j</servlet-name>
-         <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
-     </servlet>
-     <servlet-mapping>
-         <servlet-name>perf4j</servlet-name>
-         <url-pattern>/perf4j</url-pattern>
-     </servlet-mapping>
-     ```
-     
-3. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
-   
-    ```
-    ServerCluster: {
-      clusterList = [
-        {
-          name = perf4j-demo
-          ip = 127.0.0.1
-          port = 8888
-          url = "/perf4j"
-        }
-        {
-          name = perf4j-demo02
-          ip = 127.0.0.1
-          port = 8888
-          url = "/perf4j"
-        }
-        {
-          name = perf4j-demo03
-          ip = 127.0.0.1
-          port = 8888
-          url = "/perf4j"
-        }
-      ]
-    }
-    ```
-     
-这样，dashboard项目通过配置的集群中的节点的ip、port和servlet的访问地址去拉取性能数据，然后渲染上文中介绍的图表样式     
+1. [perf4j与dashboard配合使用说明文档](./doc/usage.md)
+1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 
 
+## 常问问题
+
+1. [perf4j的性能数据为啥选用sqlite,而不是其它功能更强大的数据库？]
+1. [perf4j会影响到业务本身的性能吗？]
+1. [怎样利用perf4j健康db、redis、tomcat等常用组件？]
+
+    
 ## perf4j  解读
 
 1. 整体架构
