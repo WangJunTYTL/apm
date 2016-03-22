@@ -1,4 +1,4 @@
-# perf4j-dashboard 使用介绍 
+# perf4j-dashboard 介绍 
 
 perf4j-dashboard是一个对所有依赖perf4j的项目服务进行监控数据渲染的项目。虽然官网的perf4j也内置了图表渲染功能，但它有些缺点，例如它的图表功能是
 依赖google的chartApi在远程进行图表渲染然后返回一个域名是在google下的图表地址，由于google被墙,如果直接引用官网perf4j你是看不到图表的。另外它的每个监控图表只是
@@ -23,9 +23,10 @@ __dashboard：__可以拉取perf4j在不各个机器或业务上的已经分析�
         <version>2.0-SNAPSHOT</version>
     </dependency>
     ````
-此外,`在2.0-SNAPSHOT`新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看
+此外,`在2.0-SNAPSHOT`新增SqlLiteAppender,可以把性能数据导入到sqllite库中,有关配置可以参照perf4j-demo项目中的log4j.xml查看,更过有关
+在log4j.xml配置perf4j的信息可以到网上搜索，比如：[http://www.infoq.com/cn/articles/perf4j/](http://www.infoq.com/cn/articles/perf4j/)
 
-2. 在依赖项目中配置查看监控数据的servlet,在web.xml文件中加入下面配置
+2. 通过web暴漏性能数据接口，在依赖项目中配置以下的servlet,在web.xml文件中加入下面配置
 
      ```
      <servlet>
@@ -37,8 +38,9 @@ __dashboard：__可以拉取perf4j在不各个机器或业务上的已经分析�
          <url-pattern>/perf4j</url-pattern>
      </servlet-mapping>
      ```
+   
      
-3. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据地址
+3. 在dashboard项目中配置集群中所有节点，在ServerCluster.conf 文件中像下面这样加入每一个服务的监控数据拉取地址
    
     ```
     ServerCluster: {
@@ -66,7 +68,3 @@ __dashboard：__可以拉取perf4j在不各个机器或业务上的已经分析�
     ```
      
 这样，dashboard项目通过配置的集群中的节点的ip、port和servlet的访问地址去拉取性能数据，然后渲染上文中介绍的图表样式     
- 
-
-
-在2.0-SNAPSHOT版本中的perf4j,把数据和渲染进行分离,现有的dashboard只负责渲染数据图表，依赖的项目只需要把收集到的性能数据交给它由dashboard集中渲染.

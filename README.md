@@ -29,7 +29,7 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 
 ## 快速上手
 
-如果你正在使用Windows平台，下面的步骤也许不适合，这需要你查看下面执行脚本的意思，一步一步进行构建
+*<font color='red'>注意：</font>*如果你正在使用Windows平台，下面的步骤也许不适合Windows平台，这需要你研究下面每一步的意思，自己手动完成每一步的操作
 
 **1.在本地构建安装**
 
@@ -37,7 +37,7 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 
     sh ./build.sh
     
-__注意：__线上mvn私服是不存在这个2.0-SNAPSHOT版本的perf4j包，该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，
+__<font color='red'>注意：</font>__线上mvn私服是不存在这个2.0-SNAPSHOT版本的perf4j包，该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，
 它只是有少量的对perf4j内部源码的修改，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`，而不必修改任何配置和其它使用到perf4j的地方。
     
 **2.启动集群监控项目perf4j-dashboard**
@@ -71,33 +71,8 @@ __注意：__线上mvn私服是不存在这个2.0-SNAPSHOT版本的perf4j包，�
 
 1. [perf4j与dashboard配合使用说明文档](./doc/usage.md)
 1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
-
-
-## 常问问题
-
-1. [perf4j的性能数据为啥选用sqlite,而不是其它功能更强大的数据库？]
-1. [perf4j会影响到业务本身的性能吗？]
-1. [怎样利用perf4j健康db、redis、tomcat等常用组件？]
-
-    
-## perf4j  解读
-
-1. 整体架构
-
-    1. [监控系统设计要点](./doc/feature.md)
-    1. [架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
-    1. [perf4j配合log4j的简单使用]()
-
-1. 数据收集与统计分析
-    
-    1. [数据收集](./doc/StopWatch.md)
-    1. [数据统计](./doc/TimingStatis    tics.md)
-    1. [对数据数据统计进行分组，格式化输出方式:GroupedTimingStatistics](./doc/GroupedTimingStatistics.md)
-
-1. 日志系统对接
-
-    1. [stop、lap方法调用时日志收集](./doc/LoggingStopWatch.md)
-    1. [log4j、logback、slf等日志组件对接方式](./doc/Log4jStopWatch.md)
+1. [常见问题](./doc/qa.md)
+1. [perf4j解读](./doc/perf4j_src.md)
 
 
 ## 交流
