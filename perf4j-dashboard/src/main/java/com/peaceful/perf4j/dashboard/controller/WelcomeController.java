@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.6
  */
 @Controller
-public class AdminController {
+public class WelcomeController {
 
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -33,27 +33,25 @@ public class AdminController {
 
         try {
             method = request.getParameter("method");
-
             if (StringUtils.isNotEmpty(method)) {
                 tag = request.getParameter("tag");
                 from = request.getParameter("from");
                 to = request.getParameter("to");
                 if (StringUtils.isEmpty(from)) from = "";
                 else {
-                    request.setAttribute("from",from);
+                    request.setAttribute("from", from);
                     from = String.valueOf(DateUtils.getDateByPattern(from, "yyyy-MM-dd HH:mm").getTime());
                 }
                 if (StringUtils.isEmpty(to)) to = "";
                 else {
-                    request.setAttribute("to",to);
+                    request.setAttribute("to", to);
                     to = String.valueOf(DateUtils.getDateByPattern(to, "yyyy-MM-dd HH:mm").getTime());
                 }
                 if (StringUtils.isEmpty(tag)) tag = "";
                 else {
-                    request.setAttribute("tag",tag);
+                    request.setAttribute("tag", tag);
                 }
-            }
-            else {
+            } else {
                 method = "";
             }
             String runningInfo = TaskConsoleAPI.cat(method + "&from=" + from + "&to=" + to + "&tag=" + tag);
@@ -64,10 +62,16 @@ public class AdminController {
         }
         if ("history".equals(method)) {
             return "welcome/history";
-        }else if ("jvm".equals(method)){
+        } else if ("jvm".equals(method)) {
             return "welcome/jvm";
         }
         return "welcome/index";
     }
+
+    @RequestMapping("profile")
+    public String profile() {
+        return "welcome/profile";
+    }
+
 
 }

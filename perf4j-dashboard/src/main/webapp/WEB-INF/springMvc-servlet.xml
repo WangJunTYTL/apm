@@ -18,6 +18,8 @@
 	<mvc:resources location="/image/" mapping="/image/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/static/" mapping="/static/**" />
 	<context:component-scan base-package="com.peaceful.perf4j.dashboard.controller" />
 
 

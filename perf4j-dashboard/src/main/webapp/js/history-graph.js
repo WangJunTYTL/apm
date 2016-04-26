@@ -6,108 +6,94 @@ $(function () {
         $("#chart").html("无法加载数据！");
     }
 
-        var tags = parseData['tags'];
-        var currentTag = $("#currentTag").html();
-        for (var n = 0; n < tags.length; n++) {
-            var node = $("<option>").html(tags[n]);
-            if (currentTag != null && tags[n] == currentTag) node.attr("selected", "true");
-            $("#tag").append(node);
-        }
+    var tags = parseData['tags'];
+    var currentTag = $("#currentTag").html();
+    for (var n = 0; n < tags.length; n++) {
+        var node = $("<option>").html(tags[n]);
+        if (currentTag != null && tags[n] == currentTag) node.attr("selected", "true");
+        $("#tag").append(node);
+    }
+    $("#chart").html("");
 
-        $("#chart").html("");
-        for (var n = 0; n < parseData['graph'].length; n++) {
-            var graph = parseData['graph'][n];
-            var container = $("<div>").attr("class", "col-md-12");
-            //var title =  $("<h2>").attr("class","sub-header").html(graph.graphType)
-            var node = $("<div>").attr("id", "chart" + n).attr("style", "height:300px;");
-            //container.append(title);
-            container.append(node);
-            $("#chart").append(container);
-            //alert(config)
-            var myChart = echarts.init(document.getElementById("chart" + n));
-            var series = []
-            for (var tag in graph.tags) {
-                var symbol = 'heart';
-                if (graph.tagsToYData.length > 168) {
-                    symbol = "none";
+    require.config({
+        paths: {
+            echarts: '../js/echart'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+            'echarts/chart/bar'
+        ],
+        function (ec) {
+            for (var n = 0; n < parseData['graph'].length; n++) {
+                var graph = parseData['graph'][n];
+                var container = $("<div>").attr("class", "col-md-12");
+                var node = $("<div>").attr("id", "chart" + n).attr("style", "height:300px;");
+                container.append(node);
+                $("#chart").append(container);
+                var myChart = ec.init(node.get(0));
+                var series = []
+                for (var i = 0; i < graph.tags.length; i++) {
+                    var symbol = 'heart';
+                    if (graph.tagsToYData.length > 168) {
+                        symbol = "none";
+                    }
+                    var tagData = {
+                        name: graph.tags[i],
+                        type: 'line',
+                        data: graph.tagsToYData,
+                        symbol: symbol,
+                        markPoint: {
+                            data: [
+                                {type: 'max', name: '最大值'},
+                            ]
+                        }
+                    }
+                    series.push(tagData)
                 }
-                var tagData = {
-                    name: graph.tags[tag],
-                    type: 'line',
-                    data: graph.tagsToYData,
-                    symbol: symbol,
-                    markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            //{type : 'min', name: '最小值'}
-                        ]
+                var option = {
+                    title: {
+                        text: graph.graphType
                     },
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'}
-                        ]
-                    }
-                }
-                series.push(tagData)
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: graph.tags
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: graph.labels
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel: {
+                                formatter: '{value}'
+                            }
+                        }
+                    ],
+                    series: series
+                };
+                myChart.setOption(option);
             }
-            var option = {
-                title: {
-                    text: graph.graphType,
-                    //subtext: '纯属虚构'
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data: graph.tags,
-                    orient: 'horizontal', // 'vertical'
-                    x: 'center', // 'center' | 'left' | {number},
-                    y: 'top', // 'center' | 'bottom' | {number}
-                    padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
-                },
-                toolbox: {
-                    show: true,
-                    orient: 'vertical',
-                    feature: {
-                        mark: {show: false},
-                        dataView: {show: true, readOnly: false},
-                        magicType: {show: true, type: ['line', 'bar']},
-                        saveAsImage: {show: true}
-                    }
-                },
-                calculable: true,
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: graph.labels,
-                        axisTick: {
-                            interval: 0
-
-                        }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        axisLabel: {
-                            formatter: '{value} '
-                        },
-                        axisTick: {
-                            interval: 0
-
-                        }
-                    }
-                ],
-                series: series
-            };
-
-
-            // 为echarts对象加载数据
-            myChart.setOption(option);
         }
-
-
-
+    );
 });
 

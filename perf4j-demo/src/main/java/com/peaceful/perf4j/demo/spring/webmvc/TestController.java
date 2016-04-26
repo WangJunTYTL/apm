@@ -3,6 +3,7 @@ package com.peaceful.perf4j.demo.spring.webmvc;
 import com.peaceful.common.util.Util;
 import org.perf4j.LoggingStopWatch;
 import org.perf4j.StopWatch;
+import org.perf4j.aop.Profiled;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.perf4j.slf4j.Slf4JStopWatch;
 import org.springframework.stereotype.Controller;

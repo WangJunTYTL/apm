@@ -84,6 +84,13 @@
             <version>3.8.11.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.9</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

@@ -13,19 +13,19 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 1. 支持实时监控和历史监控图表渲染,快速帮助开发者分析系统的瓶颈、问题,节省人力
 1. 和其它监控对比最大的特点：简单、实用、开箱即用
 
-下面这几张图表是其在一个实际业务项目中，集群服务的监控图表
+下面这几张图表是其在一个实际业务项目中集群服务的监控图表
 
 **实时监控**
 
-![Alt text](doc/dashboard.png)
+![Alt text](./doc/dashboard.png)
 
 **历史数据**
 
-![Alt text](doc/history.png)
+![Alt text](./doc/history.png)
 
 **基本JVM监控**
 
-![Alt text](doc/jvm.png)
+![Alt text](./doc/jvm.png)
 
 ## 快速上手
 
@@ -67,7 +67,7 @@ __<font color='red'>注意：</font>__线上mvn私服是不存在这个2.0-SNAPS
 然后在去刷新观察perf4j-dashboard项目，监控图表便会展现 
    
    
-## 具体使用介绍
+## 具体介绍
 
 1. [perf4j与dashboard配合使用说明文档](./doc/usage.md)
 1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)

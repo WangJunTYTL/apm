@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Executors;
+
 /**
  * task console api list
  *
@@ -21,7 +23,7 @@ public class TaskConsoleAPI {
     public static String cat(String method) {
         try {
             if (StringUtils.isEmpty(method)) method = "";
-            return HttpClient.get("http://" + apiAdd.get() + "?method=" + method);
+            return HttpClient.get(apiAdd.get() + "?method=" + method);
         } catch (Exception e) {
             logger.error("request found error {}", ExceptionUtils.getStackTrace(e));
             return "error";
@@ -39,9 +41,12 @@ public class TaskConsoleAPI {
      *
      * @param add task container api address
      */
-    public static void setAdd(String add) {
+    public static void setUrl(String add) {
         apiAdd.set(add);
     }
+
+
+
 
 
 }
