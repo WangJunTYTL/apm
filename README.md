@@ -1,8 +1,8 @@
 # perf4j
 
-Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于企业Java应用程序。
+Perf4J 是一个开放源码的性能记录，监测和分析库，可以把根据埋点计算服务的TPS、Mean、Count、Max、Min、StdDev 6种指标值，主要用于企业Java应用程序。
 
-perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能够被更多企业Java项目使用。
+perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard，使perf4j能够被更多企业Java项目使用。
 
 ## perf4j-zh、 perf4j
 
@@ -10,19 +10,19 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 1. 性能数据采集与数据渲染进行分离,方面对接到本公司内部的监控系统
 1. 增加集群监控项目`perf4j-dashboard`，使其可以渲染出集群中每台服务的性能图表。
 1. 支持实时监控和历史监控图表渲染,快速帮助开发者分析系统的瓶颈、问题,节省人力
-1. 和其它监控对比最大的特点：简单、实用、开箱即用
+1. 和其它监控对比最大的特点，主要定位于业务监控：简单、实用、开箱即用
 
 下面这几张图表是其在一个实际业务项目中集群服务的监控图表
 
-**实时监控**
+#### 实时监控
 
 ![Alt text](./doc/Pef4j___now.jpg)
 
-**历史数据**
+#### 历史数据
 
 ![Alt text](./doc/Pef4j___history.jpg)
 
-**基本JVM监控**
+#### 基本JVM监控
 
 ![Alt text](./doc/perf4j__jvm.jpg)
 
@@ -50,7 +50,7 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
     cd perf4j-demo
     mvn jetty:run
     
-启动成功后，需要不断的访问演示项目，使其产生请求量
+启动成功后，需要不断的访问demo项目，目的是模拟产生请求量，在Dashboard中观察demo项目的请求TPS和响应时间
     
     sh ./test.sh
 
@@ -69,7 +69,8 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 
 ## 具体介绍
 
-1. [perf4j与dashboard配合使用说明文档](./doc/usage.md)
+1. [性能数据采集](./doc/perf4j_usage.md)
+1. [dashboard配置](./doc/usage.md)
 1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 1. [常见问题](./doc/qa.md)
 1. [perf4j解读](./doc/perf4j_src.md)
