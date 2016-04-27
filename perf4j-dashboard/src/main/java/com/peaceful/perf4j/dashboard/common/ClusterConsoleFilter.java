@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.peaceful.perf4j.dashboard.controller.ConfController;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,18 +36,18 @@ public class ClusterConsoleFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         String currentCluster = request.getParameter("currentCluster");
-        if (currentCluster == null || currentCluster.equals("")) {
-            Set<String> keys = Conf.NODES.keySet();
-            for (String key : keys) {
-                currentCluster = key;
-                break;
+        String method = request.getParameter("method");
+        if (StringUtils.isNotBlank(method) && StringUtils.isBlank(currentCluster)) {
+            response.sendRedirect("/");
+        } else {
+            if (StringUtils.isNotBlank(currentCluster)) {
+                request.setAttribute("currentCluster",currentCluster);
+                TaskConsoleAPI.setUrl(Conf.NODES.get(currentCluster));
             }
+            filterChain.doFilter(request, servletResponse);
         }
-        request.setAttribute("currentCluster", currentCluster);
-        TaskConsoleAPI.setUrl(Conf.NODES.get(currentCluster));
-        filterChain.doFilter(request, servletResponse);
-
     }
 
     @Override

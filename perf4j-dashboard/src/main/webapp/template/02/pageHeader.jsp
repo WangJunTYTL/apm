@@ -62,7 +62,7 @@
     <script src="/js/helper/Map.js"></script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<body class="hold-transition skin-green sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
     <header class="main-header">
@@ -92,6 +92,10 @@
                         <a href="javascript:void(0)" class="top_nav_menu" menu="jvm">JVM</a>
                     </li>
 
+
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Refresh
@@ -113,9 +117,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="/profile">Profile</a>
                     </li>
                     <li>
                         <a href="https://github.com/WangJunTYTL/perf4j-zh" target="_blank">Help</a>

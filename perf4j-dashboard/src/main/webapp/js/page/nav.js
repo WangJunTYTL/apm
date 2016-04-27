@@ -23,7 +23,7 @@ $(function () {
 
     $(document).on('click', '.cluster_nav', function () {
         var name = $(this).html();
-        window.location.href = "/?currentCluster=" + name;
+        window.location.href = "/?method=now&currentCluster=" + name;
     });
 
     $(document).on("click", ".top_nav_menu", function () {

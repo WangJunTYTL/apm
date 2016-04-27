@@ -26,7 +26,7 @@ $(function () {
                     for (var i = 0; i < nodes[key].length; i++) {
                         var node = nodes[key][i];
                         var tr = $("<tr>")
-                        tr.append($('<td>').append($('<a>').attr("class", "btn").attr("href", "/?currentCluster=" + node['node_name']).html(node['node_name'])));
+                        tr.append($('<td>').append($('<a>').attr("class", "btn").attr("href", "/?method=now&currentCluster=" + node['node_name']).html(node['node_name'])));
                         tr.append($('<td>').append($('<a>').attr("class", "btn removeNodeMenu").attr("href", "javascript:void(0)").attr("clusterName", node['cluster_name']).attr("nodeName", node['node_name']).html("删除")));
                         table.append(tr);
                     }

@@ -64,8 +64,10 @@ public class WelcomeController {
             return "welcome/history";
         } else if ("jvm".equals(method)) {
             return "welcome/jvm";
+        } else if ("now".equals(method)) {
+            return "welcome/index";
         }
-        return "welcome/index";
+        return "welcome/nodes";
     }
 
     @RequestMapping("profile")

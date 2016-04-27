@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0 16/4/25
  */
 @Controller
-@Description("Web程序启动时需要转载块")
+@Description("Web程序启动时需要加载项")
 public class OnloadController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OnloadController.class);
@@ -41,8 +41,8 @@ public class OnloadController {
             e.printStackTrace();
             LOGGER.error("WEB ONLOAD ERROR: CREATE TABLE CLUSTER_NODES FAIL -> {}", e);
         }
-        executorService.scheduleAtFixedRate(new NodesRefreshInterval(),0,8, TimeUnit.SECONDS);
-        executorService.scheduleAtFixedRate(new TagRefreshInterval(),0,2, TimeUnit.HOURS);
+        executorService.scheduleAtFixedRate(new NodesRefreshInterval(), 0, 8, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(new TagRefreshInterval(), 0, 2, TimeUnit.HOURS);
 
 
     }
@@ -52,10 +52,10 @@ public class OnloadController {
         @Override
         public void run() {
             try {
-                Conf.NODES.clear();
                 PreparedStatement statement = null;
                 statement = SQLiteHelper.getConn().prepareStatement(SELECT_NODE_SQL);
                 ResultSet resultSet = statement.executeQuery();
+                Conf.NODES.clear();
                 while (resultSet.next()) {
                     Conf.NODES.put(resultSet.getString(2), resultSet.getString(3));
                 }

@@ -4,8 +4,7 @@ Perf4J 是一个开放源码的性能记录，监测和分析库，主要用于�
 
 perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能够被更多企业Java项目使用。
 
-
-## perf4j-zh、 perf4j 
+## perf4j-zh、 perf4j
 
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
 1. 性能数据采集与数据渲染进行分离,方面对接到本公司内部的监控系统
@@ -17,45 +16,36 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控，使perf4j能�
 
 **实时监控**
 
-![Alt text](./doc/dashboard.png)
+![Alt text](./doc/Pef4j___now.jpg)
 
 **历史数据**
 
-![Alt text](./doc/history.png)
+![Alt text](./doc/Pef4j___history.jpg)
 
 **基本JVM监控**
 
-![Alt text](./doc/jvm.png)
+![Alt text](./doc/perf4j__jvm.jpg)
 
 ## 快速上手
 
-*<font color='red'>注意：</font>*如果你正在使用Windows平台，下面的步骤也许不适合Windows平台，这需要你研究下面每一步的意思，自己手动完成每一步的操作
+如果你正在使用Windows平台，请按照`build.sh`脚本的步骤手动执行
 
-**1.在本地构建安装**
+### 开始构建
 
-首先你需要在本地将`2.0-SNAPSHOT`版本的perf4项目install到你本地，你只需要执行下面脚本
+构建perf4j-zh到你本机或者发布到公司的私服，通过执行下面脚本快速完成
 
     sh ./build.sh
-    
-__<font color='red'>注意：</font>__线上mvn私服是不存在这个2.0-SNAPSHOT版本的perf4j包，该脚本主要目的是安装该版本的perf4j到你本地的maven私服中，新版本的perf4j使用方式完全和原官网的perf4j一样，
-它只是有少量的对perf4j内部源码的修改，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`，而不必修改任何配置和其它使用到perf4j的地方。
-    
-**2.启动集群监控项目perf4j-dashboard**
+
+### 启动dashboard
     
     cd perf4j-dashboard
     mvn jetty:run
     
-启动完毕后访问：[127.0.0.1:8889](http://127.0.0.1:8889) ，你也可以更改端口号，通过修改 perf4j-dashboard/pom.xml下面的配置
-    
-    <properties>
-        <jetty.stop.port>10000</jetty.stop.port>
-        <jetty.run.port>8889</jetty.run.port>
-    </properties>
+启动完毕后访问：[127.0.0.1:8889](http://127.0.0.1:8889)，此时没有任何数据，接着需要启动演示项目demo
 
-**3.运行perf4j-demo演示项目**
+### 启动demo演示项目
 
-此时，在dashboard项目中不会有任何监控图表，因为还没有任何依赖perf4j的项目在运行，perf4j-demo就是一个用于演示的demo项目，它引入了perf4j依赖，通过同样方式启动
-在这个演示项目中，它会监控接口的请求TPS、响应时间和固定实际内的请求数
+监控接口的请求TPS、响应时间
  
     cd perf4j-demo
     mvn jetty:run
@@ -64,9 +54,19 @@ __<font color='red'>注意：</font>__线上mvn私服是不存在这个2.0-SNAPS
     
     sh ./test.sh
 
-然后在去刷新观察perf4j-dashboard项目，监控图表便会展现 
+然后在去刷新观察dashboard
    
-   
+## 版本升级
+
+`注意：`上述构建时会构建一个2.0-SNAPSHOT版本的perf4j包，它和官网0.9.16版本的perf4j有些不同
+
+1. 增加了`SqlLiteAppender`，该Appender可以支持把按时间单元分析后性能数据结果导入到SQLite文件中
+1. 内部图表数据结构改变了，不在调用Google的ChartApi，改为把分析好的性能数据结果以Json格式输出
+1. 增加了通过Web方是查询性能数据的API接口
+
+它只是有少量的对perf4j内部源码的修改，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`
+
+
 ## 具体介绍
 
 1. [perf4j与dashboard配合使用说明文档](./doc/usage.md)
@@ -74,6 +74,18 @@ __<font color='red'>注意：</font>__线上mvn私服是不存在这个2.0-SNAPS
 1. [常见问题](./doc/qa.md)
 1. [perf4j解读](./doc/perf4j_src.md)
 
+## 最近更新
+
+### 2016-04-26
+
+1. 更新dashboard项目的UI风格，导航栏可以按照集群进行折叠
+2. 优化History页面的加载速度
+3. 增加机器索引页面，可以快速定位机器
+4. 更改配置方式，废弃之前通过配置文件添加机器的方式，可以直接在web页面中管理机器
+
+### 2016-03-21
+
+1. 修复Windows下的构建的找不到git.cmd错误的bug
 
 ## 交流
 

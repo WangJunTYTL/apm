@@ -20,29 +20,23 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Dashboard
+            Home
             <small>${currentCluster}</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>
     </section>
     <!-- Main content -->
     <section class="content">
         <div class="row">
             <div class="container-fluid">
-                <div id="chart">
-                    <h5>无法获取数据</h5>
+                <div class="col-lg-12" id="nodesPanel">
                 </div>
             </div>
         </div>
-        <data value="" style="display: none" id="runningInfo">${runningInfo}</data>
-        <data value="" style="display: none" id="clusterMap">${clusterMap}</data>
-        <data value="" style="display: none" id="refresh">${refresh}</data>
-        <script src="/js/index-graph.js"></script>
-
     </section>
 </div>
+<script src="/js/page/nodes.js"></script>
 <jsp:include page="../../../../template/02/pageFooter.jsp"></jsp:include>
 

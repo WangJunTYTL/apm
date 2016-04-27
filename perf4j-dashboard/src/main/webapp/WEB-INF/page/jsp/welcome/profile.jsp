@@ -19,7 +19,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Dashboard
+            Profile
             <small>${currentCluster}</small>
         </h1>
         <ol class="breadcrumb">
@@ -35,7 +35,8 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">快捷菜单</div>
                         <div class="panel-body">
-                            <a href='javascript:void(0)' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>添加新节点</a>
+                            <a href='javascript:void(0)' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>添加机器</a>
+                            <a href='/' class='btn btn-primary'>机器索引</a>
                         </div>
                     </div>
                 </div>
