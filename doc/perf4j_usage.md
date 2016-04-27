@@ -103,11 +103,11 @@
 ```
 
 最简单埋点方式
-
+```
 StopWatch watch = new SlfStopWatch();
 watch.start("tag");
 ....业务逻辑执行
 watch.stop();
-
+```
 perf4j还提供了更多的埋点方式，可以参考网上博客，这里不作具体介绍
 
