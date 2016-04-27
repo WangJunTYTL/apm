@@ -70,7 +70,7 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard�
 ## 具体介绍
 
 1. [性能数据采集](./doc/perf4j_usage.md)
-1. [dashboard配置](./doc/usage.md)
+1. [dashboard配置](./doc/dashboard_usage.md)
 1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 1. [常见问题](./doc/qa.md)
 1. [perf4j解读](./doc/perf4j_src.md)
