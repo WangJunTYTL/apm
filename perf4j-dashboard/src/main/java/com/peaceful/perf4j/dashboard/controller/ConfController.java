@@ -61,6 +61,7 @@ public class ConfController {
     public void addNodes(String clusterName, String nodeName, String url) {
         try {
             SQLiteHelper.executeUpdate(String.format(INSERT_NODE_SQL, clusterName, nodeName, url, System.currentTimeMillis()));
+            Conf.NODES.put(nodeName,url);
             Http.responseJSON(0, "OK");
         } catch (SQLException e) {
             LOGGER.error("add node error: {}", e);
