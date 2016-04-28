@@ -41,7 +41,7 @@ public class OnloadController {
             e.printStackTrace();
             LOGGER.error("WEB ONLOAD ERROR: CREATE TABLE CLUSTER_NODES FAIL -> {}", e);
         }
-        executorService.scheduleAtFixedRate(new NodesRefreshInterval(), 0, 8, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(new NodesRefreshInterval(), 0, 8, TimeUnit.HOURS);
         executorService.scheduleAtFixedRate(new TagRefreshInterval(), 0, 2, TimeUnit.HOURS);
 
 

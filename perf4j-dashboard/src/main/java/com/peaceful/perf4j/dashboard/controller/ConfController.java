@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.peaceful.common.util.Http;
+import com.peaceful.perf4j.dashboard.common.Conf;
 import com.peaceful.perf4j.dashboard.common.SQLiteHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ public class ConfController {
     public void deleteNodes(String clusterName, String nodeName) {
         try {
             SQLiteHelper.executeUpdate(String.format(DELETE_NODE_SQL, clusterName, nodeName));
+            Conf.NODES.remove(nodeName);
             Http.responseJSON(0, "OK");
         } catch (SQLException e) {
             LOGGER.error("delete node error: {}", e);
