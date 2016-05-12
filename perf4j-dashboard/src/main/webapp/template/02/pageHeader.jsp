@@ -94,7 +94,7 @@
 
 
                     <li>
-                        <a href="/profile">Profile</a>
+                        <a href="/">Nodes</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

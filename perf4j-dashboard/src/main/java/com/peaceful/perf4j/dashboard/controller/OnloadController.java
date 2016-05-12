@@ -25,11 +25,17 @@ public class OnloadController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OnloadController.class);
     private static final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    // 机器列表
     private static final String CLUSTER_NODES_TABLE_SQL = "CREATE TABLE CLUSTER_NODES (" +
             " cluster_name            VARCHAR(255)     NOT NULL," +
             " node_name          INT    NOT NULL, " +
             " url           VARCHAR(255)     NOT NULL, " +
             " create_time        BIGINT)";
+
+    private static final String LINKS_TABLE_SQL = "CREATE TABLE LINKS ("+
+            " name  varchar(20) not null,"+
+            " url varchar(50) not null,"+
+            " location int default 0)";
     private static final String SELECT_NODE_SQL = "SELECT * FROM CLUSTER_NODES ORDER BY cluster_name;";
 
     static {
@@ -37,14 +43,13 @@ public class OnloadController {
         LOGGER.info("validate table cluster_nodes is exist...");
         try {
             SQLiteHelper.createTable(CLUSTER_NODES_TABLE_SQL, "cluster_name", "node_name");
+            SQLiteHelper.createTable(LINKS_TABLE_SQL);
         } catch (SQLException e) {
             e.printStackTrace();
-            LOGGER.error("WEB ONLOAD ERROR: CREATE TABLE CLUSTER_NODES FAIL -> {}", e);
+            LOGGER.error("WEB ONLOAD ERROR: CREATE TABLE FAIL -> {}", e);
         }
         executorService.scheduleAtFixedRate(new NodesRefreshInterval(), 0, 8, TimeUnit.HOURS);
         executorService.scheduleAtFixedRate(new TagRefreshInterval(), 0, 2, TimeUnit.HOURS);
-
-
     }
 
     static class NodesRefreshInterval implements Runnable {

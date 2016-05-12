@@ -30,17 +30,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="container-fluid" id="clusterPanel">
-                <div class="col-lg-2">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">快捷菜单</div>
-                        <div class="panel-body">
-                            <a href='javascript:void(0)' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>添加机器</a>
-                            <a href='/' class='btn btn-primary'>机器索引</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-12">
+                <a href='javascript:void(0)' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>添加机器</a>
+                <a href='/' class='btn btn-primary'>机器索引</a>
             </div>
+            <div id="clusterPanel" class="col-lg-12"></div>
         </div>
     </section>
 </div>
