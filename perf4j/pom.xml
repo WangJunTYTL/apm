@@ -611,11 +611,11 @@
             </plugin>
 
             <!-- For the the perf4j site generation, tack the site plugin to 3.0 -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.0</version>
-            </plugin>
+            </plugin>-->
         </plugins>
 
         <extensions>

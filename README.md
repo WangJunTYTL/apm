@@ -4,6 +4,7 @@ Perf4J 是一个开放源码的性能记录，监测和分析库，可以把根�
 
 perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard，使perf4j能够被更多企业Java项目使用。
 
+
 ## perf4j-zh、 perf4j
 
 1. perf4j-zh重写per4j的图表渲染，由google的chartApi改为baidu的Echart图表，在google被墙的今天，使其更适合国内的使用行情。
@@ -69,6 +70,7 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard�
 
 ## 具体介绍
 
+1. [perf4j简介](./doc/site/index.html)
 1. [性能数据采集](./doc/perf4j_usage.md)
 1. [dashboard配置](./doc/dashboard_usage.md)
 1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
