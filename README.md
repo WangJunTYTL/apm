@@ -81,6 +81,11 @@ git clone https://github.com/WangJunTYTL/perf4j-zh.git
 
 ## 最近更新
 
+### 2016-05-13
+
+1. 移除profile菜单，在首页可以直接添加机器
+2. 可以在首页添加快速链接，把经常查看的tag添加到首页
+
 ### 2016-04-26
 
 1. 更新dashboard项目的UI风格，导航栏可以按照集群进行折叠

@@ -104,7 +104,7 @@
 
 ### api说明
 
-以上面配置的地址是/perf4j为例
+如果是要对接到公司自己的监控系统，可以掌握下面几个api，以上面配置的地址是/perf4j为例
 
 1. 实时数据：/perf4j?method=now
 2. 历史数据：/perf4j?method=history&tag=XX&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
