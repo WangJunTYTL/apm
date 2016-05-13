@@ -1,8 +1,6 @@
-# 性能数据采集
+# 性能数据采集配置
 
-如果你还没有使用过perf4j进行性能监控，可以参照这篇博客：[http://www.infoq.com/cn/articles/perf4j/](http://www.infoq.com/cn/articles/perf4j/)。这里只简单介绍下perf4j的配置
-
-在你的项目中加入以下依赖
+### 在你的项目中加入以下依赖
 
 ```
  <dependency>
@@ -19,7 +17,9 @@
 
 ```
 
-如果你使用的log4j作为日志组件实现，可以在log4j.xml加入如下配置,可以参照demo项目中log4j的配置
+### 配置log4j
+
+**注意：** 如果你正在使用logback并成功配置了logback的使用，请你增加logback的配置文档，多谢！
 
 ```
     <!--实时图表配置,每个appender将会渲染出一张图表-->
@@ -89,7 +89,7 @@
     <!-- per4j-appender-end -->
 ```
 
-如果需要在dashboard项目中观察性能图表，需要配置Web地址
+### 配置api
 
 ```
   <servlet>
@@ -102,12 +102,22 @@
   </servlet-mapping>
 ```
 
-最简单埋点方式
+### api说明
+
+以上面配置的地址是/perf4j为例
+
+1. 实时数据：/perf4j?method=now
+2. 历史数据：/perf4j?method=history&tag=XX&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
+3. jvm数据：/perf4j?method=history&tag=XX&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
+
+响应数据均为Json格式
+
+### 最简单的埋点方式
 ```
 StopWatch watch = new SlfStopWatch();
 watch.start("tag");
 ....业务逻辑执行
 watch.stop();
 ```
-perf4j还提供了更多的埋点方式，可以参考网上博客，这里不作具体介绍
+perf4j还提供了丰富的埋点方式，这里不作具体介绍
 

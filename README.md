@@ -29,11 +29,15 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard�
 
 ## 快速上手
 
-如果你正在使用Windows平台，请按照`build.sh`脚本的步骤手动执行
+### 下载项目
+
+git clone https://github.com/WangJunTYTL/perf4j-zh.git
 
 ### 开始构建
 
-构建perf4j-zh到你本机或者发布到公司的私服，通过执行下面脚本快速完成
+**注意：** 如果你正在使用Windows平台，请按照`build.sh`脚本的步骤手动执行
+
+构建perf4j-zh到你本机，通过执行下面脚本快速完成
 
     sh ./build.sh
 
@@ -59,23 +63,21 @@ perf4j-zh 是修改部分perf4j源码并加入机器集群监控项目Dashboard�
    
 ## 版本升级
 
-`注意：`上述构建时会构建一个2.0-SNAPSHOT版本的perf4j包，它和官网0.9.16版本的perf4j有些不同
+`注意：`上述构建时会构建一个2.0-SNAPSHOT版本的perf4j包如果你正在使用0.9.16版本或更低版本的包请升级，另外如果你们
 
 1. 增加了`SqlLiteAppender`，该Appender可以支持把按时间单元分析后性能数据结果导入到SQLite文件中
 1. 内部图表数据结构改变了，不在调用Google的ChartApi，改为把分析好的性能数据结果以Json格式输出
-1. 增加了通过Web方是查询性能数据的API接口
+1. 增加了通过HTTP方式查询性能数据的API接口
 
-它只是有少量的对perf4j内部源码的修改，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`
+最新版本中只有内部功能的更新，不会涉及到用户使用层的接口，所以当你的项目原本就依赖perf4j时，你可以直接把依赖包升级到`2.0-SNAPSHOT`
 
+## perf4j-zh说明文档
 
-## 具体介绍
+有关perf4j的节本介绍，大家可以直接在网上搜索，或者下载后查看 ./perf4j-zh/doc/site/index.html
 
-1. [perf4j简介](./doc/site/index.html)
-1. [性能数据采集](./doc/perf4j_usage.md)
-1. [dashboard配置](./doc/dashboard_usage.md)
-1. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
-1. [常见问题](./doc/qa.md)
-1. [perf4j解读](./doc/perf4j_src.md)
+1. [性能数据采集配置](./doc/perf4j_usage.md)
+2. [dashboard配置](./doc/dashboard_usage.md)
+3. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 
 ## 最近更新
 

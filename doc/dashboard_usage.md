@@ -1,12 +1,25 @@
 # Dashboard
 
-Dashboard是一个对所有依赖perf4j的项目服务进行监控数据渲染的项目,如果你已经部署好Dashboard项目，可以点击Profile页面中的添加机器菜单，添加机器
+Dashboard是一个针对perf4j进行性能数据渲染的项目，可以通过图表的方式展现数据。
 
-![Alt text](./perf4j__profile.jpg)
+### 启动Dashboard
 
-如上图需要为每台机器设置集群名称、节点名称、和暴漏性能数据的API地址，添加好之后，可以访问首页快速查看机器列表
+#### 直接通过mvn jetty启动
+
+在perf4j-dashboard目录下直接执行：mvn jetty:run
+#### 选用Tocmat
+
+你也可以打包扔在tomcat下运行...
+
+### 配置数据来源api
+
+启动成功后，可以直接点击添加机器按钮，添加获取数据的api，该api地址是你在项目中配置的地址
 
 ![Alt text](./perf4j_home.jpg)
+
+
+
+
 
 
 
