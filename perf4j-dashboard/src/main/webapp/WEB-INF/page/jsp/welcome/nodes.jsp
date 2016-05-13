@@ -69,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="modalConfirmMenu">Submit</button>
+                <button type="button" class="btn btn-success" id="modalConfirmMenu">Submit</button>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="modalConfirmMenu2">Submit</button>
+                <button type="button" class="btn btn-success" id="modalConfirmMenu2">Submit</button>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="modalConfirmMenu3">Submit</button>
+                <button type="button" class="btn btn-success" id="modalConfirmMenu3">Submit</button>
             </div>
         </div>
     </div>

@@ -30,7 +30,6 @@ public class WelcomeController {
         String from = "";
         String to = "";
         String tag = "";
-
         try {
             method = request.getParameter("method");
             if (StringUtils.isNotEmpty(method)) {
@@ -51,12 +50,10 @@ public class WelcomeController {
                 else {
                     request.setAttribute("tag", tag);
                 }
-            } else {
-                method = "";
+                String runningInfo = TaskConsoleAPI.cat(method + "&from=" + from + "&to=" + to + "&tag=" + tag);
+                logger.info("runningInfo {}", runningInfo);
+                request.setAttribute("runningInfo", runningInfo);
             }
-            String runningInfo = TaskConsoleAPI.cat(method + "&from=" + from + "&to=" + to + "&tag=" + tag);
-            logger.info("runningInfo {}", runningInfo);
-            request.setAttribute("runningInfo", runningInfo);
         } catch (Exception e) {
             logger.error("request api error ", ExceptionUtils.getStackTrace(e));
         }
