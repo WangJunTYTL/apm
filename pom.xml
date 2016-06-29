@@ -11,9 +11,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>perf4j</module>
-        <module>perf4j-dashboard</module>
-        <module>perf4j-demo</module>
+        <module>apm-perf4j</module>
+        <module>apm-aggregate</module>
+        <module>apm-alert</module>
+        <module>apm-plugin</module>
+        <module>apm-dashboard</module>
+        <module>apm-demo</module>
     </modules>
 
 </project>

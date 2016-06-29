@@ -12,12 +12,11 @@
 #   1. git clone https://github.com/WangJunTYTL/peaceful-basic-platform.git
 #   2. 进入peaceful-basic-platform 目录 ，先执行 mvn install f peaceful-parent/pom.xml -Dmaven.test.skip=true 然后在执行 mvn install  -Dmaven.test.skip=true
 #   3. 进入perf4j-zh目录，执行 mvn install  -Dmaven.test.skip=true
-#   4. 进入perf4j-dashboard目录 执行 mvn jetty:run 启动dashboard项目
+#   4. 进入apm-dashboard目录 执行 mvn jetty:run 启动dashboard项目
 #   5. 进入perf4j-demo目录, 执行 mvn jetty:run 启动演示项目
-#   6. 不断访问演示项目,使其产生请求量,查看dashboard项目查看监控数据
+#   6. 不断访问演示项目地址:http://127.0.0.1:8888/demo,使其产生请求量,查看dashboard项目查看监控数据
 #==================================
 
-source /etc/profile
 ENV=$1
 [ "x${ENV}" == "x" ] && ENV='dev' # dev test product
 echo '----------------------------------------------'
@@ -41,8 +40,8 @@ cmd_is_exist "git"
 echo '----------------------------------------------'
 
 wait
-echo "准备下载依赖包并开始构建 ..."
-
+echo "准备下载依赖包并开始构建...初次构建需要下载依赖包~~这可能需要点时间~~等会再回来吧"
+sleep 2
 #下载依赖包，最好手动将依赖包install到你的本
 echo "下载依赖包peaceful-basic-platform"
 [ -d "peaceful-basic-platform" ] && rm -rf peaceful-basic-platform
@@ -57,7 +56,7 @@ rm -rf peaceful-basic-platform
 
 mvn -P${ENV} clean install  -Dmaven.test.skip=true || exit 1
 echo '-------------------------------------------------------------------------------'
-echo "恭喜你!构建成功,接下来你可以运行演示项目perf4j-demo和perf4j-dashboard进行测试..."
+echo "构建成功~~接下来你可以运行演示项目perf4j-demo和apm-dashboard进行测试..."
 echo '-------------------------------------------------------------------------------'
 
 

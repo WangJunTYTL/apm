@@ -1,0 +1,34 @@
+{
+  "order": 0,
+  "template": "apm*",
+  "settings": {
+    "index.number_of_shards": "1"
+  },
+  "mappings": {
+    "customer": {
+      "properties": {
+        "db": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "hostname": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      }
+    },
+    "master": {
+      "properties": {
+        "tag": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "hostname": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "aliases": {}
+}
