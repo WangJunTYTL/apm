@@ -25,14 +25,23 @@ public class MetricsFromJdbc {
      * @param from 单位ms
      * @param to   单位ms
      */
-    public static MetricsSet selectOneMetrics(String tag, long from, long to) {
+    public static MetricsForTag selectOneMetrics(String tag, long from, long to) {
         JdbcLog4jAppender instance = JdbcLog4jAppender.getInstance();
         if (instance != null) {
-//            List<Map<String, String>> list = instance.select(QUERY_SQL + " order by create_time desc", tag, from, to);
-//            if (list == null || list.isEmpty()) {
-//            } else {
-//                return list.get(0);
-//            }
+            MetricsSet metricsSet = instance.select(QUERY_SQL + " order by create_time desc limit 1", tag, from, to);
+            if (metricsSet != null) {
+                MetricsForTag metricsForTag = new MetricsForTag();
+                metricsForTag.tag = metricsSet.tag;
+                metricsForTag.count = metricsSet.counts.get(0);
+                metricsForTag.mean = metricsSet.means.get(0);
+                metricsForTag.hostname = metricsSet.hostname;
+                metricsForTag.interval = metricsSet.interval;
+                metricsForTag.createTime = metricsSet.series.get(0);
+                metricsForTag.min = metricsSet.mins.get(0);
+                metricsForTag.max = metricsSet.maxs.get(0);
+                metricsForTag.std = metricsSet.stds.get(0);
+                return metricsForTag;
+            }
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package com.peaceful.apm.aggregate.sqlite;
 
 import com.peaceful.apm.aggregate.JdbcLog4jAppender;
+import com.peaceful.apm.aggregate.MetricsForTag;
 import com.peaceful.apm.aggregate.MetricsSet;
 import com.peaceful.apm.aggregate.MetricsFromJdbc;
 import com.peaceful.boot.common.helper.Console;
@@ -21,8 +22,8 @@ public class Per4jJdbcLog4jAppenderTest {
     private static JdbcLog4jAppender sqliteAppender = new JdbcLog4jAppender();
     private static int db_mysql = 1;
     private static int db_sqlite = 0;
-    private static int db_type = db_sqlite;
-//    private static int db_type = db_mysql;
+//    private static int db_type = db_sqlite;
+    private static int db_type = db_mysql;
 
     static {
         if (db_mysql == db_type) {
@@ -42,7 +43,7 @@ public class Per4jJdbcLog4jAppenderTest {
         TimingStatistics timingStatistics = new TimingStatistics(1.2, 2.0, 3, 1, 6);
         timingStatisticsMap.put("test-tag", timingStatistics);
         MetricsFromJdbc.insertMetrics(timingStatisticsMap, 1, TimeUnit.MINUTES);
-        MetricsSet metrics = MetricsFromJdbc.selectOneMetrics("test-tag", 1465816843253L, System.currentTimeMillis());
+        MetricsForTag metrics = MetricsFromJdbc.selectOneMetrics("test-tag", 1465816843253L, System.currentTimeMillis());
         Console.log(metrics);
     }
 

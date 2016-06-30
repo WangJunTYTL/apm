@@ -29,7 +29,7 @@
 
 
     <mvc:interceptors>
-        <bean class="com.peaceful.perf4j.demo.monitor.APMForHttpInterceptor" />
+        <bean class="com.peaceful.apm.plugin.SpringMvcRequest" />
     </mvc:interceptors>
 
     <!-- View Resolver for JSP-->

@@ -22,6 +22,9 @@ public class MetricsSet {
     public List<Double> stds;
 
     public MetricsSet(String tag, String interval, String hostname) {
+        this.tag = tag;
+        this.interval = interval;
+        this.hostname = hostname;
         this.series = new LinkedList<>();
         this.counts = new LinkedList<>();
         this.means = new LinkedList<>();

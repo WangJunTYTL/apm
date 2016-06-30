@@ -42,24 +42,6 @@ perf4j-zh 是修改部分perf4j源码并加入数据聚合、dashboard展示、�
 2. [dashboard配置](./doc/dashboard_usage.md)
 3. [perf4j架构解析](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 
-## 最近更新
-
-#### 2016-05-13
-
-1. 移除profile菜单，在首页可以直接添加机器
-2. 可以在首页添加快速链接，把经常查看的tag添加到首页
-
-#### 2016-04-26
-
-1. 更新dashboard项目的UI风格，导航栏可以按照集群进行折叠
-2. 优化History页面的加载速度
-3. 增加机器索引页面，可以快速定位机器
-4. 更改配置方式，废弃之前通过配置文件添加机器的方式，可以直接在web页面中管理机器
-
-#### 2016-03-21
-
-1. 修复Windows下的构建的找不到git.cmd错误的bug
-
 ## 交流
 
 QQ群：365133362 群名称：互联网从业者

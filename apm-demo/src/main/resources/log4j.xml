@@ -61,7 +61,7 @@
         <appender-ref ref="ExecutionCount"></appender-ref>
         <appender-ref ref="ExecutionStdDev"></appender-ref>
         <appender-ref ref="Perf4jJdbcAppender"></appender-ref>
-        <appender-ref ref="Perf4jESAppender"></appender-ref>
+        <!--<appender-ref ref="Perf4jESAppender"></appender-ref>-->
         <appender-ref ref="console"/>
     </appender>
 

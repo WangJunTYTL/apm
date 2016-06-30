@@ -17,7 +17,7 @@ public class MetricsFromElastic {
         if (appender != null) {
             appender.save(timingStatisticsMap, interval, timeUnit);
         } else {
-            LogLog.error("ElasticLog4jAppender is closed");
+            LogLog.debug("ElasticLog4jAppender is closed");
         }
     }
 }

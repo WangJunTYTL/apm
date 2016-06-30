@@ -56,7 +56,7 @@ rm -rf peaceful-basic-platform
 
 mvn -P${ENV} clean install  -Dmaven.test.skip=true || exit 1
 echo '-------------------------------------------------------------------------------'
-echo "构建成功~~接下来你可以运行演示项目perf4j-demo和apm-dashboard进行测试..."
+echo "恭喜你~~构建成功！"
 echo '-------------------------------------------------------------------------------'
 
 
