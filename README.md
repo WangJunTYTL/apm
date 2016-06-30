@@ -2,7 +2,9 @@
 
 Perf4J 是一个开放源码的性能记录，监测和分析库，可以把根据埋点计算服务的TPS、Mean、Count、Max、Min、StdDev 6种指标值，主要用于企业Java应用程序。
 
-perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，提供了数据聚合、展示、预警模块，使perf4j能够被更多企业Java项目使用。
+perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，集性能数据采集、聚合、展示、预警完整的业务级别监控解决方案，另取名**Application Performance Monitor**，简称**APM**，
+使perf4j能够被更多企业Java项目使用。[点击查看在实际业务中的监控效果图](./reference/apm_dashboard.md)
+
 
 ## 特点
 
@@ -11,9 +13,6 @@ perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，提供�
 * 自带dashboard，也可以对接到公司内部的监控系统，比如常用的监控系统ganglia、grafana
 * 基于简单表达式的预警规则定义
 * 简单、实用、开箱即用，如果你已经用过perf4j你也不需要有什么改动
-
-这是一套集性能数据采集、聚合、展示、预警完整的业务级别监控解决方案，取名**Application Performance Monitor**，简称**APM**，[查看Dashboard](./reference/apm_dashboard.md)在实际业务中的效果图
-
 
 ## Perf4j源码改动的地方
 
@@ -25,8 +24,8 @@ perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，提供�
 
 ## 详细说明文档
 
-1. [性能数据采集](./reference/apm_gather.md)
-2. [定制数据输出地](./reference/apm_aggregate.md)
+1. [数据采集](./reference/apm_gather.md)
+2. [数据输出](./reference/apm_aggregate.md)
 
 ## 快速上手
 
