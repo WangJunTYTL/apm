@@ -43,6 +43,13 @@
         <param name="driver" value="com.mysql.jdbc.Driver"></param>
     </appender>
 
+    <!--本地聚合后的数据通过Jdbc输出-->
+    <appender name="Perf4jSQLiteJdbcAppender"
+              class="com.peaceful.apm.aggregate.JdbcLog4jAppender">
+        <param name="url" value="jdbc:sqlite:apm.db"></param>
+        <param name="driver" value="org.sqlite.JDBC"></param>
+    </appender>
+
     <!--本地聚合后的数据输入到ElasticSearch-->
     <appender name="Perf4jESAppender"
               class="com.peaceful.apm.aggregate.ElasticLog4jAppender">

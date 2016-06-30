@@ -16,6 +16,7 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -75,10 +76,14 @@ public class ElasticLog4jAppender extends AppenderSkeleton {
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("tag", tag);
             data.put("count", timingStatistics.getCount());
-            data.put("mean", timingStatistics.getMean());
+            BigDecimal bg = new BigDecimal(timingStatistics.getMean());
+            double mean = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            data.put("mean", mean);
             data.put("min", timingStatistics.getMin());
             data.put("max", timingStatistics.getMax());
-            data.put("std", timingStatistics.getStandardDeviation());
+            bg = new BigDecimal(timingStatistics.getStandardDeviation());
+            double std = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            data.put("std", std);
             // 自动追加下面数据
             data.put("hostname", NetHelper.getHostname());
             data.put("timestamp", ISO8601DATEFORMAT.format(new Date()));

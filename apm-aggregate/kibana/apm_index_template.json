@@ -2,22 +2,11 @@
   "order": 0,
   "template": "apm*",
   "settings": {
-    "index.number_of_shards": "1"
+    "index.number_of_replicas": "0",
+    "index.number_of_shards": "5"
   },
   "mappings": {
-    "customer": {
-      "properties": {
-        "db": {
-          "index": "not_analyzed",
-          "type": "string"
-        },
-        "hostname": {
-          "index": "not_analyzed",
-          "type": "string"
-        }
-      }
-    },
-    "master": {
+    "perf4j": {
       "properties": {
         "tag": {
           "index": "not_analyzed",

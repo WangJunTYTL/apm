@@ -115,7 +115,9 @@ public class JdbcLog4jAppender extends AppenderSkeleton {
                     statement.setDouble(3, mean);
                     statement.setLong(4, timingStatistics.getMin());
                     statement.setLong(5, timingStatistics.getMax());
-                    statement.setDouble(6, timingStatistics.getStandardDeviation());
+                    bg = new BigDecimal(timingStatistics.getStandardDeviation());
+                    double std = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    statement.setDouble(6, std);
                     statement.setDouble(7, TimeUnit.SECONDS.convert(interval, timeUnit));
                     statement.setString(8, NetHelper.getHostname());
                     statement.setLong(9, System.currentTimeMillis());
