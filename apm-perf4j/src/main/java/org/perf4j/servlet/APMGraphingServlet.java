@@ -24,7 +24,7 @@ import java.util.*;
  * @since 1.6
  */
 
-public class VitaGraphingServlet extends HttpServlet {
+public class APMGraphingServlet extends HttpServlet {
 
     private static final long serialVersionUID = 7877125631806499443L;
 

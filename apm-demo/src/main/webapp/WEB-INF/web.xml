@@ -25,11 +25,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>perf4j</servlet-name>
-        <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
+        <servlet-class>org.perf4j.servlet.APMGraphingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>perf4j</servlet-name>
-        <url-pattern>/perf4j</url-pattern>
+        <url-pattern>/apm</url-pattern>
     </servlet-mapping>
 
     <listener>

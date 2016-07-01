@@ -94,7 +94,7 @@
 ```
   <servlet>
         <servlet-name>perf4j</servlet-name>
-        <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
+        <servlet-class>org.perf4j.servlet.APMGraphingServlet</servlet-class>
   </servlet>
   <servlet-mapping>
       <servlet-name>perf4j</servlet-name>

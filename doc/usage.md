@@ -31,7 +31,7 @@ __dashboard：__可以拉取perf4j在不各个机器或业务上的已经分析�
      ```
      <servlet>
          <servlet-name>perf4j</servlet-name>
-         <servlet-class>org.perf4j.servlet.VitaGraphingServlet</servlet-class>
+         <servlet-class>org.perf4j.servlet.APMGraphingServlet</servlet-class>
      </servlet>
      <servlet-mapping>
          <servlet-name>perf4j</servlet-name>

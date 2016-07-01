@@ -1,7 +1,7 @@
 数据输出
 ----------
 Perf4j会根据你设定的周期，在本地进行数据聚合，比如建议设置1分钟聚合一次，然后数据可以通过日志组件输出，所以如果我们要想定制数据的输出地，我们需要编写
-当前日志组件的Appender。以log4j为例,你需要实现下面方法
+当前日志组件的Appender。以log4j为例,你需要像下面的方式实现
 ```
 public class MyAppender extends AppenderSkeleton {
 
@@ -11,7 +11,7 @@ public class MyAppender extends AppenderSkeleton {
         if (logMessage instanceof GroupedTimingStatistics) {
             GroupedTimingStatistics statistics = (GroupedTimingStatistics) logMessage;
             try {
-                // 保存数据
+                // 你的数据保存地
             } catch (Exception e) {
                 getErrorHandler().error(Throwables.getStackTraceAsString(e));
             }
@@ -33,6 +33,15 @@ public class MyAppender extends AppenderSkeleton {
 如果没有特别要求，在apm-aggregate模块默认实现了基于log4j日志组件的数据输出。第一种通过Jdbc方式保存到数据库，如Mysql、SQLite，第二种输出到ElasticSearch，
 你可以直接在log4j.xml配置。
 
+首先加入下面依赖
+```
+<dependency>
+    <groupId>com.peaceful</groupId>
+    <artifactId>apm-aggregate</artifactId>
+    <!--使用的版本-->
+    <version>x.x.version</version>
+</dependency>
+```
 ## 输出到MySql
 ```
 <appender name="Perf4jJdbcAppender"
