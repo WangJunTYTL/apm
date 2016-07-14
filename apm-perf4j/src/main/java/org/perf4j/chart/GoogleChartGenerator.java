@@ -16,17 +16,16 @@
 package org.perf4j.chart;
 
 import com.alibaba.fastjson.JSON;
-import com.peaceful.common.util.Util;
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;
 import org.perf4j.helpers.StatsValueRetriever;
 
-import java.util.*;
-import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * This implementation of StatisticsChartGenerator creates a chart URL in the format expected by the Google Chart API.

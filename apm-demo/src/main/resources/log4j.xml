@@ -67,7 +67,8 @@
         <appender-ref ref="ExecutionTimes"></appender-ref>
         <appender-ref ref="ExecutionCount"></appender-ref>
         <appender-ref ref="ExecutionStdDev"></appender-ref>
-        <appender-ref ref="Perf4jJdbcAppender"></appender-ref>
+        <appender-ref ref="Perf4jSQLiteJdbcAppender"></appender-ref>
+        <!--<appender-ref ref="Perf4jJdbcAppender"></appender-ref>-->
         <!--<appender-ref ref="Perf4jESAppender"></appender-ref>-->
         <appender-ref ref="console"/>
     </appender>
@@ -83,6 +84,4 @@
     </root>
 
 </log4j:configuration>
-
-
 

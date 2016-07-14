@@ -37,55 +37,40 @@
                         <div class="form-group">
                             <label for="exampleInputName2">From</label>
                             <input type="text" class="form-control datetimepicker" id="exampleInputName2" name="from"
-                                   data-date-format="yyyy-mm-dd hh:ii" value="${from}" placeholder="1小时前">
+                                   data-date-format="yyyy-mm-dd hh:ii" value="${from}" placeholder="Last 2 hours">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail2">To</label>
                             <input type="text" class="form-control datetimepicker" id="exampleInputEmail2" name="to"
-                                   data-date-format="yyyy-mm-dd hh:ii" value="${to}" placeholder="当前时间">
+                                   data-date-format="yyyy-mm-dd hh:ii" value="${to}" placeholder="Now">
                         </div>
                         <input type="hidden" class="form-control" name="method" value="jvm">
                         <input type="hidden" class="form-control" name="currentCluster" value="${currentCluster}">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
-                <div id="chart" class="col-lg-12">
-                    <h3 class="page-header">Memory</h3>
-                    <div>
-                        <div class="col-lg-6">
-                            <%--<h5>Heap</h5>--%>
-                            <div id="UsedHeap" style="height: 300px"></div>
-                        </div>
-                        <div class="col-lg-6">
-
-                            <%--<h5>NonHeap</h5>--%>
-                            <div id="UsedNonHeap" style="height: 300px"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Thread</h3>
-                        <div class="col-lg-12">
-                            <div id="Thread" style="height: 300px;"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="page-header">GC</h3>
-                        <div class="col-lg-6">
-                            <%--<h5>Count</h5>--%>
-                            <div id="GCCount" style="height: 300px"></div>
-                        </div>
-                        <div class="col-lg-6">
-                            <%--<h5>Time</h5>--%>
-                            <div id="GCTime" style="height: 300px"></div>
-                        </div>
-                    </div>
-
-                </div>
-                <div>
-                    <div class="text-center text-muted" id="hostname"></div>
-                </div>
                 <data value="" style="display: none" id="runningInfo">${runningInfo}</data>
             </div>
+        </div>
+        <div id="chart" class="row">
+            <div class="col-lg-6">
+                <div id="UsedHeap" style="height: 300px"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="UsedNonHeap" style="height: 300px"></div>
+            </div>
+            <div class="col-lg-12">
+                <div id="Thread" style="height: 300px;"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="GCCount" style="height: 300px"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="GCTime" style="height: 300px"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center text-muted" id="hostname"></div>
         </div>
     </section>
 </div>
@@ -95,7 +80,7 @@
     $('.datetimepicker').datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
         minView: 0,
-        maxView:3
+        maxView: 3
     });
 </script>
 <jsp:include page="../../../../template/02/pageFooter.jsp"></jsp:include>

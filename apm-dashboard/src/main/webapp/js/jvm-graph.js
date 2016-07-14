@@ -2,8 +2,12 @@ $(function () {
     try {
         var charts = $("#runningInfo").html();
         var parseData = JSON.parse(charts);
+        if (parseData == null) {
+            $("#chart").html("服务端响应数据是空的!");
+            return;
+        }
     } catch (e) {
-        $("#chart").html("无法获取数据!")
+        $("#chart").html("无法加载数据！响应数据内容：" + charts);
     }
     require.config({
         paths: {
@@ -17,14 +21,13 @@ $(function () {
             'echarts/chart/bar'
         ],
         function (ec) {
-            for (var n = 0; n < parseData['jvmData'].length; n++) {
-                var graph = parseData['jvmData'][n];
+            if (parseData['used.heap.size'] != null){
                 var option = {
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        data: ['' + graph['tag']],
+                        data: ['UsedHeap'],
                         orient: 'horizontal', // 'vertical'
                         x: 'center', // 'center' | 'left' | {number},
                         y: 'top', // 'center' | 'bottom' | {number}
@@ -34,10 +37,7 @@ $(function () {
                         show: true,
                         orient: 'vertical',
                         feature: {
-                            mark: {show: true},
-                            dataView: {show: true, readOnly: false},
-                            magicType: {show: false, type: ['line', 'bar']},
-                            saveAsImage: {show: true}
+                            magicType: {show: true, type: ['line', 'bar']},
                         }
                     },
                     calculable: true,
@@ -45,7 +45,107 @@ $(function () {
                         {
                             type: 'category',
                             boundaryGap: false,
-                            data: graph['labels']
+                            data: parseData['label']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel : {
+                                formatter: '{value} M'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'UsedHeap',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: parseData['used.heap.size'],
+                            symbol: 'none'
+                        }
+                    ]
+                };
+                var echart = ec.init(document.getElementById('UsedHeap'));
+                echart.setOption(option);
+            }
+
+            if (parseData['used.nonHeap.size'] != null){
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['UsedNonHeap'],
+                        orient: 'horizontal', // 'vertical'
+                        x: 'center', // 'center' | 'left' | {number},
+                        y: 'top', // 'center' | 'bottom' | {number}
+                        padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        feature: {
+                            magicType: {show: true, type: ['line', 'bar']},
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: parseData['label']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel : {
+                                formatter: '{value} M'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'UsedNonHeap',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: parseData['used.nonHeap.size'],
+                            symbol: 'none'
+                        }
+                    ]
+                };
+                var echart = ec.init(document.getElementById('UsedNonHeap'));
+                echart.setOption(option);
+            }
+
+            if (parseData['thread.count'] != null){
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['thread.current.count'],
+                        orient: 'horizontal', // 'vertical'
+                        x: 'center', // 'center' | 'left' | {number},
+                        y: 'top', // 'center' | 'bottom' | {number}
+                        padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        feature: {
+                            magicType: {show: true, type: ['line', 'bar']},
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: parseData['label']
                         }
                     ],
                     yAxis: [
@@ -55,19 +155,115 @@ $(function () {
                     ],
                     series: [
                         {
-                            name: graph['tag'],
+                            name: 'thread.current.count',
                             type: 'line',
                             stack: '总量',
                             itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                            data: graph['counts'],
+                            data: parseData['thread.count'],
                             symbol: 'none'
                         }
                     ]
                 };
-                var echart = ec.init(document.getElementById(graph['tag']));
+                var echart = ec.init(document.getElementById('Thread'));
                 echart.setOption(option);
             }
 
+            if (parseData['gc.count'] != null){
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['gc.total.count'],
+                        orient: 'horizontal', // 'vertical'
+                        x: 'center', // 'center' | 'left' | {number},
+                        y: 'top', // 'center' | 'bottom' | {number}
+                        padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        feature: {
+                            magicType: {show: true, type: ['line', 'bar']},
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: parseData['label']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'gc.total.count',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: parseData['gc.count'],
+                            symbol: 'none'
+                        }
+                    ]
+                };
+                var echart = ec.init(document.getElementById('GCCount'));
+                echart.setOption(option);
+            }
+
+            if (parseData['gc.time'] != null){
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['gc.total.time'],
+                        orient: 'horizontal', // 'vertical'
+                        x: 'center', // 'center' | 'left' | {number},
+                        y: 'top', // 'center' | 'bottom' | {number}
+                        padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        feature: {
+                            magicType: {show: true, type: ['line', 'bar']},
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: parseData['label']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel : {
+                                formatter: '{value} ms'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'gc.total.time',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: parseData['gc.time'],
+                            symbol: 'none'
+                        }
+                    ]
+                };
+                var echart = ec.init(document.getElementById('GCTime'));
+                echart.setOption(option);
+            }
         }
     );
 

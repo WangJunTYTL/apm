@@ -63,7 +63,7 @@ public abstract class AbstractGraphingServlet extends HttpServlet {
         Map<String, StatisticsChartGenerator> chartsByName = getChartGeneratorsToDisplay(request);
 
         response.setContentType("text/html;charset=utf-8");
-        
+
         writeHeader(request, response);
         for (Map.Entry<String, StatisticsChartGenerator> nameAndChart : chartsByName.entrySet()) {
             writeChart(nameAndChart.getKey(), nameAndChart.getValue(), request, response);
@@ -88,9 +88,7 @@ public abstract class AbstractGraphingServlet extends HttpServlet {
             int refreshRate = Integer.parseInt(request.getParameter("refreshRate"));
             response.getWriter().println("<meta http-equiv=\"refresh\" content=\"" + refreshRate + "\">");
         }
-        response.getWriter().println("<script src=\"http://libs.baidu.com/jquery/1.9.0/jquery.js\"></script>");
-        response.getWriter().println("<script src=\"http://echarts.baidu.com/build/dist/echarts-all.js\"></script>");
-        response.getWriter().println("</head>");
+        response.getWriter().println("<head>");
         response.getWriter().println("<body>");
     }
 
@@ -111,7 +109,7 @@ public abstract class AbstractGraphingServlet extends HttpServlet {
         String chartUrl = (chartGenerator == null) ? null : chartGenerator.getChartUrl();
         if (chartUrl != null) {
             response.getWriter().println("<b>" + name + "</b><br>");
-            response.getWriter().println("<div class=\"chart\">" + chartUrl + "</div>");
+            response.getWriter().println("<img src=\"" + chartUrl + "\">");
         } else {
             response.getWriter().println("<b>Unknown graph name: " + name + "</b><br>");
         }
@@ -122,88 +120,6 @@ public abstract class AbstractGraphingServlet extends HttpServlet {
      */
     protected void writeFooter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().println("<script type='text/javascript'>");
-        response.getWriter().println("$(function () {\n" +
-                "\n" +
-                "    var charts = $(\".chart\");\n" +
-                "    for (var n = 0; n < charts.length; n++) {\n" +
-                "        var c = charts[n];\n" +
-                "        var config = $(c).html();\n" +
-                "        $(c).html(\"\");\n" +
-                "        var node = $(\"<div>\").attr(\"id\", \"chart\" + n).attr(\"style\", \"height:500px;\");\n" +
-                "        $(c).append(node);\n" +
-                "        //alert(config)\n" +
-                "        if (config == null || config == \"\")\n" +
-                "            continue;\n" +
-                "        var parseData = JSON.parse(config);\n" +
-                "        var myChart = echarts.init(document.getElementById(\"chart\" + n));\n" +
-                "        var series = []\n" +
-                "        for (var tag in parseData.tagsToYData) {\n" +
-                "            var tagData = {\n" +
-                "                name: tag,\n" +
-                "                type: 'line',\n" +
-                "                data: parseData.tagsToYData[tag],\n" +
-                "                markPoint: {\n" +
-                "                    data: [\n" +
-                "                        {type: 'max', name: '最大值'},\n" +
-                "                        //{type : 'min', name: '最小值'}\n" +
-                "                    ]\n" +
-                "                },\n" +
-                "                markLine: {\n" +
-                "                    data: [\n" +
-                "                        {type: 'average', name: '平均值'}\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            }\n" +
-                "            series.push(tagData)\n" +
-                "        }\n" +
-                "        var option = {\n" +
-                "            title: {\n" +
-                "                //text: parseData.graphType,\n" +
-                "                //subtext: '纯属虚构'\n" +
-                "            },\n" +
-                "            tooltip: {\n" +
-                "                trigger: 'axis'\n" +
-                "            },\n" +
-                "            legend: {\n" +
-                "                data: parseData.tags,\n" +
-                "            },\n" +
-                "            toolbox: {\n" +
-                "                show: true,\n" +
-                "                feature: {\n" +
-                "                    mark: {show: false},\n" +
-                "                    dataView: {show: true, readOnly: false},\n" +
-                "                    magicType: {show: true, type: ['line', 'bar']},\n" +
-                "                    restore: {show: true},\n" +
-                "                    saveAsImage: {show: true}\n" +
-                "                }\n" +
-                "            },\n" +
-                "            calculable: true,\n" +
-                "            xAxis: [\n" +
-                "                {\n" +
-                "                    type: 'category',\n" +
-                "                    boundaryGap: false,\n" +
-                "                    data: parseData.labels\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            yAxis: [\n" +
-                "                {\n" +
-                "                    type: 'value',\n" +
-                "                    axisLabel: {\n" +
-                "                        formatter: '{value} '\n" +
-                "                    }\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            series: series\n" +
-                "        };\n" +
-                "\n" +
-                "\n" +
-                "        // 为echarts对象加载数据\n" +
-                "        myChart.setOption(option);\n" +
-                "    }\n" +
-                "\n" +
-                "});\n");
-        response.getWriter().println("</script>");
         response.getWriter().println("</body>");
         response.getWriter().println("</html>");
         response.getWriter().flush();

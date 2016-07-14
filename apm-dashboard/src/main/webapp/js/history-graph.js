@@ -2,19 +2,27 @@ $(function () {
     try {
         var charts = $("#runningInfo").html();
         var parseData = JSON.parse(charts);
+        if (parseData == null) {
+            $("#chart").html("服务端响应数据是空的!");
+            return;
+        }
+        var tags = parseData['allTags'];
+        var currentTag = parseData['currentTag'];
+        for (var n = 0; n < tags.length; n++) {
+            var node = $("<option>").html(tags[n]);
+            if (currentTag != null && tags[n] == currentTag) node.attr("selected", "true");
+            $("#tag").append(node);
+        }
+        if (parseData['graph'] == null) {
+            $("#chart").html("没有查询到数据!");
+            return;
+        }
     } catch (e) {
-        $("#chart").html("无法加载数据！");
+        $("#chart").html("无法加载数据！响应数据内容：" + charts);
     }
 
-    var tags = parseData['tags'];
-    var currentTag = $("#currentTag").html();
-    for (var n = 0; n < tags.length; n++) {
-        var node = $("<option>").html(tags[n]);
-        if (currentTag != null && tags[n] == currentTag) node.attr("selected", "true");
-        $("#tag").append(node);
-    }
+    // 开始渲染图表
     $("#chart").html("");
-
     require.config({
         paths: {
             echarts: '../js/echart'
@@ -35,42 +43,42 @@ $(function () {
                 $("#chart").append(container);
                 var myChart = ec.init(node.get(0));
                 var series = []
-                for (var i = 0; i < graph.tags.length; i++) {
-                    var symbol = 'heart';
-                    if (graph.tagsToYData.length > 168) {
-                        symbol = "none";
-                    }
-                    var tagData = {
-                        name: graph.tags[i],
-                        type: 'line',
-                        data: graph.tagsToYData,
-                        symbol: symbol,
-                        markPoint: {
-                            data: [
-                                {type: 'max', name: '最大值'},
-                            ]
-                        }
-                    }
-                    series.push(tagData)
+                var symbol = 'auto';
+                if (graph.tagsToYData.length > 168) {
+                    symbol = "none";
                 }
+                var tagData = {
+                    name: currentTag,
+                    type: 'line',
+                    data: graph['tagsToYData'],
+                    symbol: symbol,
+                    markPoint: {
+                        data: [
+                            {type: 'max', name: '最大值'},
+                        ]
+                    }
+                }
+                series.push(tagData)
                 var option = {
                     title: {
-                        text: graph.graphType
+                        text: graph['graphType'] =='Count'?'TPS(per second)':graph['graphType'],
                     },
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        data: graph.tags
+                        show:graph['graphType']=='Count'?true:false,
+                        data: [currentTag],
+                        orient: 'horizontal', // 'vertical'
+                        x: 'center', // 'center' | 'left' | {number},
+                        y: 'top', // 'center' | 'bottom' | {number}
+                        padding: [20, 5, 5, 5],    // [5, 10, 15, 20]
                     },
                     toolbox: {
                         show: true,
+                        orient: 'vertical',
                         feature: {
-                            mark: {show: true},
-                            dataView: {show: true, readOnly: false},
                             magicType: {show: true, type: ['line', 'bar']},
-                            restore: {show: true},
-                            saveAsImage: {show: true}
                         }
                     },
                     calculable: true,
@@ -78,14 +86,14 @@ $(function () {
                         {
                             type: 'category',
                             boundaryGap: false,
-                            data: graph.labels
+                            data: parseData['label']
                         }
                     ],
                     yAxis: [
                         {
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value}'
+                                formatter: '{value}'+((graph['graphType'] =='Min'|| graph['graphType'] =='Max'|| graph['graphType'] =='Mean')?' ms':'')
                             }
                         }
                     ],

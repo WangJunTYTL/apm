@@ -43,21 +43,23 @@
                         <div class="form-group">
                             <label for="exampleInputName2">From</label>
                             <input type="text" class="form-control datetimepicker" id="exampleInputName2" name="from"
-                                   data-date-format="yyyy-mm-dd hh:ii" value="${from}" placeholder="1小时前">
+                                   data-date-format="yyyy-mm-dd hh:ii" value="${from}" placeholder="Last 2 hours">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail2">To</label>
                             <input type="text" class="form-control datetimepicker" id="exampleInputEmail2" name="to"
-                                   data-date-format="yyyy-mm-dd hh:ii" value="${to}" placeholder="当前时间">
+                                   data-date-format="yyyy-mm-dd hh:ii" value="${to}" placeholder="Now">
                         </div>
                         <input type="hidden" class="form-control" name="method" value="history">
                         <input type="hidden" class="form-control" name="currentCluster" value="${currentCluster}">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
-                <div class="col-lg-12" id="chart">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" id="chart">
 
-                </div>
             </div>
         </div>
         <data value="" style="display: none" id="runningInfo">${runningInfo}</data>

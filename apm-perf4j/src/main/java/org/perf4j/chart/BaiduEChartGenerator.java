@@ -2,11 +2,9 @@ package org.perf4j.chart;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;
 import org.perf4j.helpers.StatsValueRetriever;
-import org.perf4j.servlet.RequestScopeManage;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -78,7 +76,6 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
             labels.add(label);
             labels2.add(windowStartTime);
             positions.add(decimalFormat.format(position));
-
             //skip over some windows if stepSize is greater than 1
             for (int i = 1; i < stepSize && iter.hasNext(); i++) {
                 iter.next();
@@ -168,13 +165,7 @@ public class BaiduEChartGenerator implements StatisticsChartGenerator {
         data.put("tags", tags);
         data.put("labels", labels);
         data.put("tagsToYData", tagsToYData);
-//        data.put("tagsToXDataAndYData", tagsToXDataAndYData);
-        if (RequestScopeManage.pretty.get() != null && RequestScopeManage.pretty.get()) {
-            // 格式化输出数据
-            return JSON.toJSONString(data, SerializerFeature.PrettyFormat);
-        } else {
-            return JSON.toJSONString(data);
-        }
+        return JSON.toJSONString(data);
     }
 
     /**

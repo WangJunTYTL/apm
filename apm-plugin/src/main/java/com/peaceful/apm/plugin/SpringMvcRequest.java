@@ -25,7 +25,7 @@ public class SpringMvcRequest extends HandlerInterceptorAdapter {
         if (reqURI.indexOf("css") == -1 && reqURI.indexOf("js") == -1 && reqURI.indexOf("image") == -1) {
             StopWatch stopWatch = new Slf4JStopWatch();
             request.setAttribute("stopWatch", stopWatch);
-            stopWatch.lap("HTTP.REQUEST");
+            stopWatch.lap("http.request");
         }
         return super.preHandle(request, response, handler);
     }
@@ -50,7 +50,7 @@ public class SpringMvcRequest extends HandlerInterceptorAdapter {
                 reqURI = reqURI.replaceAll("/", ".");
                 stopWatch.stop("http" + reqURI);
             }
-            stopWatch.lap("HTTP.REQUEST");
+            stopWatch.lap("http.request");
         }
         super.afterCompletion(request, response, handler, ex);
     }
