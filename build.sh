@@ -16,7 +16,6 @@
 #   5. 进入perf4j-demo目录, 执行 mvn jetty:run 启动演示项目
 #   6. 不断访问演示项目地址:http://127.0.0.1:8888/demo,使其产生请求量,查看dashboard项目查看监控数据
 #==================================
-
 ENV=$1
 [ "x${ENV}" == "x" ] && ENV='dev' # dev test product
 echo '----------------------------------------------'
@@ -49,10 +48,20 @@ git clone https://github.com/WangJunTYTL/peaceful-basic-platform.git ||  exit 1
 cd peaceful-basic-platform
 mvn clean -P${ENV} -f peaceful-boot-parent/pom.xml install  -Dmaven.test.skip=true || exit 1
 mvn clean -P${ENV} install -f peaceful-boot/pom.xml -Dmaven.test.skip=true || exit 1
+mvn clean -P${ENV} -f peaceful-parent/pom.xml install  -Dmaven.test.skip=true || exit 1
+mvn clean -P${ENV} -f peaceful-common-utils/pom.xml install  -Dmaven.test.skip=true || exit 1
+cd ..
+
+echo "下载依赖包redismanage"
+[ -d "redismanage" ]   && rm -rf redismanage
+git clone https://github.com/WangJunTYTL/redismanage.git || exit 1
+cd redismanage
+mvn clean -P${ENV} install  -Dmaven.test.skip=true || exit 1
 cd ..
 
 wait
 rm -rf peaceful-basic-platform
+rm -rf redismanage
 
 mvn -P${ENV} clean install  -Dmaven.test.skip=true || exit 1
 echo '-------------------------------------------------------------------------------'

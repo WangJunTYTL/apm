@@ -21,9 +21,11 @@ perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，集性�
 
 ## APM说明文档
 
+1. [整体架构](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
 1. [数据采集](./reference/apm_gather.md)
 2. [数据输出](./reference/apm_aggregate.md)
 2. [数据展示](./reference/apm_view.md)
+2. [预警...待更新]
 
 
 ## 交流
