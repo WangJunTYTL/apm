@@ -108,7 +108,7 @@
 
 1. 实时数据：/perf4j?method=now
 2. 历史数据：/perf4j?method=history&tag=XX&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
-3. jvm数据：/perf4j?method=history&tag=XX&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
+3. jvm数据：/perf4j?method=history&from=timestamp&to=timestamp from默认值是六个小时前，to默认是当前
 
 响应数据均为Json格式
 
