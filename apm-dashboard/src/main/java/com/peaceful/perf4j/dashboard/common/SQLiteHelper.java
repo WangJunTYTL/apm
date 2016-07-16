@@ -15,7 +15,7 @@ public class SQLiteHelper {
 
     private static final String userDir = System.getProperty("user.dir");
     private static final String driver = "org.sqlite.JDBC";
-    private static final String url = "jdbc:sqlite:"+userDir+"/perf4jdashboard.db";
+    private static final String url = "jdbc:sqlite:"+userDir+"/apm-dashboard.db";
     private static Connection connection = null;
     private static final Object CONN_MONITOR = new Object();
     private static final Logger LOGGER = LoggerFactory.getLogger(SQLiteHelper.class);

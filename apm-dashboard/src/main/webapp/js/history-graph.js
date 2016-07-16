@@ -19,6 +19,7 @@ $(function () {
         }
     } catch (e) {
         $("#chart").html("无法加载数据！响应数据内容：" + charts);
+        return;
     }
 
     // 开始渲染图表
@@ -61,13 +62,13 @@ $(function () {
                 series.push(tagData)
                 var option = {
                     title: {
-                        text: graph['graphType'] =='Count'?'TPS(per second)':graph['graphType'],
+                        text: graph['graphType'] == 'Count' ? 'TPS(per second)' : graph['graphType'],
                     },
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        show:graph['graphType']=='Count'?true:false,
+                        show: graph['graphType'] == 'Count' ? true : false,
                         data: [currentTag],
                         orient: 'horizontal', // 'vertical'
                         x: 'center', // 'center' | 'left' | {number},
@@ -93,7 +94,7 @@ $(function () {
                         {
                             type: 'value',
                             axisLabel: {
-                                formatter: '{value}'+((graph['graphType'] =='Min'|| graph['graphType'] =='Max'|| graph['graphType'] =='Mean')?' ms':'')
+                                formatter: '{value}' + ((graph['graphType'] == 'Min' || graph['graphType'] == 'Max' || graph['graphType'] == 'Mean') ? ' ms' : '')
                             }
                         }
                     ],

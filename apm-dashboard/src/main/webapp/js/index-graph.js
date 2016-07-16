@@ -14,7 +14,16 @@ $(function () {
         function (ec) {
             var refreshChart = function () {
                 $.post("/graph/data", {currentCluster: currentCluster}, function (data) {
-                    var parseData = JSON.parse(data);
+                    try {
+                        var parseData = JSON.parse(data);
+                        if (parseData.length == 0) {
+                            $("#chart").html("没有实时数据，响应数据内容是：" + data + " <br>请确认是否配置实时数据展示或者暂时查看历史数据");
+                            return;
+                        }
+                    } catch (e) {
+                        $("#chart").html("无法加载数据！响应数据内容：" + data);
+                        return;
+                    }
                     $("#chart").html("");
                     for (var n = 0; n < parseData.length; n++) {
                         var graph = parseData[n];
