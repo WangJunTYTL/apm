@@ -90,7 +90,6 @@ public class ElasticLogbackAppender extends AppenderBase<LoggingEvent> {
                         .setSource(data)
                         .execute()
                         .actionGet();
-                System.err.println("upload data to elasticsearch response ->" + response);
             } catch (Exception e) {
                 System.err.println("upload data to elasticsearch fail ->" + e);
             }

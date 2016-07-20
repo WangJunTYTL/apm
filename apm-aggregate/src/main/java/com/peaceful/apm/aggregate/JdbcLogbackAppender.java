@@ -124,7 +124,6 @@ public class JdbcLogbackAppender extends AppenderBase<ch.qos.logback.classic.spi
                 statement.addBatch();
             }
             int[] rows = statement.executeBatch();
-            System.err.println("batch result is " + rows.length);
         } catch (Exception e) {
             Throwables.propagate(e);
         } finally {
@@ -169,7 +168,6 @@ public class JdbcLogbackAppender extends AppenderBase<ch.qos.logback.classic.spi
                             return;
                         }
                     }
-                    System.err.println("sqlite file location is " + file.getAbsolutePath());
                 } catch (Exception e) {
                     fail_message = "can't create file:" + path;
                     Throwables.propagate(e);
