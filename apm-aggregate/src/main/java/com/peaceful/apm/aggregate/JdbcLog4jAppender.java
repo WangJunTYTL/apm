@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  * @author WangJun
  * @version 1.0 16/6/24
  */
-public class JdbcLog4jAppender extends AppenderSkeleton {
+public class JdbcLog4jAppender extends AppenderSkeleton implements JdbcAppender {
 
     private String url;
     private String user;

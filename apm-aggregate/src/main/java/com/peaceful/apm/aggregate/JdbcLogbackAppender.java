@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @author WangJun
  * @version 1.0 16/6/24
  */
-public class JdbcLogbackAppender extends AppenderBase<ch.qos.logback.classic.spi.LoggingEvent> {
+public class JdbcLogbackAppender extends AppenderBase<ch.qos.logback.classic.spi.LoggingEvent> implements JdbcAppender {
 
     private String url;
     private String user;

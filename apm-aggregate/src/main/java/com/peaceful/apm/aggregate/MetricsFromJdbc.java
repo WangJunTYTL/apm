@@ -26,7 +26,10 @@ public class MetricsFromJdbc {
      * @param to   单位ms
      */
     public static MetricsForTag selectOneMetrics(String tag, long from, long to) {
-        JdbcLog4jAppender instance = JdbcLog4jAppender.getInstance();
+        JdbcAppender instance = JdbcLog4jAppender.getInstance();
+        if (instance == null){
+            instance = JdbcLogbackAppender.getInstance();
+        }
         if (instance != null) {
             MetricsSet metricsSet = instance.select(QUERY_SQL + " order by create_time desc limit 1", tag, from, to);
             if (metricsSet != null) {
@@ -54,11 +57,14 @@ public class MetricsFromJdbc {
      * @param timeUnit            时间单位标识
      */
     public static void insertMetrics(Map<String, TimingStatistics> timingStatisticsMap, long interval, TimeUnit timeUnit) {
-        JdbcLog4jAppender appender = JdbcLog4jAppender.getInstance();
+        JdbcAppender appender = JdbcLog4jAppender.getInstance();
+        if (appender == null){
+            appender = JdbcLogbackAppender.getInstance();
+        }
         if (appender != null) {
             appender.save(timingStatisticsMap, interval, timeUnit);
         } else {
-            LogLog.error("JdbcLog4jAppender is closed");
+            // .ignore
         }
     }
 
@@ -70,21 +76,27 @@ public class MetricsFromJdbc {
      * @param to   ms单位
      */
     public static MetricsSet selectMetrics(String tag, long from, long to) {
-        JdbcLog4jAppender appender = JdbcLog4jAppender.getInstance();
+        JdbcAppender appender = JdbcLog4jAppender.getInstance();
+        if (appender == null){
+            appender = JdbcLogbackAppender.getInstance();
+        }
         if (appender != null) {
             return appender.select(QUERY_SQL + " order by create_time asc", tag, from, to);
         } else {
-            LogLog.error("JdbcLog4jAppender is closed");
+            LogLog.error("JdbcAppender is closed");
         }
         return null;
     }
 
     public static List<String> selectMetricsTag() {
-        JdbcLog4jAppender appender = JdbcLog4jAppender.getInstance();
+        JdbcAppender appender = JdbcLog4jAppender.getInstance();
+        if (appender == null){
+            appender = JdbcLogbackAppender.getInstance();
+        }
         if (appender != null) {
             return appender.selectTags();
         } else {
-            LogLog.error("JdbcLog4jAppender is closed");
+            LogLog.error("JdbcAppender is closed");
         }
         return null;
     }
