@@ -17,7 +17,7 @@ perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，集性�
 * 自定义监控数据的输出地，默认提供file、Jdbc、elasticsearch的输出方式
 * 自带dashboard，也可以对接到公司内部的监控系统，比如常用的监控系统ganglia、grafana
 * 基于简单表达式的预警规则定义
-* 简单、实用、开箱即用，如果你已经用过perf4j你也不需要有什么改动
+* 简单、实用、开箱即用，如果你已经用过perf4j你可以轻易使用该项目配置dashboard
 
 ## APM说明文档
 
