@@ -30,8 +30,8 @@ public class MyAppender extends AppenderSkeleton {
 }
 ```
 
-如果没有特别要求，在apm-aggregate模块默认实现了基于log4j日志组件的数据输出。第一种通过Jdbc方式保存到数据库，如Mysql、SQLite，第二种输出到ElasticSearch，
-你可以直接在log4j.xml配置。
+如果没有特别要求，在apm-aggregate模块默认实现了基于常用的两种日志组件log4j和logback的数据输出选择。第一种通过Jdbc方式保存到数据库，如Mysql、SQLite，第二种输出到ElasticSearch，
+如果你使用到是log4j,你可以像下面这样配置,如果是logback,使用Logback对应的appender即可,例如JdbcLog4jAppender对应的logback是JdbcLogbackAppender。
 
 首先加入下面依赖
 ```
@@ -65,6 +65,7 @@ public class MyAppender extends AppenderSkeleton {
 
 ## 输出到ElasticSearch
 ```
+<!--基于elastic search的1.x版本实现-->
  <appender name="Perf4jESAppender"
            class="com.peaceful.apm.aggregate.ElasticLog4jAppender">
      <param name="url" value="127.0.0.1"></param>

@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * perf4jAppender for jdbc
+ * 如果使用log4j组件，使用该appender通过jdbc输出到db
  * 已验证支持Mysql、SQLite
  * <p>
  * 必须作为 {@link org.perf4j.log4j.AsyncCoalescingStatisticsAppender}的 subAppender
@@ -139,6 +139,20 @@ public class JdbcLog4jAppender extends AppenderSkeleton implements JdbcAppender 
         }
     }
 
+    public Connection getConnection() {
+        Connection connection = null;
+        try {
+            if (db_type_enum == DB_TYPE_ENUM.SQLite) {
+                connection = DriverManager.getConnection(url);
+            } else {
+                connection = DriverManager.getConnection(url, user, password);
+            }
+        } catch (SQLException e) {
+            Throwables.propagate(e);
+        }
+        return connection;
+    }
+
 
     private void init() {
         state = FAIL;
@@ -203,19 +217,6 @@ public class JdbcLog4jAppender extends AppenderSkeleton implements JdbcAppender 
         state = OK;
     }
 
-    public Connection getConnection() {
-        Connection connection = null;
-        try {
-            if (db_type_enum == DB_TYPE_ENUM.SQLite) {
-                connection = DriverManager.getConnection(url);
-            } else {
-                connection = DriverManager.getConnection(url, user, password);
-            }
-        } catch (SQLException e) {
-            Throwables.propagate(e);
-        }
-        return connection;
-    }
 
     @Override
     protected void append(LoggingEvent loggingEvent) {

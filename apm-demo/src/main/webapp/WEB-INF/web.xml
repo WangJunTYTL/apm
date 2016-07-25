@@ -21,7 +21,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>perf4j</servlet-name>
-        <servlet-class>com.peaceful.apm.aggregate.servlet.BaiduEchartGraphingServlet</servlet-class>
+        <servlet-class>com.peaceful.apm.aggregate.servlet.Log4jBaiduEchartGraphingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>perf4j</servlet-name>

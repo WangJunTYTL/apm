@@ -11,7 +11,7 @@
 
     <!--实时图表配置,每个appender将会渲染出一张图表-->
     <appender name="ExecutionTimes"
-              class="org.perf4j.log4j.GraphingStatisticsAppender">
+              class="com.peaceful.apm.aggregate.Log4jGraphingStatisticsAppender">
         <!-- Possible GraphTypes are Mean, Min, Max, StdDev, Count and TPS -->
         <param name="GraphType" value="Mean"/>
         <!-- The tags of the timed execution blocks to graph are specified here -->
@@ -19,17 +19,17 @@
     </appender>
 
     <appender name="ExecutionCount"
-              class="org.perf4j.log4j.GraphingStatisticsAppender">
+              class="com.peaceful.apm.aggregate.Log4jGraphingStatisticsAppender">
         <param name="GraphType" value="Count"/>
     </appender>
 
     <appender name="ExecutionStdDev"
-              class="org.perf4j.log4j.GraphingStatisticsAppender">
+              class="com.peaceful.apm.aggregate.Log4jGraphingStatisticsAppender">
         <param name="GraphType" value="StdDev"/>
     </appender>
 
     <appender name="ExecutionTPS"
-              class="org.perf4j.log4j.GraphingStatisticsAppender">
+              class="com.peaceful.apm.aggregate.Log4jGraphingStatisticsAppender">
         <param name="GraphType" value="TPS"/>
     </appender>
 

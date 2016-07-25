@@ -22,10 +22,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * perf4jAppender for jdbc
+ * 如果使用logback组件，使用该appender通过jdbc输出到db
  * 已验证支持Mysql、SQLite
  * <p>
- * 必须作为 {@link org.perf4j.log4j.AsyncCoalescingStatisticsAppender}的 subAppender
+ * 必须作为 {@link org.perf4j.logback.AsyncCoalescingStatisticsAppender}的 subAppender
  *
  * @author WangJun
  * @version 1.0 16/6/24

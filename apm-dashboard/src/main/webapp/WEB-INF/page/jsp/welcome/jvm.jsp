@@ -52,6 +52,7 @@
                 <data value="" style="display: none" id="runningInfo">${runningInfo}</data>
             </div>
         </div>
+        <br><br>
         <div id="chart" class="row">
             <div class="col-lg-6">
                 <div id="UsedHeap" style="height: 300px"></div>

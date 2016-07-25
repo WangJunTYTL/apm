@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 用于监控spring mvc的http接口
+ *
  * @author WangJun
  * @version 1.0 16/6/26
  */

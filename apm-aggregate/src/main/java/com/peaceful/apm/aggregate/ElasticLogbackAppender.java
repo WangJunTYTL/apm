@@ -21,8 +21,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * perf4j for es appender
- * 必须作为 {@link org.perf4j.log4j.AsyncCoalescingStatisticsAppender}的 subAppender
+ * 如果你使用logback组件，通过该appender可以把数据写入到elasticsearch
+ * 必须作为 {@link org.perf4j.logback.AsyncCoalescingStatisticsAppender}的子Appender
  *
  * @author WangJun
  * @version 1.0 16/6/25

@@ -46,10 +46,7 @@ echo "下载依赖包peaceful-basic-platform"
 [ -d "peaceful-basic-platform" ] && rm -rf peaceful-basic-platform
 git clone https://github.com/WangJunTYTL/peaceful-basic-platform.git ||  exit 1
 cd peaceful-basic-platform
-mvn clean -P${ENV} -f peaceful-boot-parent/pom.xml install  -Dmaven.test.skip=true || exit 1
-mvn clean -P${ENV} install -f peaceful-boot/pom.xml -Dmaven.test.skip=true || exit 1
-mvn clean -P${ENV} -f peaceful-parent/pom.xml install  -Dmaven.test.skip=true || exit 1
-mvn clean -P${ENV} -f peaceful-common-utils/pom.xml install  -Dmaven.test.skip=true || exit 1
+sh build.sh || exit 1
 cd ..
 
 echo "下载依赖包redismanage"

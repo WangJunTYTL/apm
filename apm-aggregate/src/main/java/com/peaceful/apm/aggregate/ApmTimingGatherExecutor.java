@@ -12,7 +12,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author WangJun
  * @version 1.0 16/6/21
  */

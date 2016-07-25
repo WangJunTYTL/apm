@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.peaceful</groupId>
-    <artifactId>perf4j-demo</artifactId>
+    <artifactId>apm-demo</artifactId>
     <version>2.6-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.perf4j</groupId>
             <artifactId>perf4j</artifactId>
-            <version>2.6-SNAPSHOT</version>
+            <version>0.9.16</version>
         </dependency>
 
         <dependency>

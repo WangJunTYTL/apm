@@ -18,7 +18,7 @@ $(function () {
             return;
         }
     } catch (e) {
-        $("#chart").html("无法加载数据！响应数据内容：" + charts);
+        $("#chart").html("无法加载数据！响应数据内容：<br>" + charts);
         return;
     }
 
@@ -38,16 +38,16 @@ $(function () {
         function (ec) {
             for (var n = 0; n < parseData['graph'].length; n++) {
                 var graph = parseData['graph'][n];
-                var container = $("<div>").attr("class", "col-md-12");
+                var container = $("<div>").attr("class", "col-md-6");
                 var node = $("<div>").attr("id", "chart" + n).attr("style", "height:300px;");
                 container.append(node);
                 $("#chart").append(container);
                 var myChart = ec.init(node.get(0));
                 var series = []
-                var symbol = 'auto';
-                if (graph.tagsToYData.length > 168) {
+                var symbol = 'none';
+                /*if (graph.tagsToYData.length > 168) {
                     symbol = "none";
-                }
+                }*/
                 var tagData = {
                     name: currentTag,
                     type: 'line',
@@ -59,10 +59,21 @@ $(function () {
                         ]
                     }
                 }
+                var subtext='每秒请求次数';
+                if (graph['graphType']=='Mean'){
+                    subtext="平均响应时间";
+                }else if (graph['graphType']=='Max'){
+                    subtext="最大响应时间";
+                }else if (graph['graphType']=='Min'){
+                    subtext="最小响应时间";
+                }else if (graph['graphType']=='Std'){
+                    subtext="请求标准方差";
+                }
                 series.push(tagData)
                 var option = {
                     title: {
-                        text: graph['graphType'] == 'Count' ? 'TPS(per second)' : graph['graphType'],
+                        text: graph['graphType'] == 'Count' ? 'TPS' : graph['graphType'],
+                        subtext: subtext
                     },
                     tooltip: {
                         trigger: 'axis'

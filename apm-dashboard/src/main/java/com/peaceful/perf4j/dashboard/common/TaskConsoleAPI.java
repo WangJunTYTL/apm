@@ -1,5 +1,6 @@
 package com.peaceful.perf4j.dashboard.common;
 
+import com.google.common.base.Throwables;
 import com.peaceful.common.util.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class TaskConsoleAPI {
             return HttpClient.get(apiAdd.get() + "?method=" + method);
         } catch (Exception e) {
             logger.error("request found error {}", ExceptionUtils.getStackTrace(e));
-            return "error";
+            return Throwables.getStackTraceAsString(e);
         }
     }
 

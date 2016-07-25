@@ -11,7 +11,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>apm-perf4j</module>
         <module>apm-aggregate</module>
         <module>apm-alert</module>
         <module>apm-plugin</module>

@@ -13,11 +13,12 @@ import java.util.concurrent.TimeUnit;
 public class MetricsFromElastic {
 
     public static void insertMetrics(Map<String, TimingStatistics> timingStatisticsMap, long interval, TimeUnit timeUnit) {
-        ElasticLog4jAppender appender = ElasticLog4jAppender.getInstance();
-        if (appender != null) {
-            appender.save(timingStatisticsMap, interval, timeUnit);
-        } else {
-            // .ignore
+        ElasticLog4jAppender appenderLog4j = ElasticLog4jAppender.getInstance();
+        ElasticLogbackAppender appenderLogback = ElasticLogbackAppender.getInstance();
+        if (appenderLog4j != null) {
+            appenderLog4j.save(timingStatisticsMap, interval, timeUnit);
+        } else if (appenderLogback != null) {
+            appenderLogback.save(timingStatisticsMap, interval, timeUnit);
         }
     }
 }

@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class MetricsSet {
 
-    public String tag;
-    public String interval;
-    public String hostname;
-    public List<String> series;
-    public List<Long> counts;
-    public List<Double> means;
-    public List<Long> mins;
-    public List<Long> maxs;
-    public List<Double> stds;
+    public String tag; // tag
+    public String interval; // 聚合周期
+    public String hostname; // 数据来源机器
+    public List<String> series; // 时间序列集合
+    public List<Long> counts; // 一个interval周期的执行次数
+    public List<Double> means; // 一个interval周期的平均响应时间
+    public List<Long> mins; // 一个interval周期内的最小响应时间
+    public List<Long> maxs; // 一个interval周期内的最大响应时间
+    public List<Double> stds; // 一个interval周期请求次数方差
 
     public MetricsSet(String tag, String interval, String hostname) {
         this.tag = tag;

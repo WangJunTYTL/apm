@@ -7,7 +7,7 @@ $(function () {
             return;
         }
     } catch (e) {
-        $("#chart").html("无法加载数据！响应数据内容：" + charts);
+        $("#chart").html("无法加载数据！响应数据内容：<br>" + charts);
     }
     require.config({
         paths: {
