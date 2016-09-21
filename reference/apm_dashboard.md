@@ -1,4 +1,4 @@
-Dashboard
+基于MySql数据源的展示与预警平台
 -------------------
 
 ![Alt text](./images/apm_now.jpg)

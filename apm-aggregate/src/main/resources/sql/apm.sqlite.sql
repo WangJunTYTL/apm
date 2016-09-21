@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS APM_TIMING_STATISTICS (
   `max`         BIGINT      DEFAULT 0,
   `std`         DOUBLE      DEFAULT 0,
   `interval`    INT         DEFAULT 0,
-  `hostname`    VARCHAR(20) DEFAULT 'Local',
+  `hostname`    VARCHAR(100) DEFAULT 'Local',
   `create_time` BIGINT       NOT NULL
 );
 

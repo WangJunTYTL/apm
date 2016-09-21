@@ -38,7 +38,7 @@ $(function () {
         function (ec) {
             for (var n = 0; n < parseData['graph'].length; n++) {
                 var graph = parseData['graph'][n];
-                var container = $("<div>").attr("class", "col-md-6");
+                var container = $("<div>").attr("class", "col-md-12");
                 var node = $("<div>").attr("id", "chart" + n).attr("style", "height:300px;");
                 container.append(node);
                 $("#chart").append(container);
@@ -46,8 +46,8 @@ $(function () {
                 var series = []
                 var symbol = 'none';
                 /*if (graph.tagsToYData.length > 168) {
-                    symbol = "none";
-                }*/
+                 symbol = "none";
+                 }*/
                 var tagData = {
                     name: currentTag,
                     type: 'line',
@@ -59,15 +59,15 @@ $(function () {
                         ]
                     }
                 }
-                var subtext='每秒请求次数';
-                if (graph['graphType']=='Mean'){
-                    subtext="平均响应时间";
-                }else if (graph['graphType']=='Max'){
-                    subtext="最大响应时间";
-                }else if (graph['graphType']=='Min'){
-                    subtext="最小响应时间";
-                }else if (graph['graphType']=='Std'){
-                    subtext="请求标准方差";
+                var subtext = '每秒请求次数';
+                if (graph['graphType'] == 'Mean') {
+                    subtext = "平均响应时间";
+                } else if (graph['graphType'] == 'Max') {
+                    subtext = "最大响应时间";
+                } else if (graph['graphType'] == 'Min') {
+                    subtext = "最小响应时间";
+                } else if (graph['graphType'] == 'Std') {
+                    subtext = "请求标准方差";
                 }
                 series.push(tagData)
                 var option = {

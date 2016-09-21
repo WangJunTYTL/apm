@@ -45,7 +45,7 @@ public class MyAppender extends AppenderSkeleton {
 ## 输出到MySql
 ```
 <appender name="Perf4jJdbcAppender"
-          class="com.peaceful.apm.aggregate.JdbcLog4jAppender">
+          class="com.peaceful.apm.aggregate.appender.JdbcLog4jAppender">
     <param name="url"
            value="jdbc:mysql://127.0.0.1:3306/test3?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false"></param>
     <param name="user" value="root"></param>
@@ -57,7 +57,7 @@ public class MyAppender extends AppenderSkeleton {
 ## 输出到SQLite
 ```
 <appender name="Perf4jSQLiteJdbcAppender"
-          class="com.peaceful.apm.aggregate.JdbcLog4jAppender">
+          class="com.peaceful.apm.aggregate.appender.JdbcLog4jAppender">
     <param name="url" value="jdbc:sqlite:apm.db"></param>
     <param name="driver" value="org.sqlite.JDBC"></param>
 </appender>
@@ -67,7 +67,7 @@ public class MyAppender extends AppenderSkeleton {
 ```
 <!--基于elastic search的1.x版本实现-->
  <appender name="Perf4jESAppender"
-           class="com.peaceful.apm.aggregate.ElasticLog4jAppender">
+           class="com.peaceful.apm.aggregate.appender.ElasticLog4jAppender">
      <param name="url" value="127.0.0.1"></param>
      <param name="port" value="9300"></param>
      <param name="indexPrefix" value="apm-"></param>

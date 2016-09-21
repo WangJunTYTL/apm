@@ -158,6 +158,7 @@ immediately after the control sidebar -->
 <!-- FastClick -->
 <script src="plugins/fastclick/fastclick.js"></script>
 --%>
+<%--<script src="/js/Chart.js"  type="text/javascript"></script>--%>
 <!-- AdminLTE App -->
 <script src="/static/template02/app.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

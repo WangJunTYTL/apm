@@ -39,10 +39,11 @@
     <!-- Bootstrap 3.3.6 -->
     <script src="/js/bootstrap-3.5.js"></script>
     <script src="/js/helper/Map.js"></script>
+    <script src="/js/helper/js-cookie.js"></script>
 
 </head>
-<body class="hold-transition skin-green sidebar-mini sidebar-collapse">
-<%--<body class="hold-transition skin-green sidebar-mini">--%>
+<body class="hold-transition skin-green sidebar-mini"> <%-- sidebar-collapse--%>
+<%--<body class="frame-transition skin-green sidebar-mini">--%>
 <div class="wrapper">
 
     <header class="main-header">
@@ -62,15 +63,6 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="javascript:void(0)" class="top_nav_menu" menu="now">实时</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="top_nav_menu" menu="history">过去</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="top_nav_menu" menu="jvm">JVM</a>
-                    </li>
                 </ul>
             </div>
         </nav>

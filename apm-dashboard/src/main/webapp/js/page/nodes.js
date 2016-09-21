@@ -1,9 +1,9 @@
 $(function () {
     var loadClusterListPanel = function () {
-        $.post("/conf/cluster", function (data) {
-            var result = JSON.parse(data);
+        $.get("/conf/cluster", function (data) {
+            var result = data;
             if (result.code == 0) {
-                var nodes = JSON.parse(result.result);
+                var nodes = result.data;
                 var flag = false;
                 for (var key in nodes) {
                     var panel = $('#nodesPanel');
@@ -30,7 +30,7 @@ $(function () {
     loadClusterListPanel();
 
     $.post("/conf/links/get", function (data) {
-        var result = JSON.parse(data);
+        var result = data;
         if (result.code == 0) {
             var menus = result.data;
             for (var i = 0; i < menus.length; i++) {
@@ -43,7 +43,7 @@ $(function () {
         var cluster = $("#cluster").val();
         var node = $("#node").val();
         var url = $("#url").val();
-        $.post("/conf/cluster/add", {clusterName: cluster, nodeName: node, url: url}, function (data) {
+        $.post("/setting/node/add", {clusterName: cluster, nodeName: node, url: url}, function (data) {
             var result = JSON.parse(data);
             if (result.code == 0) {
                 alert("加入成功！");

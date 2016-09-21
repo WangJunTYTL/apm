@@ -49,16 +49,8 @@ cd peaceful-basic-platform
 sh build.sh || exit 1
 cd ..
 
-echo "下载依赖包redismanage"
-[ -d "redismanage" ]   && rm -rf redismanage
-git clone https://github.com/WangJunTYTL/redismanage.git || exit 1
-cd redismanage
-mvn clean -P${ENV} install  -Dmaven.test.skip=true || exit 1
-cd ..
-
 wait
 rm -rf peaceful-basic-platform
-rm -rf redismanage
 
 mvn -P${ENV} clean install  -Dmaven.test.skip=true || exit 1
 echo '-------------------------------------------------------------------------------'

@@ -1,35 +1,34 @@
-# Perf4j
+APM
+=============
+__APM：__ Application Performance Monitor，是一款集性能数据采集、展示、预警一套完整的业务监控解决方案。
 
-Perf4J 是一个开放源码的性能记录，监测和分析库，可以计算服务的TPS、Mean、Count、Max、Min、StdDev 6种指标值，主要用于企业Java应用程序。
+![alt text](./reference/images/apm_heart.jpg)
 
-perf4j-zh 是修改部分perf4j源码并基于它进行了二次开发，集性能数据采集、聚合、展示、预警完整的业务级别监控解决方案，另取名**Application Performance Monitor**，简称**APM**，
-使perf4j能够被更多企业Java项目使用。
+可以提供以下功能：
 
+- 近实时的数据采集，依赖perf4j
+- 自定义性能数据存储方案，比如mysql、influxdb、elasticserach
+- 丰富的数据图表展示功能，依赖grafana
+- 灵活的预警规则定义，支持表达式语言定义规则和消息模板
 
-![Alt text](./reference/images/metircs.jpg)
+### 快速上手
+- 下载项目：git clone https://github.com/WangJunTYTL/apm.git
+- 构建：sh  build.sh （如果平台不可以执行shell脚本，一定要按照脚本执行步骤进行手动构建）
+- 启动： apm-dashboard
+    - 配置数据源，进入到apm-dashboard项目，在conf.properties中设置mysql数据源，请注意，链接的数据库需要拥有执行建表语句的权限。
+    - 启动项目， mvn jetty:run （初次启动，建议直接通mvn jetty:run的方式启动）
+    - 在浏览器中访问：127.0.0.1:8888 ，（你也许上来会先随便点击看下各个功能看下，这样更好）项目本身集成监控，可以在这里查看你刚才访问过的http地址和当前服务的jvm基本信息。
 
-[点击查看在实际业务中的监控效果图](./reference/apm_dashboard.md)
+### 项目文档
 
-
-## 特点
-
-* 近实时的精确的数据采集，由Perf4j提供。
-* 自定义监控数据的输出地，默认提供file、Jdbc、elasticsearch的输出方式
-* 自带dashboard，也可以对接到公司内部的监控系统，比如常用的监控系统ganglia、grafana
-* 基于简单表达式的预警规则定义
-* 简单、实用、开箱即用，如果你已经用过perf4j你可以轻易使用该项目配置dashboard
-
-## APM说明文档
-
-1. [整体架构](https://raw.githubusercontent.com/WangJunTYTL/perf4j-zh/master/doc/perf4j架构解析.jpg)
-1. [数据采集](./reference/apm_gather.md)
-2. [数据输出](./reference/apm_aggregate.md)
-2. [数据展示](./reference/apm_view.md)
-2. [预警...待更新]
+1. [Java项目中数据采集方式](./reference/apm_gather.md)
+2. [怎样将数据导入到MySql](./reference/apm_mysql.md)
+3. [怎样将数据导入到ElasticSearch](./reference/apm_elasticsearch.md)
+4. [基于MySql数据源的展示与预警平台]()
+5. [基于ElasticSearch搭建Grafana展示平台]()
 
 
-## 交流
 
-QQ群：365133362 群名称：互联网从业者
-   
-   
+### 交流
+
+QQ群：365133362 群名称：互联网从业者    

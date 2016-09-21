@@ -18,7 +18,7 @@ public class AlertExecutor {
             .setNameFormat("apm-alert-%d")
             .setDaemon(true)
             .build();
-    public static final ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(5, threadFactoryBuilder);
+    public static final ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(8, threadFactoryBuilder);
 
 
 }

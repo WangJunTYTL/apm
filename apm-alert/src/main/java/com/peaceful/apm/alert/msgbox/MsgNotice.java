@@ -1,16 +1,29 @@
 package com.peaceful.apm.alert.msgbox;
 
-import java.util.List;
+import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * 消息通知形式
- *
- * @author WangJun
- * @version 1.0 16/6/19
+ * Created by wangjun on 16/9/4.
  */
-public interface MsgNotice {
+public class MsgNotice {
 
-    void sendEmail(List<Message> messages);
+    @Inject
+    MsgHandler msgHandler;
 
-    void sendSms(List<Message> messages);
+    public void send(Message message) {
+        Preconditions.checkArgument(StringUtils.isNoneBlank(message.content), "msg content is empty!");
+        Preconditions.checkArgument(StringUtils.isNoneBlank(message.receivers), "msg receiver is empty!");
+        // email 消息
+        if (message instanceof MailMsg) {
+            MailMsg mailMsg = (MailMsg) message;
+            msgHandler.sendEmail(mailMsg);
+        }
+        // sms 消息
+        else if (message instanceof SmsMsg) {
+            SmsMsg smsMsg = (SmsMsg) message;
+            msgHandler.sendSms(smsMsg);
+        }
+    }
 }
