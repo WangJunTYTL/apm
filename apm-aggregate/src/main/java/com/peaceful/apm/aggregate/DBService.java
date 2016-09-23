@@ -50,12 +50,12 @@ public class DBService implements AppenderService {
                 "  INDEX (tag)," +
                 "  INDEX (hostname)," +
                 "  INDEX (create_time)" +
-                "  )";
+                "  )ENGINE=MyISAM DEFAULT CHARSET utf8 COLLATE utf8_general_ci;";
 
         String apm_service = "CREATE TABLE IF NOT EXISTS APM_SERVICE (" +
                 "  `service`  VARCHAR(50) NOT NULL PRIMARY KEY ," +
                 "  `hostname` VARCHAR(100)" +
-                ")";
+                ")ENGINE=MyISAM DEFAULT CHARSET utf8 COLLATE utf8_general_ci;";
         Connection connection = getConnection();
         Statement statement = null;
         try {

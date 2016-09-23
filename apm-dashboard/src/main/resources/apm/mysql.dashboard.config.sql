@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS APM_ALERT (
   `update_time`     DATETIME         NOT NULL,
   CONSTRAINT ServiceTag UNIQUE (`service`,`tag`),
   INDEX (tag)
-);
+)ENGINE=MyISAM DEFAULT CHARSET utf8 COLLATE utf8_general_ci;

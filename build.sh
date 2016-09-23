@@ -29,7 +29,7 @@ cmd_is_exist(){
     if [ $? == 0 ];then
         echo "OK"
     else
-        echo "请先安装$1，并添加$1到PATH变量中" && eit 1
+        echo "请先安装$1，并添加$1到PATH变量中" && exit 1
     fi
 }
 

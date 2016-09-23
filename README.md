@@ -24,8 +24,8 @@ __APM：__ Application Performance Monitor，是一款集性能数据采集、�
 1. [Java项目中数据采集方式](./reference/apm_gather.md)
 2. [怎样将数据导入到MySql](./reference/apm_mysql.md)
 3. [怎样将数据导入到ElasticSearch](./reference/apm_elasticsearch.md)
-4. [基于MySql数据源的展示与预警平台]()
-5. [基于ElasticSearch搭建Grafana展示平台]()
+4. [基于MySql数据源的展示与预警平台](./reference/apm_dashboard.md)
+5. [基于Elastic和Grafana的展示平台](./reference/apm_other.md)
 
 
 
