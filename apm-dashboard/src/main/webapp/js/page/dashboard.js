@@ -181,7 +181,7 @@ $(function () {
 
     $(document).on("click", "#submit", function () {
         var service = $("input[name='service']").val();
-        var hostname = $("input[name='node']").val();
+        var hostname = $("#hostname").val();
         var tag = $("#tag").val();
         var startTime = $("input[name='from']").val();
         var endTime = $("input[name='to']").val();

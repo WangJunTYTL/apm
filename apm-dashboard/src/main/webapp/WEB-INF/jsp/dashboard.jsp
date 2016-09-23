@@ -42,9 +42,9 @@
                             <form class="form-inline">
                                 <div class="form-group">
                                     <label for="tag">Host</label>
-                                    <select class="form-control" id="hostname" name="tag">
+                                    <select class="form-control" id="hostname" name="node">
                                         <c:forEach items="${nodes}" var="node">
-                                            <option>${nodes}</option>
+                                            <option>${node}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -61,7 +61,6 @@
                                     <input type="text" class="form-control datetimepicker" id="exampleInputName2" name="from"
                                            data-date-format="yyyy-mm-dd hh:ii" value="${from}" placeholder="Last 2 hours">
                                     <input type="hidden" name="service" value="${service}">
-                                    <input type="hidden" name="node" value="${hostname}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail2">To</label>

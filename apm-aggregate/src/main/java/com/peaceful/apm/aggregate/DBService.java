@@ -53,8 +53,9 @@ public class DBService implements AppenderService {
                 "  )ENGINE=MyISAM DEFAULT CHARSET utf8 COLLATE utf8_general_ci;";
 
         String apm_service = "CREATE TABLE IF NOT EXISTS APM_SERVICE (" +
-                "  `service`  VARCHAR(50) NOT NULL PRIMARY KEY ," +
-                "  `hostname` VARCHAR(100)" +
+                "  `service`  VARCHAR(50) NOT NULL ," +
+                "  `hostname` VARCHAR(100)," +
+                "   PRIMARY KEY (`service`,`hostname`) "+
                 ")ENGINE=MyISAM DEFAULT CHARSET utf8 COLLATE utf8_general_ci;";
         Connection connection = getConnection();
         Statement statement = null;
