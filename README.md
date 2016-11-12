@@ -1,15 +1,17 @@
 APM
 =============
-__APM：__ Application Performance Monitor，是一款集性能数据采集、展示、预警一套完整的业务监控解决方案。
+__APM：__ Application Performance Monitor，是一款偏向于解决业务上的监控系统，可以帮助业务开发者快速构建自己的metric，集性能数据采集、展示、预警一套完整的业务监控解决方案。
+
+在业务层面，运维人员其实是很难介入到实际的业务编码中的，对于业务中存在的关键点，也许还只有业务开发者自己清楚所在，APM目的是帮助业务开发者快速构建自己的metric，对关键性的业务逻辑点加入监控行为。
 
 ![alt text](./reference/images/apm_heart.jpg)
 
-可以提供以下功能：
+提供以下功能特性：
 
-- 近实时的数据采集，依赖perf4j
-- 自定义性能数据存储方案，比如mysql、influxdb、elasticserach
-- 丰富的数据图表展示功能，依赖grafana
-- 灵活的预警规则定义，支持表达式语言定义规则和消息模板
+- 由Perf4j提供近实时的数据采集
+- 可以自定义时间性能数据存储方案，默认提供MySql和ElasticSearch数据存储设计，可扩展，如常用的influxdb
+- 由grafana提供丰富的数据图表展示功能，可以支持常见的图表类型，可以支持让业务开发者自定义图表或者Dashboard
+- 灵活的预警规则定义，支持通过表达式语言定义预警规则和消息模板
 
 ### 快速上手
 - 下载项目：git clone https://github.com/WangJunTYTL/apm.git
@@ -17,7 +19,7 @@ __APM：__ Application Performance Monitor，是一款集性能数据采集、�
 - 启动： apm-dashboard
     - 配置数据源，进入到apm-dashboard项目，在conf.properties中设置mysql数据源，请注意，链接的数据库需要拥有执行建表语句的权限。
     - 启动项目， mvn jetty:run （初次启动，建议直接通mvn jetty:run的方式启动）
-    - 在浏览器中访问：127.0.0.1:8888 ，（你也许上来会先随便点击看下各个功能看下，这样更好）项目本身集成监控，可以在这里查看你刚才访问过的http地址和当前服务的jvm基本信息。
+    - 在浏览器中访问：127.0.0.1:8888 ，项目本身集成监控，可以在这里查看你刚才访问过的http地址和当前服务的jvm基本信息。
 
 ### 项目文档
 
