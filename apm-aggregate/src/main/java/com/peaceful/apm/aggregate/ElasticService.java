@@ -3,7 +3,6 @@ package com.peaceful.apm.aggregate;
 import com.google.common.base.Throwables;
 import com.peaceful.boot.common.helper.DateHelper;
 import com.peaceful.boot.common.helper.NetHelper;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
@@ -43,6 +42,7 @@ public class ElasticService implements AppenderService {
         this.clusterName = clusterName;
         this.indexPrefix = indexPrefix;
     }
+
 
     @Override
     public void saveStatisticsData(Map<String, TimingStatistics> timingStatisticsSortedMap, long interval, TimeUnit timeUnit) {
