@@ -1,6 +1,6 @@
 package com.peaceful.apm.dashboard.conf;
 
-import com.peaceful.apm.aggregate.plugin.SpringMvcRequest;
+import com.peaceful.apm.plugin.SpringMvcRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;

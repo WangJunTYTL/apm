@@ -4,8 +4,8 @@ Java项目中基本的数据采集方式
 #### 首先需要在你的Java项目中加入perf4j的依赖
 ```
 <dependency>
-    <groupId>org.perf4j</groupId>
-    <artifactId>perf4j</artifactId>
+    <groupId>com.peaceful</groupId>
+    <artifactId>apm-perf4j</artifactId>
     <!--x.x是你使用的版本-->
     <version>x.x</version>
 </dependency>

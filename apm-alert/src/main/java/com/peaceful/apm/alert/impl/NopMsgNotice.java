@@ -1,9 +1,7 @@
 package com.peaceful.apm.alert.impl;
 
+import com.peaceful.apm.alert.helper.MailHelper;
 import com.peaceful.apm.alert.msgbox.*;
-import com.peaceful.boot.common.helper.Console;
-import com.peaceful.boot.common.helper.DateHelper;
-import com.peaceful.boot.common.helper.MailHelper;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +19,6 @@ public class NopMsgNotice implements MsgHandler {
 
     @Override
     public void sendSms(SmsMsg msg) {
-        Console.log("假设这样就方式了消息");
+        System.out.println("假设这样就方式了消息");
     }
 }

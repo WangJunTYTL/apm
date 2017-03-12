@@ -6,13 +6,16 @@
 
     <groupId>com.peaceful</groupId>
     <artifactId>apm</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>apm-aggregate</module>
+        <module>apm-pom</module>
+        <module>apm-perf4j</module>
+        <module>apm-extension</module>
         <module>apm-alert</module>
         <module>apm-dashboard</module>
     </modules>
+
 
 </project>

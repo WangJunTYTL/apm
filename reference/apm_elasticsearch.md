@@ -6,7 +6,7 @@ apm提供导入ElasticSearch的appender组件类，支持1.x版本的es客户端
 ```
 <dependency>
     <groupId>com.peaceful</groupId>
-    <artifactId>apm-aggregate</artifactId>
+    <artifactId>apm-perf4j</artifactId>
     <version>2.6-SNAPSHOT</version>
 </dependency>
 ```
@@ -14,7 +14,7 @@ apm提供导入ElasticSearch的appender组件类，支持1.x版本的es客户端
 
 ```
 <appender name="ESAppender"
-          class="com.peaceful.apm.aggregate.appender.ElasticLogbackAppender">
+          class="com.peaceful.apm.perf4j.appender.ElasticLogbackAppender">
     <param name="host" value="localhost"></param>
     <param name="port" value="9300"></param>
     <param name="indexPrefix" value="apm-"></param>

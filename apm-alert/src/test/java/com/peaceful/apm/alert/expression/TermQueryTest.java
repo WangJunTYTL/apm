@@ -1,7 +1,6 @@
 package com.peaceful.apm.alert.expression;
 
 import com.google.common.collect.Maps;
-import com.peaceful.boot.common.helper.Console;
 import org.junit.Test;
 
 import java.util.Map;
@@ -18,7 +17,7 @@ public class TermQueryTest {
         Map<String, String> map = Maps.newHashMap();
         map.put("count", "111");
         map.put("min", "6");
-        Console.log(termQuery.bool("${count}>100&${min}<6", map));
+        System.out.println(termQuery.bool("${count}>100&${min}<6", map));
     }
 
 }
