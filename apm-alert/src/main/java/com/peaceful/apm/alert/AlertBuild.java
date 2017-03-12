@@ -3,12 +3,12 @@ package com.peaceful.apm.alert;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
+import com.peaceful.apm.alert.helper.AlertApplication;
+import com.peaceful.apm.alert.helper.DateHelper;
 import com.peaceful.apm.alert.msgbox.MailMsg;
 import com.peaceful.apm.alert.msgbox.Message;
 import com.peaceful.apm.alert.msgbox.SmsMsg;
 import com.peaceful.apm.alert.users.User;
-import com.peaceful.boot.Application;
-import com.peaceful.boot.common.helper.DateHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,7 +144,7 @@ public class AlertBuild {
                         buffer.append("<b>plan.dispatch.time:</b>").append(DateHelper.formatDateTime(new Date(alertProcess.nextProcessTime))).append("<br>");
                         buffer.append("<b>reality.dispatch.time:</b>").append(DateHelper.formatDateTime(new Date())).append("<br>");
                         MailMsg message = new MailMsg("Alert Dispatch Event：dispatch delay warn", buffer.toString());
-                        message.receivers = Application.getConfigContext().getString("apm.admin.email");
+                        message.receivers = AlertApplication.getConfigContext().getString("apm.admin.email");
                         Alert.notice(message);
                     }
                 } else if (alertProcess.state.equals(AlertProcess.State.TERMINATED)) {
@@ -176,7 +176,7 @@ public class AlertBuild {
                 buffer.append("<b>email msg:</b>").append(alertBuild.emailMsg).append("<br>");
                 buffer.append("<b>cause:</b>").append(Throwables.getStackTraceAsString(e)).append("<br>");
                 MailMsg message = new MailMsg("Alert Dispatch Event: execute exception", buffer.toString());
-                message.receivers = Application.getConfigContext().getString("apm.admin.email");
+                message.receivers = AlertApplication.getConfigContext().getString("apm.admin.email");
                 Alert.notice(message);
                 LOGGER.error("Alert Dispatch Event: execute exception,tag:{},term:{}, cause:{}", alertBuild.tag, alertBuild.term, Throwables.getStackTraceAsString(e));
             }

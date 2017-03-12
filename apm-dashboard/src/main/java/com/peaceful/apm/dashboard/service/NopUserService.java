@@ -3,7 +3,6 @@ package com.peaceful.apm.dashboard.service;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.peaceful.apm.alert.users.User;
-import com.peaceful.boot.Application;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigObject;

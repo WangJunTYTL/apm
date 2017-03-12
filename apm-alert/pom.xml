@@ -6,21 +6,14 @@
 
     <parent>
         <groupId>com.peaceful</groupId>
-        <artifactId>peaceful-boot-parent</artifactId>
+        <artifactId>apm-pom</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../apm-pom/pom.xml</relativePath>
     </parent>
 
-    <groupId>com.peaceful</groupId>
     <artifactId>apm-alert</artifactId>
-    <version>2.6-SNAPSHOT</version>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.peaceful</groupId>
-            <artifactId>peaceful-boot</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -62,6 +55,32 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-jexl3</artifactId>
             <version>3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>

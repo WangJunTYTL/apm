@@ -8,10 +8,10 @@ __APM：__ Application Performance Monitor，是一款偏向于解决业务上�
 
 提供以下功能特性：
 
-- 由Perf4j提供近实时的数据采集
-- 可以自定义时间性能数据存储方案，默认提供MySql和ElasticSearch数据存储设计，可扩展，如常用的influxdb
-- 由grafana提供丰富的数据图表展示功能，可以支持常见的图表类型，可以支持让业务开发者自定义图表或者Dashboard
-- 灵活的预警规则定义，支持通过表达式语言定义预警规则和消息模板
+- 实时数据采集：由Perf4j提供近实时的数据采集，与日志组件集成,如log4j、logback
+- 数据分析引擎：可以自定义时间性能数据存储方案，默认提供MySql和ElasticSearch数据存储设计，可扩展，如常用的influxdb
+- 数据图表：推荐Grafana，提供丰富的数据图表展示功能，可以支持常见的图表类型，可以支持让业务开发者自定义图表或者Dashboard
+- 预警：灵活的预警规则定义，支持通过表达式语言定义预警规则和消息模板
 
 ### 快速上手
 - 下载项目：git clone https://github.com/WangJunTYTL/apm.git

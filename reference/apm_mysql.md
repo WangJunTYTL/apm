@@ -12,7 +12,7 @@ MySql是各个公司常用到的数据库，足够稳定和灵活，如果你打
 然后在日志文件配置以下信息
 
 ```
-<appender name="JdbcAppender" class="com.peaceful.apm.aggregate.appender.JdbcLogbackAppender">
+<appender name="JdbcAppender" class="com.peaceful.apm.perf4j.appender.JdbcLogbackAppender">
     <param name="url"
            value="${datasource.url}"></param>
     <param name="user" value="${datasource.user}"></param>

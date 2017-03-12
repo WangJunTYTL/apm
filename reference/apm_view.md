@@ -48,7 +48,7 @@ perf4j是支持图表显示的，可是比较简陋也不太好用。第一，�
 ```
 <!--数据存储位置，这里是存储到项目的目录下的apm.db文件中-->
 <appender name="Perf4jSQLiteJdbcAppender"
-          class="com.peaceful.apm.aggregate.appender.JdbcLog4jAppender">
+          class="com.peaceful.apm.perf4j.appender.JdbcLog4jAppender">
     <param name="url" value="jdbc:sqlite:apm.db"></param>
     <param name="driver" value="org.sqlite.JDBC"></param>
 </appender>
@@ -64,7 +64,7 @@ perf4j是支持图表显示的，可是比较简陋也不太好用。第一，�
 ```
 <!--实时图表配置,每个appender将会渲染出一张图表-->
 <appender name="ExecutionTimes"
-          class="com.peaceful.apm.aggregate.appender.Log4jGraphingStatisticsAppender">
+          class="com.peaceful.apm.perf4j.appender.Log4jGraphingStatisticsAppender">
     <!-- Possible GraphTypes are Mean, Min, Max, StdDev, Count and TPS -->
     <param name="GraphType" value="Mean"/>
     <!-- The tags of the timed execution blocks to graph are specified here -->
@@ -72,17 +72,17 @@ perf4j是支持图表显示的，可是比较简陋也不太好用。第一，�
 </appender>
 
 <appender name="ExecutionCount"
-          class="com.peaceful.apm.aggregate.appender.Log4jGraphingStatisticsAppender">
+          class="com.peaceful.apm.perf4j.appender.Log4jGraphingStatisticsAppender">
     <param name="GraphType" value="Count"/>
 </appender>
 
 <appender name="ExecutionStdDev"
-          class="com.peaceful.apm.aggregate.appender.Log4jGraphingStatisticsAppender">
+          class="com.peaceful.apm.perf4j.appender.Log4jGraphingStatisticsAppender">
     <param name="GraphType" value="StdDev"/>
 </appender>
 
 <appender name="ExecutionTPS"
-          class="com.peaceful.apm.aggregate.appender.Log4jGraphingStatisticsAppender">
+          class="com.peaceful.apm.perf4j.appender.Log4jGraphingStatisticsAppender">
     <param name="GraphType" value="TPS"/>
     </appender>
 ```
@@ -92,7 +92,7 @@ perf4j是支持图表显示的，可是比较简陋也不太好用。第一，�
 ```
 <servlet>
     <servlet-name>perf4j</servlet-name>
-    <servlet-class>com.peaceful.apm.aggregate.servlet.Log4jBaiduEchartGraphingServlet</servlet-class>
+    <servlet-class>com.peaceful.apm.perf4j.servlet.Log4jBaiduEchartGraphingServlet</servlet-class>
 </servlet>
 <servlet-mapping>
     <servlet-name>perf4j</servlet-name>
@@ -120,7 +120,7 @@ grafana地址:[http://grafana.org](http://grafana.org), 首先我们像下面把
 ```
 <!--基于elastic search的1.x版本实现-->
  <appender name="Perf4jESAppender"
-           class="com.peaceful.apm.aggregate.appender.ElasticLog4jAppender">
+           class="com.peaceful.apm.perf4j.appender.ElasticLog4jAppender">
      <param name="url" value="127.0.0.1"></param>
      <param name="port" value="9300"></param>
      <param name="indexPrefix" value="apm-"></param>

@@ -1,6 +1,6 @@
 package com.peaceful.apm.dashboard.service;
 
-import com.peaceful.boot.Application;
+import com.peaceful.apm.alert.helper.AlertApplication;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class UserServiceProvider implements FactoryBean{
 
     @Override
     public UserService getObject() throws Exception {
-        String userService = Application.getConfigContext().getString("apm.user.service.impl");
+        String userService = AlertApplication.getConfigContext().getString("apm.user.service.impl");
         return (UserService) Class.forName(userService).newInstance();
     }
 

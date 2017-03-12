@@ -21,7 +21,7 @@
     </appender>
 
     <!--聚合数据通过Jdbc输出-->
-    <appender name="JdbcAppender" class="com.peaceful.apm.aggregate.appender.JdbcLogbackAppender">
+    <appender name="JdbcAppender" class="com.peaceful.apm.perf4j.appender.JdbcLogbackAppender">
         <param name="url"
                value="${datasource.url}"></param>
         <param name="user" value="${datasource.user}"></param>
@@ -31,7 +31,7 @@
 
    <!-- &lt;!&ndash;本地聚合后的数据输入到ElasticSearch&ndash;&gt;
     <appender name="ESAppender"
-              class="com.peaceful.apm.aggregate.appender.ElasticLogbackAppender">
+              class="com.peaceful.apm.perf4jpender.ElasticLogbackAppender">
         <param name="host" value="localhost"></param>
         <param name="port" value="9300"></param>
         <param name="indexPrefix" value="apm-"></param>
