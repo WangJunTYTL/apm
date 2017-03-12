@@ -5,7 +5,7 @@ MySql是各个公司常用到的数据库，足够稳定和灵活，如果你打
 ```
 <dependency>
     <groupId>com.peaceful</groupId>
-    <artifactId>apm-aggregate</artifactId>
+    <artifactId>apm-perf4j</artifactId>
     <version>2.6-SNAPSHOT</version>
 </dependency>
 ```
