@@ -1,8 +1,7 @@
 #!/bin/bash
 
 mvn clean install  -Dmaven.test.skip=true -f apm-pom/pom.xml || exit 1
-mvn clean install  -Dmaven.test.skip=true -f apm-perf4j/pom.xml || exit 1
-mvn clean install  -Dmaven.test.skip=true -f apm-extension/pom.xml || exit 1
+mvn clean install  -Dmaven.test.skip=true -f apm-core/pom.xml || exit 1
 mvn clean install  -Dmaven.test.skip=true -f apm-alert/pom.xml || exit 1
 
 # 本地测试数据库连接 ，如需更改可到conf.properties配置
@@ -13,6 +12,6 @@ if [ $? != 0 ];then
     exit 1
 fi
 
-mvn jetty:run -Dmaven.test.skip=true -f apm-dashboard/pom.xml
+mvn jetty:run -Dmaven.test.skip=true -f apm-simple-web/pom.xml
 
 

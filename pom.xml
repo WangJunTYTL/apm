@@ -11,11 +11,12 @@
 
     <modules>
         <module>apm-pom</module>
-        <module>apm-perf4j</module>
-        <module>apm-extension</module>
+        <module>apm-core</module>
         <module>apm-alert</module>
-        <module>apm-dashboard</module>
+        <module>apm-simple-web</module>
     </modules>
+
+
 
 
 </project>

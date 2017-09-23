@@ -52,4 +52,20 @@ apm提供导入ElasticSearch的appender组件类，支持1.x版本的es客户端
   "aliases": {}
 }
 ```
+### 下载安装Elasticsearch
+__注意elasticsearch要求客户端版本与服务端版本必须一一对应，这里推荐使用2.4.6版本，并下载head与kopf插件__
+下载 elasticsearch:https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.4.6/elasticsearch-2.4.6.tar.gz
 
+安装head用于数据查询
+elasticsearch-2.4.6/bin/plugin install mobz/elasticsearch-head
+安装kopf用于运维工具
+elasticsearch-2.4.6/bin/plugin install lmenezes/elasticsearch-kopf/2.0
+
+启动elasticsearch：elasticsearch-2.4.6/bin/elasticsearch
+
+注意：elasticsearch，从1.x升级到2.x版本的api会有变话，从2.x版本升级到5.x版本，上面两种工具的安装方式比较麻烦
+为了减少麻烦，这里建议使用1.x或2.x版本
+
+### 下载安装Grafana
+
+mac：brew install grafana
