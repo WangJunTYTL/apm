@@ -1,7 +1,8 @@
-package com.peaceful.apm.core;
+package com.peaceful.apm.core.store;
 
 import com.google.common.base.Throwables;
 
+import com.peaceful.apm.core.MetricStore;
 import com.peaceful.apm.core.helper.DateHelper;
 import com.peaceful.apm.core.helper.Log;
 import com.peaceful.apm.core.helper.NetHelper;

@@ -1,5 +1,8 @@
-package com.peaceful.apm.core;
+package com.peaceful.apm.core.store;
 
+import com.peaceful.apm.core.Counter;
+import com.peaceful.apm.core.MetricStore;
+import com.peaceful.apm.core.TimingWatchHandler;
 import com.peaceful.apm.core.helper.Log;
 import com.peaceful.apm.core.helper.NetHelper;
 
@@ -41,6 +44,7 @@ public class MetricMySqlStore implements MetricStore {
         this.user = user;
         this.password = password;
         this.service = service;
+        Log.info("start ");
     }
 
     private synchronized boolean isStart() {
@@ -51,7 +55,7 @@ public class MetricMySqlStore implements MetricStore {
             try {
                 registerService();
                 initTable();
-                saveHeartbeatData();
+                saveWatchData();
                 needStart = false;
                 isRun = true;
             } catch (Exception e) {
@@ -76,7 +80,7 @@ public class MetricMySqlStore implements MetricStore {
             statement.execute(DAO.createApmStatisticsTable(routeId));
             statement.execute(DAO.createApmHeartbeatTable(routeId));
         } catch (SQLException e) {
-            Log.warn("init table:"+e);
+            Log.warn("init table:" + e);
         } finally {
             closeConnection(statement, connection);
         }
@@ -143,7 +147,7 @@ public class MetricMySqlStore implements MetricStore {
             statement = connection.prepareStatement(INSERT_SQL);
             Iterator<String> tags = timingStatisticsMap.keySet().iterator();
             String hostname = NetHelper.getHostname();
-            long unixTime = System.currentTimeMillis()/1000;
+            long unixTime = System.currentTimeMillis() / 1000;
             while (tags.hasNext()) {
                 String tag = tags.next();
                 TimingStatistics timingStatistics = timingStatisticsMap.get(tag);
@@ -151,7 +155,7 @@ public class MetricMySqlStore implements MetricStore {
                 statement.setString(1, hostname);
                 statement.setString(2, tag);
                 statement.setString(3, "TPS");
-                BigDecimal bg = new BigDecimal((double)timingStatistics.getCount()/60);
+                BigDecimal bg = new BigDecimal((double) timingStatistics.getCount() / 60);
                 double tps = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 statement.setDouble(4, tps);
                 statement.setLong(5, unixTime);
@@ -160,7 +164,7 @@ public class MetricMySqlStore implements MetricStore {
                 statement.setString(1, hostname);
                 statement.setString(2, tag);
                 statement.setString(3, "Mean");
-                bg  = new BigDecimal(timingStatistics.getMean());
+                bg = new BigDecimal(timingStatistics.getMean());
                 double mean = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 statement.setDouble(4, mean);
                 statement.setLong(5, unixTime);
@@ -183,7 +187,7 @@ public class MetricMySqlStore implements MetricStore {
                 statement.setString(1, hostname);
                 statement.setString(2, tag);
                 statement.setString(3, "Std");
-                bg  = new BigDecimal(timingStatistics.getStandardDeviation());
+                bg = new BigDecimal(timingStatistics.getStandardDeviation());
                 double std = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 statement.setDouble(4, std);
                 statement.setLong(5, unixTime);
@@ -197,16 +201,17 @@ public class MetricMySqlStore implements MetricStore {
         }
     }
 
-    public void saveHeartbeatData() {
+    public void saveWatchData() {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    HeartBeatService.loadToJvm();
-                    Log.debug("start heartbeat service");
-                    boolean flag = true;
-                    while (flag) {
-                        List<Heartbeat> heartBeatDataList = HeartBeatService.getNext();
+                    TimingWatchHandler watchHandler = new TimingWatchHandler();
+                    if (watchHandler.isStart()) {
+                        Log.debug("start watch handler service");
+                    }
+                    while (watchHandler.isStart()) {
+                        List<Counter> heartBeatDataList = watchHandler.getNext();
                         String heartbeatTable = "apm_heartbeat_" + getTableRoute(service);
                         String INSERT_SQL = "insert into " + heartbeatTable + " (`hostname`,`tag`,`metric`,`value`,`create_time`) values (?,?,?,?,?)";
                         Connection connection = null;
@@ -214,7 +219,7 @@ public class MetricMySqlStore implements MetricStore {
                         try {
                             connection = getConnection();
                             statement = connection.prepareStatement(INSERT_SQL);
-                            for (Heartbeat data : heartBeatDataList) {
+                            for (Counter data : heartBeatDataList) {
                                 statement.setString(1, NetHelper.getHostname());
                                 statement.setString(2, data.getTag());
                                 statement.setString(3, data.getMetric());

@@ -2,7 +2,7 @@ package com.peaceful.apm.core.log4j;
 
 import com.google.common.base.Throwables;
 
-import com.peaceful.apm.core.MetricElasticStore;
+import com.peaceful.apm.core.store.MetricElasticStore;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;

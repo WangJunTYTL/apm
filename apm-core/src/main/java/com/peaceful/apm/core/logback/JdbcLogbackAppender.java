@@ -2,7 +2,7 @@ package com.peaceful.apm.core.logback;
 
 import com.google.common.base.Throwables;
 
-import com.peaceful.apm.core.MetricMySqlStore;
+import com.peaceful.apm.core.store.MetricMySqlStore;
 
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;

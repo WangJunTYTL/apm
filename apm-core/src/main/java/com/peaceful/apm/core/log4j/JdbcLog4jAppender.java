@@ -2,7 +2,7 @@ package com.peaceful.apm.core.log4j;
 
 import com.google.common.base.Throwables;
 
-import com.peaceful.apm.core.MetricMySqlStore;
+import com.peaceful.apm.core.store.MetricMySqlStore;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.AppenderSkeleton;

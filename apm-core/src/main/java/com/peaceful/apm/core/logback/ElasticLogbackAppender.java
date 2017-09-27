@@ -4,7 +4,7 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import com.google.common.base.Throwables;
 
-import com.peaceful.apm.core.MetricElasticStore;
+import com.peaceful.apm.core.store.MetricElasticStore;
 
 import org.perf4j.GroupedTimingStatistics;
 import org.perf4j.TimingStatistics;
