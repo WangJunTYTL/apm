@@ -2,6 +2,8 @@ package com.peaceful.apm.core.log4j;
 
 import com.google.common.base.Throwables;
 
+import com.peaceful.apm.core.helper.Log;
+import com.peaceful.apm.core.helper.NetHelper;
 import com.peaceful.apm.core.store.MetricElasticStore;
 
 import org.apache.log4j.AppenderSkeleton;
@@ -13,8 +15,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 如果你使用log4j组件，通过该appender可以把数据写入到elasticsearch
- * 必须作为 {@link org.perf4j.log4j.AsyncCoalescingStatisticsAppender}的子Appender
+ * 如果你使用log4j组件，通过该appender可以把数据写入到elasticsearch 必须作为 {@link org.perf4j.log4j.AsyncCoalescingStatisticsAppender}的子Appender
  *
  * @author WangJun
  * @version 1.0 16/6/25
@@ -45,15 +46,24 @@ public class ElasticLog4jAppender extends AppenderSkeleton {
 
     @Override
     public void activateOptions() {
+        if (!NetHelper.pingIpPort(host, port, 3)) {
+            Log.warn("ElasticSearch connection fail, host:" + host + " port:" + port);
+            this.closed = true;
+            return;
+        }
         metricsFromElastic = new MetricElasticStore(host, port, clusterName, indexPrefix);
     }
 
     public void save(Map<String, TimingStatistics> timingStatisticsSortedMap, long interval, TimeUnit timeUnit) {
-        metricsFromElastic.saveStatisticsData(timingStatisticsSortedMap, interval, timeUnit);
+        if (metricsFromElastic != null)
+            metricsFromElastic.saveStatisticsData(timingStatisticsSortedMap, interval, timeUnit);
     }
 
     @Override
     protected void append(LoggingEvent loggingEvent) {
+        if (this.closed) {
+            return;
+        }
         Object logMessage = loggingEvent.getMessage();
         if (logMessage instanceof GroupedTimingStatistics) {
             GroupedTimingStatistics statistics = (GroupedTimingStatistics) logMessage;

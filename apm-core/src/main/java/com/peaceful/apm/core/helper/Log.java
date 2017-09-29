@@ -14,6 +14,7 @@ public class Log {
 
 
     private static String logPrefix = "apm.console.log";
+    private static long startTime = System.currentTimeMillis();
 
     private static boolean isDebug() {
 //        return true;
@@ -55,6 +56,7 @@ public class Log {
     public static void error(String msg) {
         print(Level.ERROR, msg);
     }
+
     public static void error(Exception e) {
         if (e.getMessage() != null) {
             print(Level.ERROR, e.getMessage());
@@ -65,17 +67,21 @@ public class Log {
 
 
     private static void print(Level level, String msg) {
-        Logger logger = LoggerFactory.getLogger(logPrefix);
-        if (level == Level.DEBUG && logger.isDebugEnabled()) {
-            logger.debug(msg);
-        } else if (level == Level.INFO && logger.isInfoEnabled()) {
-            logger.info(msg);
-        } else if (level == Level.WARN && logger.isWarnEnabled()) {
-            logger.warn(msg);
-        } else if (level == Level.ERROR && logger.isErrorEnabled()) {
-            logger.error(msg);
+        if (System.currentTimeMillis() - startTime > 60 * 1000) { // 等待1分钟，等待log模块启动
+            Logger logger = LoggerFactory.getLogger(logPrefix);
+            if (level == Level.DEBUG && logger.isDebugEnabled()) {
+                logger.debug(msg);
+            } else if (level == Level.INFO && logger.isInfoEnabled()) {
+                logger.info(msg);
+            } else if (level == Level.WARN && logger.isWarnEnabled()) {
+                logger.warn(msg);
+            } else if (level == Level.ERROR && logger.isErrorEnabled()) {
+                logger.error(msg);
+            } else {
+                System.err.println(DateHelper.formatDateTime(new Date()) + " [" + level.name() + "] [" + logPrefix + "] " + msg);
+            }
         } else {
-            System.out.println(DateHelper.formatDateTime(new Date()) + " [" + level.name() + "] [" + logPrefix + "] " + msg);
+            System.err.println(DateHelper.formatDateTime(new Date()) + " [" + level.name() + "] [" + logPrefix + "] " + msg);
         }
     }
 

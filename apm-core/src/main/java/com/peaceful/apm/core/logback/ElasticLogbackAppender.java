@@ -2,8 +2,11 @@ package com.peaceful.apm.core.logback;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.AppenderBase;
+
 import com.google.common.base.Throwables;
 
+import com.peaceful.apm.core.helper.Log;
+import com.peaceful.apm.core.helper.NetHelper;
 import com.peaceful.apm.core.store.MetricElasticStore;
 
 import org.perf4j.GroupedTimingStatistics;
@@ -14,8 +17,7 @@ import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 如果你使用logback组件，通过该appender可以把数据写入到elasticsearch
- * 必须作为 {@link org.perf4j.logback.AsyncCoalescingStatisticsAppender}的子Appender
+ * 如果你使用logback组件，通过该appender可以把数据写入到elasticsearch 必须作为 {@link org.perf4j.logback.AsyncCoalescingStatisticsAppender}的子Appender
  *
  * @author WangJun
  * @version 1.0 16/6/25
@@ -69,13 +71,18 @@ public class ElasticLogbackAppender extends AppenderBase<LoggingEvent> {
 
     @Override
     public void start() {
+        if (!NetHelper.pingIpPort(host, port, 3)) {
+            Log.warn("ElasticSearch connection fail, host:" + host + " port:" + port);
+            return;
+        }
         metricsFromElastic = new MetricElasticStore(host, port, clusterName, indexPrefix);
         super.start();
     }
 
     @Override
     public void stop() {
-        metricsFromElastic.close();
+        if (metricsFromElastic != null)
+            metricsFromElastic.close();
         super.stop();
     }
 }

@@ -44,7 +44,6 @@ public class MetricMySqlStore implements MetricStore {
         this.user = user;
         this.password = password;
         this.service = service;
-        Log.info("start ");
     }
 
     private synchronized boolean isStart() {
@@ -206,6 +205,7 @@ public class MetricMySqlStore implements MetricStore {
             @Override
             public void run() {
                 try {
+                    if (!isStart()) return;
                     TimingWatchHandler watchHandler = new TimingWatchHandler();
                     if (watchHandler.isStart()) {
                         Log.debug("start watch handler service");
