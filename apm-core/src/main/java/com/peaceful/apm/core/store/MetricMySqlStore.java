@@ -205,7 +205,6 @@ public class MetricMySqlStore implements MetricStore {
             @Override
             public void run() {
                 try {
-                    if (!isStart()) return;
                     TimingWatchHandler watchHandler = new TimingWatchHandler();
                     if (watchHandler.isStart()) {
                         Log.debug("start watch handler service");
