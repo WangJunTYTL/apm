@@ -67,7 +67,7 @@ public class Log {
 
 
     private static void print(Level level, String msg) {
-        if (System.currentTimeMillis() - startTime > 60 * 1000) { // 等待1分钟，等待log模块启动
+        if (System.currentTimeMillis() - startTime > 60 * 1000) { // 等待1分钟，等待log模块启动，之后所有的log信息由介入的日志组件接管
             Logger logger = LoggerFactory.getLogger(logPrefix);
             if (level == Level.DEBUG && logger.isDebugEnabled()) {
                 logger.debug(msg);

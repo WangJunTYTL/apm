@@ -55,8 +55,15 @@ public class AlertService extends AbstractScheduledService {
 
     @Override
     protected void runOneIteration() throws Exception {
+        List<String> services;
         try {
-            List<String> services = dataSourceService.selectAllService();
+            services = dataSourceService.selectAllService();
+        } catch (Exception e) {
+            // .ignore TODO 暂时忽略
+            return;
+        }
+
+        try {
             for (String service : services) {
                 List<AlertBuild> alertBuildList = dataSourceService.selectAllAlert(service);
                 for (AlertBuild alertBuild : alertBuildList) {

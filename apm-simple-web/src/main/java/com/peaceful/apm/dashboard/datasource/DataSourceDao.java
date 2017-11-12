@@ -18,7 +18,7 @@ public interface DataSourceDao {
     @Select("select distinct(metric) from apm_statistics_${tableId} where create_time >#{create_time} ")
     List<String> selectAllTagByService(@Param("tableId") int tableId, @Param("create_time") long createTime);
 
-    @Select("select distinct(tag) from apm_heartbeat_${tableId} where create_time >#{create_time} ")
+    @Select("select distinct(tag) from apm_statistics_${tableId} where create_time >#{create_time} ")
     List<String> selectAllHeartBeatTypeByService(@Param("tableId") int tableId, @Param("create_time") long createTime);
 
     @Select("select * from apm_service")
@@ -36,7 +36,7 @@ public interface DataSourceDao {
     @Select("select * from apm_statistics_${routeId} where metric in (#{tags}) and hostname = #{hostname} and  create_time between #{start_time} and #{end_time} order by create_time asc")
     List<MetricsForTag> selectData(@Param("routeId") int routeId, @Param("hostname") String hostname, @Param("tags") String tags, @Param("start_time") long startTime, @Param("end_time") long endTime);
 
-    @Select("select metric,value,create_time from apm_heartbeat_${routeId} where tag = #{tag} and hostname = #{hostname} and  create_time between #{start_time} and #{end_time} order by create_time asc")
+    @Select("select metric,value,create_time from apm_statistics_${routeId} where tag = #{tag} and hostname = #{hostname} and  create_time between #{start_time} and #{end_time} order by create_time asc")
     List<MetricsForHeartbeat> selectHeartbeatData(@Param("routeId") int routeId, @Param("hostname") String hostname, @Param("tag") String tag, @Param("start_time") long startTime, @Param("end_time") long endTime);
 
     @Insert("insert into apm_alert (`service`,`metric`,`term`,`interval`,`sms_msg`,`mail_msg`,`receiver_groups`,`create_time`,`update_time`) values (#{service},#{metric},#{term},#{interval},#{sms_msg},#{mail_msg},#{receiver_groups},now(),now())")

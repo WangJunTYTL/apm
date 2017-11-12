@@ -34,16 +34,18 @@ public class MetricMySqlStore implements MetricStore {
     private static int retryTime = 0; //是否已启动
 
     public MetricMySqlStore(String url, String user, String password, String driver, String service) {
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            Log.warn(e);
-            needStart = false;
-        }
         this.url = url;
         this.user = user;
         this.password = password;
         this.service = service;
+        try {
+            Class.forName(driver);
+            registerService();
+            initTable();
+        } catch (ClassNotFoundException e) {
+            Log.warn(e);
+            needStart = false;
+        }
     }
 
     private synchronized boolean isStart() {
@@ -52,8 +54,7 @@ public class MetricMySqlStore implements MetricStore {
         }
         if (needStart) {
             try {
-                registerService();
-                initTable();
+//                registerService(); // 注册服务
                 saveWatchData();
                 needStart = false;
                 isRun = true;
@@ -76,7 +77,6 @@ public class MetricMySqlStore implements MetricStore {
             connection = getConnection();
             statement = connection.createStatement();
             statement.execute(DAO.createApmServiceTable());
-            statement.execute(DAO.createApmStatisticsTable(routeId));
             statement.execute(DAO.createApmHeartbeatTable(routeId));
         } catch (SQLException e) {
             Log.warn("init table:" + e);
@@ -137,7 +137,7 @@ public class MetricMySqlStore implements MetricStore {
                 statement.addBatch();
             }
             statement.executeBatch();*/
-        String heartbeatTable = "apm_heartbeat_" + getTableRoute(service);
+        String heartbeatTable = "apm_statistics_" + getTableRoute(service);
         String INSERT_SQL = "insert into " + heartbeatTable + " (`hostname`,`tag`,`metric`,`value`,`create_time`) values (?,?,?,?,?)";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -211,7 +211,7 @@ public class MetricMySqlStore implements MetricStore {
                     }
                     while (watchHandler.isStart()) {
                         List<Counter> heartBeatDataList = watchHandler.getNext();
-                        String heartbeatTable = "apm_heartbeat_" + getTableRoute(service);
+                        String heartbeatTable = "apm_statistics_" + getTableRoute(service);
                         String INSERT_SQL = "insert into " + heartbeatTable + " (`hostname`,`tag`,`metric`,`value`,`create_time`) values (?,?,?,?,?)";
                         Connection connection = null;
                         PreparedStatement statement = null;

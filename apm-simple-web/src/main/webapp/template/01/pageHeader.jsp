@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/monitor">APM<span class="small text-muted">（仅支持单机数据聚合）</span></a>
+            <a class="navbar-brand" href="/monitor">APM<span class="small text-muted"></span></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
