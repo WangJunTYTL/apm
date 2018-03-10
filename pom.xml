@@ -13,7 +13,8 @@
         <module>apm-pom</module>
         <module>apm-core</module>
         <module>apm-alert</module>
-        <module>apm-simple-web</module>
+        <module>apm-view</module>
+        <module>apm-test</module>
     </modules>
 
 
